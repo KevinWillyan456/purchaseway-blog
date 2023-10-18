@@ -1,0 +1,71 @@
+.header {
+    width: 100%;
+    background: var(--color-dark);
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+.header .content {
+    max-width: calc(1260px + 40px);
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.header .content .header-logo {
+    cursor: pointer;
+    margin-right: 20px;
+}
+.header .content .header-logo img {
+    pointer-events: none;
+}
+.header .content .header-container-search {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 364px);
+    height: 30px;
+    border-radius: 15px;
+    background: var(--color-background);
+    margin-right: 20px;
+    padding: 0 10px;
+    overflow: hidden;
+}
+.header .content .header-container-search .header-search-icon {
+    margin-right: 5px;
+}
+.header .content .header-container-search input {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+    color: var(--color-dark);
+    font-size: 16px;
+    outline: none;
+    margin-right: 10px;
+}
+.header .content .header-container-search input::placeholder {
+    color: var(--color-dark);
+    font-size: 16px;
+}
+.header .content .header-btn-register {
+    width: 110px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-blue);
+    color: var(--colot-white);
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.header .content .header-btn-login {
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-orange);
+    color: var(--colot-white);
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
