@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-dark: #026e81;
+    --color-aqua: #00abbd;
+    --color-blue: #0099dd;
+    --color-light: #a1c7e0;
+    --color-orange: #ff9933;
+    --color-background: #eef8fe;
+    --colot-white: #ffffff;
+    --color-black: #000000;
+}
+
+body {
+    background-color: var(--color-background);
+    height: 100%;
+}
+html {
+    height: 100%;
+}
