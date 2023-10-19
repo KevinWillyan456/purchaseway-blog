@@ -1,0 +1,30 @@
+.user-container {
+    width: 209px;
+    height: 213px;
+    border-radius: 10px;
+    background: var(--color-white);
+}
+.user-container .user-picture {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background: var(--color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-container .user-picture .pencil-container {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
