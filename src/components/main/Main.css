@@ -1,0 +1,65 @@
+.main {
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+.main .container {
+    max-width: 1050px;
+    width: 100%;
+    margin: 0 auto;
+}
+.main .container .content-banner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.main .container .content-banner .conversion {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.main .container .content-banner .conversion .title {
+    width: 460px;
+    color: var(--color-black);
+    font-size: 40px;
+}
+
+.main .container .content-banner .conversion .btn-register {
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    background: var(--color-blue);
+    color: var(--color-white);
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+.main .container .title-characteristics {
+    color: var(--color-black);
+    font-size: 40px;
+    text-align: center;
+    margin-top: 60px;
+}
+.main .container .cards {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+}
+.main .container .cards .card-characteristics {
+    position: relative;
+    width: 300px;
+    height: 260px;
+    background: var(--color-white);
+    margin-bottom: 20px;
+}
+.main .container .cards .card-characteristics .feature {
+    color: var(--color-dark);
+    font-size: 40px;
+    position: absolute;
+    bottom: 30px;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}

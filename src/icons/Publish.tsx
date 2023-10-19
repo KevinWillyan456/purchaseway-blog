@@ -1,6 +1,7 @@
 function Publish() {
     return (
         <svg
+            style={{ top: "30px", position: "absolute", width: "100%" }}
             xmlns="http://www.w3.org/2000/svg"
             width="145"
             height="145"
