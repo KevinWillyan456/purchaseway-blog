@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
 }
-.header .content {
+.header .container {
     max-width: calc(1260px + 40px);
     width: 100%;
     padding: 0 20px;
@@ -13,14 +13,14 @@
     display: flex;
     align-items: center;
 }
-.header .content .header-logo {
+.header .container .header-logo {
     cursor: pointer;
     margin-right: 20px;
 }
-.header .content .header-logo img {
+.header .container .header-logo img {
     pointer-events: none;
 }
-.header .content .header-container-search {
+.header .container .header-container-search {
     display: flex;
     align-items: center;
     width: calc(100% - 364px);
@@ -31,10 +31,10 @@
     padding: 0 10px;
     overflow: hidden;
 }
-.header .content .header-container-search .header-search-icon {
+.header .container .header-container-search .header-search-icon {
     margin-right: 5px;
 }
-.header .content .header-container-search input {
+.header .container .header-container-search input {
     background-color: transparent;
     border: none;
     width: 100%;
@@ -44,11 +44,11 @@
     outline: none;
     margin-right: 10px;
 }
-.header .content .header-container-search input::placeholder {
+.header .container .header-container-search input::placeholder {
     color: var(--color-dark);
     font-size: 16px;
 }
-.header .content .header-btn-register {
+.header .container .header-btn-register {
     width: 110px;
     height: 40px;
     border-radius: 10px;
@@ -59,7 +59,7 @@
     cursor: pointer;
     margin-right: 20px;
 }
-.header .content .header-btn-login {
+.header .container .header-btn-login {
     width: 80px;
     height: 40px;
     border-radius: 10px;

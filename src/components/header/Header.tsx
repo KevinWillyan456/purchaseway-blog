@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Close from "../../icons/Close";
-import MagnifyingGlass from "../../icons/magnifyingGlass";
+import MagnifyingGlass from "../../icons/MagnifyingGlass";
 import "./Header.css";
 
 function Header() {
@@ -8,7 +8,7 @@ function Header() {
 
     return (
         <header className="header">
-            <div className="content">
+            <div className="container">
                 <div className="header-logo">
                     <img src="/purchaseway-blog-logo.png" alt="logo" />
                 </div>
