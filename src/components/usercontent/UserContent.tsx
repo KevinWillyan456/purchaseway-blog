@@ -12,8 +12,7 @@ function UserContent() {
                 </div>
             </div>
             <div className="user-name">Joe Dawn</div>
-
-            <div className="user-posts-text">Post</div>
+            <div className="user-posts-text">Posts</div>
             <div className="user-posts">10</div>
             <div className="user-likes-text">Likes</div>
             <div className="user-likes">10</div>

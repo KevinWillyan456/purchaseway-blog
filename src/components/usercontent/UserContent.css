@@ -1,4 +1,5 @@
 .user-container {
+    position: relative;
     width: 209px;
     height: 213px;
     border-radius: 10px;
@@ -8,11 +9,13 @@
     position: relative;
     width: 60px;
     height: 60px;
-    border-radius: 30px;
+    border-radius: 50%;
     background: var(--color-dark);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 .user-container .user-picture .pencil-container {
@@ -27,4 +30,42 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+.user-container .user-name {
+    position: absolute;
+    top: 20px;
+    left: 92px;
+    overflow: hidden;
+    max-width: 107px;
+    max-height: 65px;
+    color: var(--color-dark);
+    font-size: 16px;
+}
+.user-container .user-posts-text {
+    position: absolute;
+    top: 130px;
+    left: 20px;
+    color: var(--color-dark);
+    font-size: 20px;
+}
+.user-container .user-posts {
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    color: var(--color-aqua);
+    font-size: 20px;
+}
+.user-container .user-likes-text {
+    position: absolute;
+    top: 130px;
+    right: 30px;
+    color: var(--color-dark);
+    font-size: 20px;
+}
+.user-container .user-likes {
+    position: absolute;
+    bottom: 30px;
+    left: 136px;
+    color: var(--color-aqua);
+    font-size: 20px;
 }
