@@ -1,7 +1,11 @@
 .user-container {
     position: relative;
     width: 209px;
+    max-width: 209px;
+    min-width: 209px;
     height: 213px;
+    max-height: 213px;
+    min-height: 213px;
     border-radius: 10px;
     background: var(--color-white);
 }
@@ -19,6 +23,7 @@
 }
 
 .user-container .user-picture .pencil-container {
+    transition: 200ms;
     position: absolute;
     bottom: -5px;
     right: -5px;
@@ -30,6 +35,9 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+.user-container .user-picture .pencil-container:hover {
+    background: var(--color-dark-orange);
 }
 .user-container .user-name {
     position: absolute;
