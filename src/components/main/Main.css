@@ -1,6 +1,6 @@
 .main {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 100px;
     margin-bottom: 60px;
 }
 .main .container {
@@ -36,6 +36,9 @@
     font-size: 20px;
     border: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .main .container .content-banner .conversion .btn-register:hover {
     background: var(--color-dark-blue);
