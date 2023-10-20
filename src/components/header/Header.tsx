@@ -33,7 +33,9 @@ function Header() {
                 <Link to="/singin" className="header-btn-register">
                     Cadastrar-se
                 </Link>
-                <button className="header-btn-login">Entrar</button>
+                <Link to="/login" className="header-btn-login">
+                    Entrar
+                </Link>
             </div>
         </header>
     );
