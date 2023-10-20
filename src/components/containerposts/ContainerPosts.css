@@ -53,6 +53,7 @@
     font-size: 18px;
 }
 .user-posted .wrapper .title-post {
+    max-width: 700px;
     color: var(--color-black);
     font-size: 24px;
 }

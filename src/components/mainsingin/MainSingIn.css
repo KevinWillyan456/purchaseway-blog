@@ -13,7 +13,7 @@
     border-bottom-right-radius: 0;
 }
 
-.form-signin input[type="email"] {
+.form-signin input[type="email"].email-input {
     margin-bottom: -1px;
     border-radius: 0;
 }

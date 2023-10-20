@@ -19,15 +19,15 @@ function MainSingIn() {
                         <input
                             type="text"
                             className="form-control"
-                            id="floatingInput"
+                            id="floatingName"
                             placeholder="name@example.com"
                         />
-                        <label htmlFor="floatingInput">Nome</label>
+                        <label htmlFor="floatingName">Nome</label>
                     </div>
                     <div className="form-floating">
                         <input
                             type="email"
-                            className="form-control"
+                            className="form-control email-input"
                             id="floatingInput"
                             placeholder="name@example.com"
                         />
