@@ -2,6 +2,7 @@ import { useState } from "react";
 import Close from "../../icons/Close";
 import MagnifyingGlass from "../../icons/MagnifyingGlass";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 function Header() {
     const [search, setSearch] = useState("");
@@ -9,9 +10,9 @@ function Header() {
     return (
         <header className="header">
             <div className="container">
-                <div className="header-logo">
+                <Link to="/" className="header-logo">
                     <img src="/purchaseway-blog-logo.png" alt="logo" />
-                </div>
+                </Link>
                 <div className="header-container-search">
                     <div className="header-search-icon">
                         <MagnifyingGlass />

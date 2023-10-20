@@ -27,6 +27,7 @@
 }
 
 .main .container .content-banner .conversion .btn-register {
+    transition: 200ms;
     width: 200px;
     height: 50px;
     border-radius: 10px;
@@ -35,6 +36,9 @@
     font-size: 20px;
     border: none;
     cursor: pointer;
+}
+.main .container .content-banner .conversion .btn-register:hover {
+    background: var(--color-dark-blue);
 }
 .main .container .title-characteristics {
     color: var(--color-black);
