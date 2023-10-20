@@ -1,0 +1,124 @@
+.container-posts {
+    max-width: 1050px;
+    border-radius: 10px;
+    background: var(--color-white);
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container-posts .recommendations {
+    color: var(--color-dark);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.container-posts .user-posted {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+.container-posts .content-posts {
+    max-width: 789px;
+    width: 100%;
+    margin: 0 auto;
+}
+.user-posted .user-picture-posts {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--color-dark);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.user-posted .wrapper .name-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.user-posted .wrapper .name-wrapper .name {
+    color: var(--color-dark);
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 600px;
+}
+.user-posted .wrapper .name-wrapper .posted-in {
+    color: var(--color-light);
+    font-size: 18px;
+}
+.user-posted .wrapper .title-post {
+    color: var(--color-black);
+    font-size: 24px;
+}
+.user-posted .wrapper .content-post {
+    color: var(--color-dark);
+    font-size: 16px;
+    max-width: 719px;
+    margin-top: 10px;
+    padding-right: 20px;
+}
+
+.user-posted .wrapper .actions-post {
+    margin-bottom: 60px;
+}
+.user-posted .wrapper .actions-post .actions-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.user-posted .wrapper .actions-post .actions-wrapper .like-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-background, #eef8fe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+}
+.user-posted .wrapper .actions-post .actions-wrapper .like-btn.active {
+    background: var(--color-aqua, #00abbd);
+}
+.user-posted .wrapper .actions-post .actions-wrapper .btn-respond {
+    width: 93px;
+    height: 30px;
+    border-radius: 15px;
+    background: var(--color-background);
+    border: none;
+    cursor: pointer;
+    color: var(--color-black);
+    font-size: 16px;
+}
+.user-posted .wrapper .actions-post .answers {
+    width: 119px;
+    height: 30px;
+    border: none;
+    border-radius: 15px;
+    background: var(--color-orange);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    cursor: pointer;
+}
+.user-posted .wrapper .actions-post .answers .answers-count {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-dark);
+    color: var(--color-white);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+}
