@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import SingIn from "./pages/SingIn";
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
     {
         path: "dashboard",
         element: <Dashboard />,
+    },
+    {
+        path: "singin",
+        element: <SingIn />,
     },
 ]);
 

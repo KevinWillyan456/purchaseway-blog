@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import AddUser from "../../icons/AddUser";
 import Publish from "../../icons/Publish";
 import Share from "../../icons/Share";
@@ -13,7 +14,9 @@ function Main() {
                         <div className="title">
                             Conheça uma comunidade baseada em publicações
                         </div>
-                        <button className="btn-register">Cadastrar-se</button>
+                        <Link to="/singin" className="btn-register">
+                            Cadastrar-se
+                        </Link>
                     </div>
                     <div>
                         <World />

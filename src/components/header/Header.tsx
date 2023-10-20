@@ -30,7 +30,9 @@ function Header() {
                         }}
                     />
                 </div>
-                <button className="header-btn-register">Cadastrar-se</button>
+                <Link to="/singin" className="header-btn-register">
+                    Cadastrar-se
+                </Link>
                 <button className="header-btn-login">Entrar</button>
             </div>
         </header>
