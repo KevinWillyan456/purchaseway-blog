@@ -3,7 +3,7 @@ import "./MainLogin.css";
 function MainLogin() {
     return (
         <main className="d-flex align-items-center bg-body-tertiary main-singin">
-            <section className="form-signin w-100 m-auto">
+            <section className="form-login w-100 m-auto">
                 <form>
                     <div className="main-singin-logo">
                         <img
