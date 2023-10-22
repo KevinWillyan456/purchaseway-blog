@@ -63,6 +63,8 @@
     max-width: 719px;
     margin-top: 10px;
     padding-right: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .user-posted .wrapper .actions-post {
@@ -76,20 +78,28 @@
     margin-bottom: 10px;
 }
 .user-posted .wrapper .actions-post .actions-wrapper .like-btn {
+    transition: 200ms;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: var(--color-background, #eef8fe);
+    background: var(--color-background);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     border: none;
 }
+.user-posted .wrapper .actions-post .actions-wrapper .like-btn:hover {
+    background: var(--color-dark-background);
+}
 .user-posted .wrapper .actions-post .actions-wrapper .like-btn.active {
-    background: var(--color-aqua, #00abbd);
+    background: var(--color-aqua);
+}
+.user-posted .wrapper .actions-post .actions-wrapper .like-btn.active:hover {
+    background: var(--color-dark-aqua);
 }
 .user-posted .wrapper .actions-post .actions-wrapper .btn-respond {
+    transition: 200ms;
     width: 93px;
     height: 30px;
     border-radius: 15px;
@@ -99,7 +109,11 @@
     color: var(--color-black);
     font-size: 16px;
 }
+.user-posted .wrapper .actions-post .actions-wrapper .btn-respond:hover {
+    background: var(--color-dark-background);
+}
 .user-posted .wrapper .actions-post .answers {
+    transition: 200ms;
     width: 119px;
     height: 30px;
     border: none;
@@ -110,6 +124,9 @@
     justify-content: space-between;
     padding: 0 10px;
     cursor: pointer;
+}
+.user-posted .wrapper .actions-post .answers:hover {
+    background: var(--color-dark-orange);
 }
 .user-posted .wrapper .actions-post .answers .answers-count {
     width: 20px;

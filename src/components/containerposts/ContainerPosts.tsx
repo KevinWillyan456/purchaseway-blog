@@ -77,6 +77,55 @@ function ContainerPosts() {
                         </div>
                     </div>
                 </article>
+                <article className="user-posted">
+                    <div className="user-picture-posts">
+                        <User />
+                    </div>
+                    <div className="wrapper">
+                        <div className="name-wrapper">
+                            <div className="name">Jane Dawn</div>
+                            <div className="posted-in">agora mesmo</div>
+                        </div>
+                        <div className="title-post">
+                            Mahou Shoujo Madoka Magica
+                        </div>
+                        <div className="content-post">
+                            "Mahou Shoujo Madoka Magica" é um anime notável e
+                            inovador no gênero de mahou shoujo (garotas
+                            mágicas). Ele se destaca por sua abordagem sombria e
+                            complexa, subvertendo as expectativas comuns
+                            associadas ao gênero. Uma das características mais
+                            marcantes do anime é a maneira como lida com os
+                            desejos. Ao longo da história, os personagens são
+                            confrontados com a oportunidade de realizar um
+                            desejo, mas a realização desses desejos vem com um
+                            preço significativo. Isso levanta questões profundas
+                            sobre o custo dos nossos desejos e a natureza
+                            complexa do que realmente queremos.
+                            <img
+                                style={{
+                                    width: "100%",
+                                    marginTop: "20px",
+                                }}
+                                src="https://i.pinimg.com/736x/56/56/76/56567651819d5511d03ea4c1c25a6a9d.jpg"
+                            />
+                        </div>
+                        <div className="actions-post">
+                            <div className="actions-wrapper">
+                                <button className="like-btn active">
+                                    <Like />
+                                </button>
+                                <button className="btn-respond">
+                                    Responder
+                                </button>
+                            </div>
+                            <button className="answers">
+                                Respostas
+                                <div className="answers-count">5</div>
+                            </button>
+                        </div>
+                    </div>
+                </article>
             </div>
         </section>
     );
