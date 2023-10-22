@@ -1,7 +1,7 @@
 import "./MainDashboard.css";
-import UserContent from "../usercontent/UserContent";
-import UserPost from "../userpost/UserPost";
-import ContainerPosts from "../containerposts/ContainerPosts";
+import UserContent from "../userContent/UserContent";
+import UserPost from "../userPost/UserPost";
+import ContainerPosts from "../containerPosts/ContainerPosts";
 
 function MainDashboard() {
     return (

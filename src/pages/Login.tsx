@@ -1,5 +1,5 @@
 import Header from "../components/header/Header";
-import MainLogin from "../components/mainlogin/MainLogin";
+import MainLogin from "../components/mainLogin/MainLogin";
 
 function Login() {
     return (
