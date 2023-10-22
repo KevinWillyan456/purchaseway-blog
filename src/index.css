@@ -8,12 +8,14 @@
 :root {
     --color-dark: #026e81;
     --color-aqua: #00abbd;
+    --color-dark-aqua: #028e9e;
     --color-blue: #0099dd;
     --color-dark-blue: #0285bd;
     --color-light: #a1c7e0;
     --color-orange: #ff9933;
     --color-dark-orange: #e68a2e;
     --color-background: #eef8fe;
+    --color-dark-background: #d1d9df;
     --color-white: #ffffff;
     --color-black: #000000;
 }
