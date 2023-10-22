@@ -28,9 +28,12 @@ function ContainerPosts() {
                         </div>
                         <div className="actions-post">
                             <div className="actions-wrapper">
-                                <button className="like-btn">
-                                    <Like />
-                                </button>
+                                <div className="like-btn-wrapper">
+                                    <button className="like-btn">
+                                        <Like />
+                                    </button>
+                                    <div className="count-like-post">12</div>
+                                </div>
                                 <button className="btn-respond">
                                     Responder
                                 </button>
@@ -39,6 +42,33 @@ function ContainerPosts() {
                                 Respostas
                                 <div className="answers-count">21</div>
                             </button>
+                            <article className="user-posted-answering">
+                                <div className="user-picture-posts">
+                                    <User />
+                                </div>
+                                <div className="wrapper">
+                                    <div className="name-wrapper">
+                                        <div className="name">Joe Dawn</div>
+                                        <div className="posted-in">
+                                            há 2 horas
+                                        </div>
+                                    </div>
+                                    <div className="content-post">
+                                        Lorem ipsum dolor sit, amet consectetur
+                                        adipisicing elit?
+                                    </div>
+                                    <div className="actions-post">
+                                        <div className="actions-wrapper">
+                                            <button className="like-btn">
+                                                <Like />
+                                            </button>
+                                            <div className="count-like-post">
+                                                5
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
                     </div>
                 </article>
@@ -63,9 +93,12 @@ function ContainerPosts() {
                         </div>
                         <div className="actions-post">
                             <div className="actions-wrapper">
-                                <button className="like-btn active">
-                                    <Like />
-                                </button>
+                                <div className="like-btn-wrapper">
+                                    <button className="like-btn active">
+                                        <Like />
+                                    </button>
+                                    <div className="count-like-post">23</div>
+                                </div>
                                 <button className="btn-respond">
                                     Responder
                                 </button>
@@ -112,9 +145,12 @@ function ContainerPosts() {
                         </div>
                         <div className="actions-post">
                             <div className="actions-wrapper">
-                                <button className="like-btn active">
-                                    <Like />
-                                </button>
+                                <div className="like-btn-wrapper">
+                                    <button className="like-btn active">
+                                        <Like />
+                                    </button>
+                                    <div className="count-like-post">2</div>
+                                </div>
                                 <button className="btn-respond">
                                     Responder
                                 </button>
