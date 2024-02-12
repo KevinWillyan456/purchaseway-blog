@@ -37,6 +37,7 @@
 }
 .header .container .header-container-search .header-search-icon {
     margin-right: 5px;
+    cursor: pointer;
 }
 .header .container .header-container-search input {
     background-color: transparent;

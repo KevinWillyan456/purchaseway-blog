@@ -21,6 +21,7 @@ function MainSingIn() {
                             className="form-control"
                             id="floatingName"
                             placeholder="name@example.com"
+                            required
                         />
                         <label htmlFor="floatingName">Nome</label>
                     </div>
@@ -30,6 +31,7 @@ function MainSingIn() {
                             className="form-control email-input"
                             id="floatingInput"
                             placeholder="name@example.com"
+                            required
                         />
                         <label htmlFor="floatingInput">E-mail</label>
                     </div>
@@ -39,6 +41,7 @@ function MainSingIn() {
                             className="form-control"
                             id="floatingPassword"
                             placeholder="Password"
+                            required
                         />
                         <label htmlFor="floatingPassword">Senha</label>
                     </div>

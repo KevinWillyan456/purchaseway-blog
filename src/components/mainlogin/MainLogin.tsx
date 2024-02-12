@@ -21,6 +21,7 @@ function MainLogin() {
                             className="form-control"
                             id="floatingInput"
                             placeholder="name@example.com"
+                            required
                         />
                         <label htmlFor="floatingInput">E-mail</label>
                     </div>
@@ -30,6 +31,7 @@ function MainLogin() {
                             className="form-control"
                             id="floatingPassword"
                             placeholder="Password"
+                            required
                         />
                         <label htmlFor="floatingPassword">Senha</label>
                     </div>

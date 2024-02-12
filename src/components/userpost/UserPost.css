@@ -23,6 +23,7 @@
     color: var(--color-dark);
     font-size: 16px;
     outline: none;
+    resize: none;
 }
 .user-post-container .user-message::placeholder {
     color: var(--color-dark);
