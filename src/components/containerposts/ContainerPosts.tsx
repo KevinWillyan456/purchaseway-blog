@@ -34,6 +34,38 @@ function ContainerPosts() {
             });
     }, []);
 
+    useEffect(() => {
+        posts.forEach((post) => {
+            if (!post.proprietario.match(/(\w{8}(-\w{4}){3}-\w{12}?)/g)) return;
+
+            axios
+                .get(
+                    import.meta.env.VITE_API_URL +
+                        "/users/" +
+                        post.proprietario,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: import.meta.env.VITE_API_KEY,
+                        },
+                    }
+                )
+                .then((response) => {
+                    setPosts((prevPosts) => {
+                        return prevPosts.map((prevPost) => {
+                            if (prevPost._id === post._id) {
+                                return {
+                                    ...prevPost,
+                                    proprietario: response.data.user.nome,
+                                };
+                            }
+                            return prevPost;
+                        });
+                    });
+                });
+        });
+    }, [posts]);
+
     return (
         <section className="container-posts">
             <div className="content-posts">
@@ -46,7 +78,7 @@ function ContainerPosts() {
                         </div>
                         <div className="wrapper">
                             <div className="name-wrapper">
-                                <div className="name">Joe Dawn</div>
+                                <div className="name">{post.proprietario}</div>
                                 <div className="posted-in">há 2 horas</div>
                             </div>
                             <div className="title-post">Título do post</div>
