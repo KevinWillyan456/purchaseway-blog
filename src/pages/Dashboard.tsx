@@ -1,6 +1,6 @@
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
-import MainDashboard from "../components/mainDashboard/MainDashboard";
+import MainDashboard from "../components/maindashboard/MainDashboard";
 
 function Dashboard() {
     return (

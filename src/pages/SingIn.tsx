@@ -1,5 +1,5 @@
 import Header from "../components/header/Header";
-import MainSingIn from "../components/mainSingIn/MainSingIn";
+import MainSingIn from "../components/mainsingin/MainSingIn";
 
 function SingIn() {
     return (
