@@ -85,7 +85,15 @@ function ContainerPosts() {
                                         ? "Carregando..."
                                         : post.proprietario}
                                 </div>
-                                <div className="posted-in">há 2 horas</div>
+                                <div className="posted-in">
+                                    {new Date(
+                                        post.dataCriacao
+                                    ).toLocaleDateString("pt-BR", {
+                                        day: "2-digit",
+                                        month: "long",
+                                        year: "numeric",
+                                    })}
+                                </div>
                             </div>
                             <div className="title-post">
                                 {post.conteudo.title}
