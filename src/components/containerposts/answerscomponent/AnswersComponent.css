@@ -1,4 +1,5 @@
 .user-posted-answering {
+    animation: answerFadeIn 200ms;
     padding: 0;
     display: flex;
     gap: 10px;
@@ -7,6 +8,15 @@
     margin-right: 0;
     margin-bottom: 0;
 }
+@keyframes answerFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .user-posted-answering .user-picture-posts {
     position: relative;
     width: 60px;

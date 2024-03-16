@@ -1,10 +1,67 @@
+import axios from "axios";
 import "./MainSingIn.css";
 
 function MainSingIn() {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const form = event.currentTarget as HTMLFormElement;
+
+        const nome = (form[0] as HTMLInputElement).value.trim();
+        const email = (form[1] as HTMLInputElement).value.trim();
+        const senha = (form[2] as HTMLInputElement).value.trim();
+
+        if (!nome || !email || !senha) {
+            alert("Preencha todos os campos");
+            return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            alert("E-mail inválido");
+            return;
+        }
+
+        if (senha.length < 6) {
+            alert("Senha deve ter no mínimo 6 caracteres");
+            return;
+        }
+
+        if (nome.length < 3) {
+            alert("Nome deve ter no mínimo 3 caracteres");
+            return;
+        }
+
+        axios
+            .post(
+                import.meta.env.VITE_API_URL + "/users",
+                {
+                    nome,
+                    email,
+                    senha,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: import.meta.env.VITE_API_KEY,
+                    },
+                }
+            )
+            .then((response) => {
+                if (response.status === 201) {
+                    alert("Usuário criado com sucesso");
+                    window.location.href = "/dashboard";
+                }
+            })
+            .catch((error) => {
+                if (error.response.status === 409) {
+                    alert("E-mail já cadastrado");
+                }
+            });
+    };
+
     return (
         <main className="d-flex align-items-center bg-body-tertiary main-singin">
             <section className="form-signin w-100 m-auto">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="main-singin-logo">
                         <img
                             src="/purchaseway-blog-favicon-medium.png"
