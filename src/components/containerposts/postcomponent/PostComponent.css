@@ -1,8 +1,17 @@
 .container-posts .user-posted {
+    animation: postFadeIn 500ms 200ms backwards;
     margin: 0;
     padding: 0;
     display: flex;
     gap: 10px;
+}
+@keyframes postFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 .user-posted .user-picture-posts {
     position: relative;

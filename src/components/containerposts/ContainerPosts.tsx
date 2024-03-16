@@ -22,6 +22,7 @@ export interface IAnswer {
 
 function ContainerPosts() {
     const [posts, setPosts] = useState<IPost[]>([]);
+    const [emptyPosts, setEmptyPosts] = useState<boolean>(false);
 
     useEffect(() => {
         axios
@@ -33,6 +34,10 @@ function ContainerPosts() {
             })
             .then((response) => {
                 setPosts(response.data.posts);
+
+                if (response.data.posts.length === 0) {
+                    setEmptyPosts(true);
+                }
             });
     }, []);
 
@@ -116,13 +121,19 @@ function ContainerPosts() {
 
     return (
         <section className="container-posts">
-            <div className="content-posts">
-                <p className="recommendations">Recomendações para você</p>
+            {posts.length === 0 ? (
+                <div className="loading">Carregando...</div>
+            ) : emptyPosts ? (
+                <div className="empty-posts">Nenhuma postagem disponível</div>
+            ) : (
+                <div className="content-posts">
+                    <p className="recommendations">Recomendações para você</p>
 
-                {posts.map((post) => (
-                    <PostComponent key={post._id} post={post} />
-                ))}
-            </div>
+                    {posts.map((post) => (
+                        <PostComponent key={post._id} post={post} />
+                    ))}
+                </div>
+            )}
         </section>
     );
 }

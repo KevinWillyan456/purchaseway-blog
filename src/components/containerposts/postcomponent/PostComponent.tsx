@@ -36,7 +36,18 @@ function PostComponent({ post }: { post: IPost }) {
                     </div>
                 </div>
                 <div className="title-post">{post.conteudo.title}</div>
-                <div className="content-post">{post.conteudo.text}</div>
+                <div className="content-post">
+                    {post.conteudo.text}
+                    {post.conteudo.urlImg && (
+                        <img
+                            style={{
+                                width: "100%",
+                                marginTop: "20px",
+                            }}
+                            src={post.conteudo.urlImg}
+                        />
+                    )}
+                </div>
                 <div className="actions-post">
                     <div className="actions-wrapper">
                         <div className="like-btn-wrapper">
