@@ -6,7 +6,7 @@ import axios from "axios";
 
 export interface IPost {
     _id: string;
-    conteudo: { text: string; urlImg: string };
+    conteudo: { text: string; urlImg: string; title: string };
     respostas: Array<{
         _id: string;
         userId: string;
@@ -78,10 +78,18 @@ function ContainerPosts() {
                         </div>
                         <div className="wrapper">
                             <div className="name-wrapper">
-                                <div className="name">{post.proprietario}</div>
+                                <div className="name">
+                                    {post.proprietario.match(
+                                        /(\w{8}(-\w{4}){3}-\w{12}?)/g
+                                    )
+                                        ? "Carregando..."
+                                        : post.proprietario}
+                                </div>
                                 <div className="posted-in">há 2 horas</div>
                             </div>
-                            <div className="title-post">Título do post</div>
+                            <div className="title-post">
+                                {post.conteudo.title}
+                            </div>
                             <div className="content-post">
                                 {post.conteudo.text}
                             </div>
