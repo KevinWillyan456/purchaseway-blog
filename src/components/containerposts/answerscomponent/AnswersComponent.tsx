@@ -33,7 +33,9 @@ function AnswersComponent({ answer }: { answer: IAnswer }) {
                         <button className="like-btn">
                             <Like />
                         </button>
-                        <div className="count-like-post">0</div>
+                        <div className="count-like-post">
+                            {answer.curtidas.length}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -44,7 +44,7 @@ function PostComponent({ post }: { post: IPost }) {
                                 <Like />
                             </button>
                             <div className="count-like-post">
-                                {post.curtidas}
+                                {post.curtidas.length}
                             </div>
                         </div>
                         <button className="btn-respond">Responder</button>

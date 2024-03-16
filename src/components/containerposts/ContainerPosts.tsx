@@ -8,7 +8,7 @@ export interface IPost {
     conteudo: { text: string; urlImg: string; title: string };
     respostas: IAnswer[];
     proprietario: string;
-    curtidas: number;
+    curtidas: string[];
     dataCriacao: Date;
 }
 
@@ -16,6 +16,7 @@ export interface IAnswer {
     _id: string;
     userId: string;
     text: string;
+    curtidas: string[];
     dataCriacao: Date;
 }
 
