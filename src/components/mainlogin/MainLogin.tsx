@@ -1,10 +1,69 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 import "./MainLogin.css";
 
 function MainLogin() {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const form = event.currentTarget as HTMLFormElement;
+
+        const email = (form[0] as HTMLInputElement).value.trim();
+        const senha = (form[1] as HTMLInputElement).value.trim();
+        const stayConnected = (form[2] as HTMLInputElement).checked;
+
+        if (!email || !senha) {
+            alert("Preencha todos os campos");
+            return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            alert("Email ou senha incorretos");
+            return;
+        }
+
+        if (senha.length < 6) {
+            alert("Email ou senha incorretos");
+            return;
+        }
+
+        axios
+            .post(
+                import.meta.env.VITE_API_URL + "/login",
+                {
+                    email,
+                    senha,
+                    stayConnected,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: import.meta.env.VITE_API_KEY,
+                    },
+                }
+            )
+            .then((response) => {
+                Cookies.set("token", response.data.token, {
+                    expires: response.data.stayConnected ? 7 : 1,
+                });
+
+                if (response.status === 200) {
+                    window.location.href = "/dashboard";
+                }
+            })
+            .catch((error) => {
+                if (
+                    error.response.status === 401 ||
+                    error.response.status === 404
+                ) {
+                    alert("Email ou senha incorretos");
+                }
+            });
+    };
+
     return (
         <main className="d-flex align-items-center bg-body-tertiary main-singin">
             <section className="form-login w-100 m-auto">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="main-singin-logo">
                         <img
                             src="/purchaseway-blog-favicon-medium.png"

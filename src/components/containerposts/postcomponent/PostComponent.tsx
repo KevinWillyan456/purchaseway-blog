@@ -43,6 +43,7 @@ function PostComponent({ post }: { post: IPost }) {
                             style={{
                                 width: "100%",
                                 marginTop: "20px",
+                                borderRadius: "10px",
                             }}
                             src={post.conteudo.urlImg}
                         />
