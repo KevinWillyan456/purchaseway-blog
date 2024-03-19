@@ -1,8 +1,12 @@
 import './UserContent.css'
 import User from '../../icons/User'
 import Pencil from '../../icons/Pencil'
+import { UserContext } from '../../contexts/UserContext'
+import { useContext } from 'react'
 
 function UserContent() {
+    const { user } = useContext(UserContext)
+
     return (
         <article className="user-container">
             <div className="user-picture">
@@ -11,11 +15,11 @@ function UserContent() {
                     <Pencil />
                 </div>
             </div>
-            <div className="user-name">Joe Dawn</div>
+            <div className="user-name">{user.nome}</div>
             <div className="user-posts-text">Posts</div>
-            <div className="user-posts">10</div>
+            <div className="user-posts">{user.posts}</div>
             <div className="user-likes-text">Likes</div>
-            <div className="user-likes">10</div>
+            <div className="user-likes">{user.curtidas}</div>
         </article>
     )
 }
