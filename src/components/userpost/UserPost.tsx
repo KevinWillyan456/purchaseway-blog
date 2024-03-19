@@ -5,7 +5,7 @@ function UserPost() {
     return (
         <article className="user-post-container">
             <textarea
-                className="user-message"
+                className="user-message focus-ring"
                 placeholder="No que está pensando?"
                 maxLength={5000}
             ></textarea>
@@ -16,7 +16,7 @@ function UserPost() {
                     </div>
                     <input
                         type="text"
-                        className="title-publish"
+                        className="title-publish focus-ring"
                         placeholder="Título da publicação"
                     />
                 </div>

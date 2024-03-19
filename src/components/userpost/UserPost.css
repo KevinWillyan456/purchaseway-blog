@@ -11,6 +11,7 @@
     padding-bottom: 10px;
 }
 .user-post-container .user-message {
+    transition: 200ms;
     max-width: 971px;
     width: 100%;
     height: 133px;
@@ -55,6 +56,7 @@
     background: var(--color-dark-orange);
 }
 .user-post-footer .wrap .title-publish {
+    transition: 200ms;
     max-width: 400px;
     width: 100%;
     height: 30px;
