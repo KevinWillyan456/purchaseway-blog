@@ -1,5 +1,5 @@
-import Header from "../components/header/Header";
-import MainSingIn from "../components/mainsingin/MainSingIn";
+import Header from '../components/header/Header'
+import MainSingIn from '../components/mainsingin/MainSingIn'
 
 function SingIn() {
     return (
@@ -7,7 +7,7 @@ function SingIn() {
             <Header />
             <MainSingIn />
         </>
-    );
+    )
 }
 
-export default SingIn;
+export default SingIn

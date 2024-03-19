@@ -1,5 +1,5 @@
-import "./UserPost.css";
-import Photograph from "../../icons/Photograph";
+import './UserPost.css'
+import Photograph from '../../icons/Photograph'
 
 function UserPost() {
     return (
@@ -23,7 +23,7 @@ function UserPost() {
                 <button className="btn-publish">Publicar</button>
             </div>
         </article>
-    );
+    )
 }
 
-export default UserPost;
+export default UserPost

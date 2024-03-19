@@ -1,38 +1,38 @@
-import axios from "axios";
-import "./MainSingIn.css";
+import axios from 'axios'
+import './MainSingIn.css'
 
 function MainSingIn() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const form = event.currentTarget as HTMLFormElement;
+        event.preventDefault()
+        const form = event.currentTarget as HTMLFormElement
 
-        const nome = (form[0] as HTMLInputElement).value.trim();
-        const email = (form[1] as HTMLInputElement).value.trim();
-        const senha = (form[2] as HTMLInputElement).value.trim();
+        const nome = (form[0] as HTMLInputElement).value.trim()
+        const email = (form[1] as HTMLInputElement).value.trim()
+        const senha = (form[2] as HTMLInputElement).value.trim()
 
         if (!nome || !email || !senha) {
-            alert("Preencha todos os campos");
-            return;
+            alert('Preencha todos os campos')
+            return
         }
 
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            alert("E-mail inválido");
-            return;
+            alert('E-mail inválido')
+            return
         }
 
         if (senha.length < 6) {
-            alert("Senha deve ter no mínimo 6 caracteres");
-            return;
+            alert('Senha deve ter no mínimo 6 caracteres')
+            return
         }
 
         if (nome.length < 3) {
-            alert("Nome deve ter no mínimo 3 caracteres");
-            return;
+            alert('Nome deve ter no mínimo 3 caracteres')
+            return
         }
 
         axios
             .post(
-                import.meta.env.VITE_API_URL + "/users",
+                import.meta.env.VITE_API_URL + '/users',
                 {
                     nome,
                     email,
@@ -40,23 +40,23 @@ function MainSingIn() {
                 },
                 {
                     headers: {
-                        "Content-Type": "application/json",
+                        'Content-Type': 'application/json',
                         Authorization: import.meta.env.VITE_API_KEY,
                     },
                 }
             )
             .then((response) => {
                 if (response.status === 201) {
-                    alert("Usuário criado com sucesso");
-                    window.location.href = "/dashboard";
+                    alert('Usuário criado com sucesso')
+                    window.location.href = '/dashboard'
                 }
             })
             .catch((error) => {
                 if (error.response.status === 409) {
-                    alert("E-mail já cadastrado");
+                    alert('E-mail já cadastrado')
                 }
-            });
-    };
+            })
+    }
 
     return (
         <main className="d-flex align-items-center bg-body-tertiary main-singin">
@@ -126,7 +126,7 @@ function MainSingIn() {
                 </form>
             </section>
         </main>
-    );
+    )
 }
 
-export default MainSingIn;
+export default MainSingIn

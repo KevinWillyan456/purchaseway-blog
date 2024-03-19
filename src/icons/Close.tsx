@@ -2,12 +2,12 @@ function Close({
     className,
     onclick,
 }: {
-    className: string;
-    onclick: () => void;
+    className: string
+    onclick: () => void
 }) {
     return (
         <svg
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
             className={className}
             onClick={onclick}
             xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@ function Close({
                 fill="#026E81"
             />
         </svg>
-    );
+    )
 }
 
-export default Close;
+export default Close

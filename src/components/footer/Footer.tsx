@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import "./Footer.css";
+import { Link } from 'react-router-dom'
+import './Footer.css'
 
 function Footer() {
     return (
@@ -11,7 +11,7 @@ function Footer() {
                 @ 2023 Purchaseway Blog - Todos os diretos reservados
             </div>
         </footer>
-    );
+    )
 }
 
-export default Footer;
+export default Footer

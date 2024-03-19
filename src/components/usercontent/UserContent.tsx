@@ -1,6 +1,6 @@
-import "./UserContent.css";
-import User from "../../icons/User";
-import Pencil from "../../icons/Pencil";
+import './UserContent.css'
+import User from '../../icons/User'
+import Pencil from '../../icons/Pencil'
 
 function UserContent() {
     return (
@@ -17,7 +17,7 @@ function UserContent() {
             <div className="user-likes-text">Likes</div>
             <div className="user-likes">10</div>
         </article>
-    );
+    )
 }
 
-export default UserContent;
+export default UserContent

@@ -22,7 +22,7 @@ function User() {
                 strokeLinejoin="round"
             />
         </svg>
-    );
+    )
 }
 
-export default User;
+export default User

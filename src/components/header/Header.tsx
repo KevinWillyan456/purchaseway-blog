@@ -1,11 +1,11 @@
-import { useState } from "react";
-import Close from "../../icons/Close";
-import MagnifyingGlass from "../../icons/MagnifyingGlass";
-import "./Header.css";
-import { Link } from "react-router-dom";
+import { useState } from 'react'
+import Close from '../../icons/Close'
+import MagnifyingGlass from '../../icons/MagnifyingGlass'
+import './Header.css'
+import { Link } from 'react-router-dom'
 
 function Header() {
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState('')
 
     return (
         <header className="header">
@@ -24,9 +24,9 @@ function Header() {
                         onChange={(e) => setSearch(e.target.value)}
                     />
                     <Close
-                        className={!search ? "hidden" : ""}
+                        className={!search ? 'hidden' : ''}
                         onclick={() => {
-                            setSearch("");
+                            setSearch('')
                         }}
                     />
                 </div>
@@ -38,7 +38,7 @@ function Header() {
                 </Link>
             </div>
         </header>
-    );
+    )
 }
 
-export default Header;
+export default Header

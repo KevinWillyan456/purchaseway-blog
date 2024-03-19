@@ -1,34 +1,34 @@
-import axios from "axios";
-import Cookies from "js-cookie";
-import "./MainLogin.css";
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import './MainLogin.css'
 
 function MainLogin() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const form = event.currentTarget as HTMLFormElement;
+        event.preventDefault()
+        const form = event.currentTarget as HTMLFormElement
 
-        const email = (form[0] as HTMLInputElement).value.trim();
-        const senha = (form[1] as HTMLInputElement).value.trim();
-        const stayConnected = (form[2] as HTMLInputElement).checked;
+        const email = (form[0] as HTMLInputElement).value.trim()
+        const senha = (form[1] as HTMLInputElement).value.trim()
+        const stayConnected = (form[2] as HTMLInputElement).checked
 
         if (!email || !senha) {
-            alert("Preencha todos os campos");
-            return;
+            alert('Preencha todos os campos')
+            return
         }
 
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            alert("Email ou senha incorretos");
-            return;
+            alert('Email ou senha incorretos')
+            return
         }
 
         if (senha.length < 6) {
-            alert("Email ou senha incorretos");
-            return;
+            alert('Email ou senha incorretos')
+            return
         }
 
         axios
             .post(
-                import.meta.env.VITE_API_URL + "/login",
+                import.meta.env.VITE_API_URL + '/login',
                 {
                     email,
                     senha,
@@ -36,18 +36,18 @@ function MainLogin() {
                 },
                 {
                     headers: {
-                        "Content-Type": "application/json",
+                        'Content-Type': 'application/json',
                         Authorization: import.meta.env.VITE_API_KEY,
                     },
                 }
             )
             .then((response) => {
-                Cookies.set("token", response.data.token, {
+                Cookies.set('token', response.data.token, {
                     expires: response.data.stayConnected ? 7 : 1,
-                });
+                })
 
                 if (response.status === 200) {
-                    window.location.href = "/dashboard";
+                    window.location.href = '/dashboard'
                 }
             })
             .catch((error) => {
@@ -55,10 +55,10 @@ function MainLogin() {
                     error.response.status === 401 ||
                     error.response.status === 404
                 ) {
-                    alert("Email ou senha incorretos");
+                    alert('Email ou senha incorretos')
                 }
-            });
-    };
+            })
+    }
 
     return (
         <main className="d-flex align-items-center bg-body-tertiary main-singin">
@@ -118,7 +118,7 @@ function MainLogin() {
                 </form>
             </section>
         </main>
-    );
+    )
 }
 
-export default MainLogin;
+export default MainLogin

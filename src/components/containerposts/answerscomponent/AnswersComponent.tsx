@@ -1,7 +1,7 @@
-import Like from "../../../icons/Like";
-import User from "../../../icons/User";
-import { IAnswer } from "../ContainerPosts";
-import "./AnswersComponent.css";
+import Like from '../../../icons/Like'
+import User from '../../../icons/User'
+import { IAnswer } from '../ContainerPosts'
+import './AnswersComponent.css'
 
 function AnswersComponent({ answer }: { answer: IAnswer }) {
     return (
@@ -13,16 +13,16 @@ function AnswersComponent({ answer }: { answer: IAnswer }) {
                 <div className="name-wrapper">
                     <div className="name">
                         {answer.userId.match(/(\w{8}(-\w{4}){3}-\w{12}?)/g)
-                            ? "Carregando..."
+                            ? 'Carregando...'
                             : answer.userId}
                     </div>
                     <div className="posted-in">
                         {new Date(answer.dataCriacao).toLocaleDateString(
-                            "pt-BR",
+                            'pt-BR',
                             {
-                                day: "2-digit",
-                                month: "long",
-                                year: "numeric",
+                                day: '2-digit',
+                                month: 'long',
+                                year: 'numeric',
                             }
                         )}
                     </div>
@@ -40,7 +40,7 @@ function AnswersComponent({ answer }: { answer: IAnswer }) {
                 </div>
             </div>
         </article>
-    );
+    )
 }
 
-export default AnswersComponent;
+export default AnswersComponent

@@ -1,6 +1,6 @@
-import Footer from "../components/footer/Footer";
-import Header from "../components/header/Header";
-import MainDashboard from "../components/maindashboard/MainDashboard";
+import Footer from '../components/footer/Footer'
+import Header from '../components/header/Header'
+import MainDashboard from '../components/maindashboard/MainDashboard'
 
 function Dashboard() {
     return (
@@ -9,7 +9,7 @@ function Dashboard() {
             <MainDashboard />
             <Footer />
         </>
-    );
+    )
 }
 
-export default Dashboard;
+export default Dashboard

@@ -15,7 +15,7 @@ function Pencil() {
                 strokeLinejoin="round"
             />
         </svg>
-    );
+    )
 }
 
-export default Pencil;
+export default Pencil

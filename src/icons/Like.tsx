@@ -15,7 +15,7 @@ function Like() {
                 strokeLinejoin="round"
             />
         </svg>
-    );
+    )
 }
 
-export default Like;
+export default Like

@@ -15,7 +15,7 @@ function MagnifyingGlass() {
                 strokeLinejoin="round"
             />
         </svg>
-    );
+    )
 }
 
-export default MagnifyingGlass;
+export default MagnifyingGlass

@@ -12,7 +12,7 @@ function World() {
                 fill="#026E81"
             />
         </svg>
-    );
+    )
 }
 
-export default World;
+export default World

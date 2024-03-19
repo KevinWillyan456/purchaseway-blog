@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import AddUser from "../../icons/AddUser";
-import Publish from "../../icons/Publish";
-import Share from "../../icons/Share";
-import World from "../../icons/World";
-import "./Main.css";
+import { Link } from 'react-router-dom'
+import AddUser from '../../icons/AddUser'
+import Publish from '../../icons/Publish'
+import Share from '../../icons/Share'
+import World from '../../icons/World'
+import './Main.css'
 
 function Main() {
     return (
@@ -41,7 +41,7 @@ function Main() {
                 </div>
             </div>
         </section>
-    );
+    )
 }
 
-export default Main;
+export default Main

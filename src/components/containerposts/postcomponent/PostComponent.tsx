@@ -1,16 +1,16 @@
-import { useState } from "react";
-import Like from "../../../icons/Like";
-import User from "../../../icons/User";
-import { IPost } from "../ContainerPosts";
-import AnswersComponent from "../answerscomponent/AnswersComponent";
-import "./PostComponent.css";
+import { useState } from 'react'
+import Like from '../../../icons/Like'
+import User from '../../../icons/User'
+import { IPost } from '../ContainerPosts'
+import AnswersComponent from '../answerscomponent/AnswersComponent'
+import './PostComponent.css'
 
 function PostComponent({ post }: { post: IPost }) {
-    const [showAnswers, setShowAnswers] = useState(false);
+    const [showAnswers, setShowAnswers] = useState(false)
 
     const handleToggleAnswers = () => {
-        setShowAnswers((prev) => !prev);
-    };
+        setShowAnswers((prev) => !prev)
+    }
 
     return (
         <article className="user-posted">
@@ -21,16 +21,16 @@ function PostComponent({ post }: { post: IPost }) {
                 <div className="name-wrapper">
                     <div className="name">
                         {post.proprietario.match(/(\w{8}(-\w{4}){3}-\w{12}?)/g)
-                            ? "Carregando..."
+                            ? 'Carregando...'
                             : post.proprietario}
                     </div>
                     <div className="posted-in">
                         {new Date(post.dataCriacao).toLocaleDateString(
-                            "pt-BR",
+                            'pt-BR',
                             {
-                                day: "2-digit",
-                                month: "long",
-                                year: "numeric",
+                                day: '2-digit',
+                                month: 'long',
+                                year: 'numeric',
                             }
                         )}
                     </div>
@@ -41,9 +41,9 @@ function PostComponent({ post }: { post: IPost }) {
                     {post.conteudo.urlImg && (
                         <img
                             style={{
-                                width: "100%",
-                                marginTop: "20px",
-                                borderRadius: "10px",
+                                width: '100%',
+                                marginTop: '20px',
+                                borderRadius: '10px',
                             }}
                             src={post.conteudo.urlImg}
                         />
@@ -86,7 +86,7 @@ function PostComponent({ post }: { post: IPost }) {
                 </div>
             </div>
         </article>
-    );
+    )
 }
 
-export default PostComponent;
+export default PostComponent

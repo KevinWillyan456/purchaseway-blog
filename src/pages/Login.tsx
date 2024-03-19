@@ -1,5 +1,5 @@
-import Header from "../components/header/Header";
-import MainLogin from "../components/mainlogin/MainLogin";
+import Header from '../components/header/Header'
+import MainLogin from '../components/mainlogin/MainLogin'
 
 function Login() {
     return (
@@ -7,7 +7,7 @@ function Login() {
             <Header />
             <MainLogin />
         </>
-    );
+    )
 }
 
-export default Login;
+export default Login

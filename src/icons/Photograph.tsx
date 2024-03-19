@@ -29,7 +29,7 @@ function Photograph() {
                 strokeLinejoin="round"
             />
         </svg>
-    );
+    )
 }
 
-export default Photograph;
+export default Photograph

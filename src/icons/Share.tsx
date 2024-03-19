@@ -1,7 +1,7 @@
 function Share() {
     return (
         <svg
-            style={{ top: "50px", position: "absolute", width: "100%" }}
+            style={{ top: '50px', position: 'absolute', width: '100%' }}
             xmlns="http://www.w3.org/2000/svg"
             width="96"
             height="114"
@@ -36,7 +36,7 @@ function Share() {
                 strokeWidth="6"
             />
         </svg>
-    );
+    )
 }
 
-export default Share;
+export default Share

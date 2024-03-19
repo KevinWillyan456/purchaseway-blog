@@ -1,7 +1,7 @@
 function AddUser() {
     return (
         <svg
-            style={{ top: "40px", position: "absolute", width: "100%" }}
+            style={{ top: '40px', position: 'absolute', width: '100%' }}
             xmlns="http://www.w3.org/2000/svg"
             width="125"
             height="125"
@@ -16,7 +16,7 @@ function AddUser() {
                 strokeLinejoin="round"
             />
         </svg>
-    );
+    )
 }
 
-export default AddUser;
+export default AddUser

@@ -7,7 +7,7 @@
     z-index: 2;
 }
 
-.form-login input[type="email"] {
+.form-login input[type='email'] {
     margin-bottom: -1px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -15,7 +15,7 @@
     border-bottom-right-radius: 0;
 }
 
-.form-login input[type="password"] {
+.form-login input[type='password'] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
