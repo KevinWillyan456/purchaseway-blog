@@ -1,15 +1,54 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Like from '../../../icons/Like'
 import User from '../../../icons/User'
 import { IPost } from '../ContainerPosts'
 import AnswersComponent from '../answerscomponent/AnswersComponent'
 import './PostComponent.css'
+import { UserContext } from '../../../contexts/UserContext'
+import axios from 'axios'
 
 function PostComponent({ post }: { post: IPost }) {
     const [showAnswers, setShowAnswers] = useState(false)
+    const [postLikes, setPostLikes] = useState<string[]>(post.curtidas)
+    const { user } = useContext(UserContext)
 
     const handleToggleAnswers = () => {
         setShowAnswers((prev) => !prev)
+    }
+
+    const handleLike = () => {
+        axios
+            .put(
+                import.meta.env.VITE_API_URL +
+                    '/posts/likes/' +
+                    post._id +
+                    '/' +
+                    user._id,
+                {},
+                {
+                    headers: {
+                        Authorization: import.meta.env.VITE_API_KEY,
+                    },
+                }
+            )
+            .then(() => {
+                axios
+                    .get(import.meta.env.VITE_API_URL + '/posts/' + post._id, {
+                        headers: {
+                            Authorization: import.meta.env.VITE_API_KEY,
+                        },
+                    })
+                    .then((responsePost) => {
+                        console.log(responsePost.data.post.curtidas)
+                        setPostLikes(responsePost.data.post.curtidas)
+                    })
+                    .catch(() => {
+                        alert('Erro ao interagir com o post, tente novamente')
+                    })
+            })
+            .catch(() => {
+                alert('Erro ao interagir com o post, tente novamente')
+            })
     }
 
     return (
@@ -52,11 +91,18 @@ function PostComponent({ post }: { post: IPost }) {
                 <div className="actions-post">
                     <div className="actions-wrapper">
                         <div className="like-btn-wrapper">
-                            <button className="like-btn">
+                            <button
+                                className={
+                                    postLikes.includes(user._id)
+                                        ? 'like-btn active'
+                                        : 'like-btn'
+                                }
+                                onClick={handleLike}
+                            >
                                 <Like />
                             </button>
                             <div className="count-like-post">
-                                {post.curtidas.length}
+                                {postLikes.length}
                             </div>
                         </div>
                         <button className="btn-respond">Responder</button>
