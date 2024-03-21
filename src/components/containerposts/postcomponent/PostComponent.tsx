@@ -38,16 +38,17 @@ function PostComponent({ post }: { post: IPost }) {
                             Authorization: import.meta.env.VITE_API_KEY,
                         },
                     })
-                    .then((responsePost) => {
-                        console.log(responsePost.data.post.curtidas)
-                        setPostLikes(responsePost.data.post.curtidas)
+                    .then((response) => {
+                        setPostLikes(response.data.post.curtidas)
                     })
                     .catch(() => {
-                        alert('Erro ao interagir com o post, tente novamente')
+                        alert(
+                            'Erro ao interagir com a postagem, tente novamente'
+                        )
                     })
             })
             .catch(() => {
-                alert('Erro ao interagir com o post, tente novamente')
+                alert('Erro ao interagir com a postagem, tente novamente')
             })
     }
 
@@ -125,6 +126,7 @@ function PostComponent({ post }: { post: IPost }) {
                                 <AnswersComponent
                                     key={answer._id}
                                     answer={answer}
+                                    postId={post._id}
                                 />
                             ))}
                         </>

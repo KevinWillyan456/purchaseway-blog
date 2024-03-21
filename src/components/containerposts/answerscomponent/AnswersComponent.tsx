@@ -1,9 +1,64 @@
+import { useContext, useState } from 'react'
 import Like from '../../../icons/Like'
 import User from '../../../icons/User'
 import { IAnswer } from '../ContainerPosts'
 import './AnswersComponent.css'
+import axios from 'axios'
+import { UserContext } from '../../../contexts/UserContext'
 
-function AnswersComponent({ answer }: { answer: IAnswer }) {
+function AnswersComponent({
+    answer,
+    postId,
+}: {
+    answer: IAnswer
+    postId: string
+}) {
+    const [answerLikes, setAnswerLikes] = useState<string[]>(answer.curtidas)
+    const { user } = useContext(UserContext)
+
+    const handleLike = () => {
+        axios
+            .put(
+                import.meta.env.VITE_API_URL +
+                    '/posts/response/likes/' +
+                    postId +
+                    '/' +
+                    answer._id +
+                    '/' +
+                    user._id,
+                {},
+                {
+                    headers: {
+                        Authorization: import.meta.env.VITE_API_KEY,
+                    },
+                }
+            )
+            .then(() => {
+                axios
+                    .get(import.meta.env.VITE_API_URL + '/posts/' + postId, {
+                        headers: {
+                            Authorization: import.meta.env.VITE_API_KEY,
+                        },
+                    })
+                    .then((response) => {
+                        setAnswerLikes(
+                            response.data.post.respostas.find(
+                                (resposta: IAnswer) =>
+                                    resposta._id === answer._id
+                            ).curtidas
+                        )
+                    })
+                    .catch(() => {
+                        alert(
+                            'Erro ao interagir com a resposta, tente novamente'
+                        )
+                    })
+            })
+            .catch(() => {
+                alert('Erro ao interagir com a resposta, tente novamente')
+            })
+    }
+
     return (
         <article className="user-posted-answering">
             <div className="user-picture-posts">
@@ -30,11 +85,18 @@ function AnswersComponent({ answer }: { answer: IAnswer }) {
                 <div className="content-post">{answer.text}</div>
                 <div className="actions-post">
                     <div className="actions-wrapper">
-                        <button className="like-btn">
+                        <button
+                            className={
+                                answerLikes.includes(user._id)
+                                    ? 'like-btn active'
+                                    : 'like-btn'
+                            }
+                            onClick={handleLike}
+                        >
                             <Like />
                         </button>
                         <div className="count-like-post">
-                            {answer.curtidas.length}
+                            {answerLikes.length}
                         </div>
                     </div>
                 </div>

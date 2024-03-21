@@ -26,7 +26,7 @@ interface UserContextType {
 export const UserContext = createContext<UserContextType>({
     user: {
         _id: '',
-        nome: '',
+        nome: 'Carregando...',
         senha: '',
         email: '',
         dataCriacao: new Date(),
@@ -43,7 +43,7 @@ interface ProviderProps {
 export function UserContextProvider({ children }: ProviderProps) {
     const [user, setUser] = useState<IUser>({
         _id: '',
-        nome: '',
+        nome: 'Carregando...',
         senha: '',
         email: '',
         dataCriacao: new Date(),

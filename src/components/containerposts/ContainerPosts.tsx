@@ -23,6 +23,7 @@ export interface IAnswer {
 function ContainerPosts() {
     const [posts, setPosts] = useState<IPost[]>([])
     const [emptyPosts, setEmptyPosts] = useState<boolean>(false)
+    const [error, setError] = useState<boolean>(false)
 
     useEffect(() => {
         axios
@@ -38,6 +39,9 @@ function ContainerPosts() {
                 if (response.data.posts.length === 0) {
                     setEmptyPosts(true)
                 }
+            })
+            .catch(() => {
+                setError(true)
             })
     }, [])
 
@@ -125,6 +129,8 @@ function ContainerPosts() {
                 <div className="loading">Carregando...</div>
             ) : emptyPosts ? (
                 <div className="empty-posts">Nenhuma postagem disponível</div>
+            ) : error ? (
+                <div className="error">Erro na comunicação com o servidor</div>
             ) : (
                 <div className="content-posts">
                     <p className="recommendations">Recomendações para você</p>
