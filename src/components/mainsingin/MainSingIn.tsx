@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import './MainSingIn.css'
 
 function MainSingIn() {
@@ -9,6 +10,7 @@ function MainSingIn() {
         const nome = (form[0] as HTMLInputElement).value.trim()
         const email = (form[1] as HTMLInputElement).value.trim()
         const senha = (form[2] as HTMLInputElement).value.trim()
+        const stayConnected = (form[3] as HTMLInputElement).checked
 
         if (!nome || !email || !senha) {
             alert('Preencha todos os campos')
@@ -37,6 +39,7 @@ function MainSingIn() {
                     nome,
                     email,
                     senha,
+                    stayConnected,
                 },
                 {
                     headers: {
@@ -46,8 +49,11 @@ function MainSingIn() {
                 }
             )
             .then((response) => {
+                Cookies.set('token', response.data.token, {
+                    expires: response.data.stayConnected ? 7 : 1,
+                })
+
                 if (response.status === 201) {
-                    alert('Usuário criado com sucesso')
                     window.location.href = '/dashboard'
                 }
             })
