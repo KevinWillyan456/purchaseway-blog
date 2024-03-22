@@ -75,7 +75,9 @@ function PostComponent({ post }: { post: IPost }) {
                         )}
                     </div>
                 </div>
-                <div className="title-post">{post.conteudo.title}</div>
+                <div className="title-post text-truncate">
+                    {post.conteudo.title}
+                </div>
                 <div className="content-post">
                     {post.conteudo.text}
                     {post.conteudo.urlImg && (

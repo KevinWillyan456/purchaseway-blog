@@ -52,10 +52,12 @@ function MainLogin() {
             })
             .catch((error) => {
                 if (
-                    error.response.status === 401 ||
-                    error.response.status === 404
+                    error.response?.status === 401 ||
+                    error.response?.status === 404
                 ) {
                     alert('Email ou senha incorretos')
+                } else {
+                    alert('Erro ao fazer login')
                 }
             })
     }

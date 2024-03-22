@@ -58,8 +58,10 @@ function MainSingIn() {
                 }
             })
             .catch((error) => {
-                if (error.response.status === 409) {
+                if (error.response?.status === 409) {
                     alert('E-mail já cadastrado')
+                } else {
+                    alert('Erro ao criar conta')
                 }
             })
     }
