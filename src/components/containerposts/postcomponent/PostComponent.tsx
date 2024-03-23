@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react'
 import Like from '../../../icons/Like'
 import User from '../../../icons/User'
-import { IPost } from '../ContainerPosts'
+import OptionsPost from './optionspost/OptionsPost'
 import AnswersComponent from '../answerscomponent/AnswersComponent'
-import './PostComponent.css'
+import { IPost } from '../ContainerPosts'
 import { UserContext } from '../../../contexts/UserContext'
 import axios from 'axios'
+import './PostComponent.css'
 
 function PostComponent({ post }: { post: IPost }) {
     const [showAnswers, setShowAnswers] = useState(false)
@@ -135,6 +136,8 @@ function PostComponent({ post }: { post: IPost }) {
                     )}
                 </div>
             </div>
+
+            <OptionsPost />
         </article>
     )
 }

@@ -1,5 +1,6 @@
 .container-posts .user-posted {
     animation: postFadeIn 500ms 200ms backwards;
+    position: relative;
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,12 +17,16 @@
 .user-posted .user-picture-posts {
     position: relative;
     width: 60px;
+    min-width: 60px;
     height: 60px;
     border-radius: 50%;
     background: var(--color-dark);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+.user-posted .wrapper {
+    width: 100%;
 }
 .user-posted .wrapper .name-wrapper {
     display: flex;
