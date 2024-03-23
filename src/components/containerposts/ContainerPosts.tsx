@@ -8,6 +8,7 @@ export interface IPost {
     conteudo: { text: string; urlImg: string; title: string }
     respostas: IAnswer[]
     proprietario: string
+    proprietarioId: string
     curtidas: string[]
     dataCriacao: Date
 }
@@ -68,6 +69,7 @@ function ContainerPosts() {
                                 return {
                                     ...prevPost,
                                     proprietario: response.data.user.nome,
+                                    proprietarioId: response.data.user._id,
                                 }
                             }
                             return prevPost
