@@ -137,7 +137,7 @@ function PostComponent({ post }: { post: IPost }) {
                 </div>
             </div>
             {user._id === post.proprietarioId && (
-                <OptionsPost postId={post._id} />
+                <OptionsPost postId={post._id} content={post.conteudo} />
             )}
         </article>
     )
