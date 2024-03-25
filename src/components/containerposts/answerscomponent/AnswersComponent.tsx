@@ -5,6 +5,8 @@ import { IAnswer } from '../ContainerPosts'
 import './AnswersComponent.css'
 import axios from 'axios'
 import { UserContext } from '../../../contexts/UserContext'
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 function AnswersComponent({
     answer,
@@ -72,14 +74,11 @@ function AnswersComponent({
                             : answer.userId}
                     </div>
                     <div className="posted-in">
-                        {new Date(answer.dataCriacao).toLocaleDateString(
-                            'pt-BR',
-                            {
-                                day: '2-digit',
-                                month: 'long',
-                                year: 'numeric',
-                            }
-                        )}
+                        {formatDistanceToNow(new Date(answer.dataCriacao), {
+                            locale: ptBR,
+                            addSuffix: true,
+                        })}
+                        {answer.wasEdited && <span> (editado)</span>}
                     </div>
                 </div>
                 <div className="content-post">{answer.text}</div>

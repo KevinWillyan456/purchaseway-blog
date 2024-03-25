@@ -9,9 +9,11 @@ import axios from 'axios'
 import { formatDistanceToNow } from 'date-fns'
 import './PostComponent.css'
 import { ptBR } from 'date-fns/locale'
+import { Form, Modal } from 'react-bootstrap'
 
 function PostComponent({ post }: { post: IPost }) {
-    const [showAnswers, setShowAnswers] = useState(false)
+    const [showAnswers, setShowAnswers] = useState<boolean>(false)
+    const [answerModalShow, setAnswerModalShow] = useState<boolean>(false)
     const [postLikes, setPostLikes] = useState<string[]>(post.curtidas)
     const { user } = useContext(UserContext)
 
@@ -108,7 +110,12 @@ function PostComponent({ post }: { post: IPost }) {
                                 {postLikes.length}
                             </div>
                         </div>
-                        <button className="btn-respond">Responder</button>
+                        <button
+                            className="btn-respond"
+                            onClick={() => setAnswerModalShow(true)}
+                        >
+                            Responder
+                        </button>
                     </div>
                     {post.respostas.length > 0 && (
                         <button
@@ -138,7 +145,97 @@ function PostComponent({ post }: { post: IPost }) {
             {user._id === post.proprietarioId && (
                 <OptionsPost postId={post._id} content={post.conteudo} />
             )}
+            <ModalAnswer
+                show={answerModalShow}
+                onHide={() => setAnswerModalShow(false)}
+                postId={post._id}
+            />
         </article>
+    )
+}
+
+function ModalAnswer(props: {
+    show: boolean
+    onHide: () => void
+    postId: string
+}) {
+    const [text, setText] = useState<string>('')
+    const { user } = useContext(UserContext)
+
+    const handleAnswer = () => {
+        axios
+            .post(
+                import.meta.env.VITE_API_URL +
+                    '/posts/response/' +
+                    props.postId +
+                    '/' +
+                    user._id,
+                {
+                    text,
+                },
+                {
+                    headers: {
+                        Authorization: import.meta.env.VITE_API_KEY,
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+            .then(() => {
+                setText('')
+                props.onHide()
+                alert('Resposta enviada com sucesso')
+            })
+            .catch(() => {
+                alert('Erro ao responder a postagem, tente novamente')
+            })
+    }
+
+    return (
+        <Modal
+            show={props.show}
+            onHide={props.onHide}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Responder postagem
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form>
+                    <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                    >
+                        <Form.Label>Conteúdo da resposta</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            value={text}
+                            style={{ resize: 'none' }}
+                            maxLength={5000}
+                            onChange={(e) => setText(e.target.value)}
+                            rows={3}
+                        />
+                    </Form.Group>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+                <button
+                    className="modal-answer-btn-close"
+                    onClick={props.onHide}
+                >
+                    Fechar
+                </button>
+                <button
+                    className="modal-answer-btn-submit"
+                    onClick={handleAnswer}
+                >
+                    Enviar
+                </button>
+            </Modal.Footer>
+        </Modal>
     )
 }
 

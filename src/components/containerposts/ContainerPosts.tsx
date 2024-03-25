@@ -20,6 +20,7 @@ export interface IAnswer {
     text: string
     curtidas: string[]
     dataCriacao: Date
+    wasEdited: boolean
 }
 
 function ContainerPosts() {
