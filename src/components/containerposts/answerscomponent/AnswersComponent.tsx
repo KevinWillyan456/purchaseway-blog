@@ -7,6 +7,7 @@ import axios from 'axios'
 import { UserContext } from '../../../contexts/UserContext'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import OptionsAnswer from './optionsanswer/OptionsAnswer'
 
 function AnswersComponent({
     answer,
@@ -69,9 +70,9 @@ function AnswersComponent({
             <div className="wrapper">
                 <div className="name-wrapper">
                     <div className="name">
-                        {answer.userId.match(/(\w{8}(-\w{4}){3}-\w{12}?)/g)
+                        {answer.userName === undefined
                             ? 'Carregando...'
-                            : answer.userId}
+                            : answer.userName}
                     </div>
                     <div className="posted-in">
                         {formatDistanceToNow(new Date(answer.dataCriacao), {
@@ -100,6 +101,9 @@ function AnswersComponent({
                     </div>
                 </div>
             </div>
+            {user._id === answer.userId && (
+                <OptionsAnswer postId={postId} answerId={answer._id} />
+            )}
         </article>
     )
 }

@@ -162,7 +162,9 @@ function ModalAnswer(props: {
     const [text, setText] = useState<string>('')
     const { user } = useContext(UserContext)
 
-    const handleAnswer = () => {
+    const handleAnswer = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
         axios
             .post(
                 import.meta.env.VITE_API_URL +
@@ -198,13 +200,13 @@ function ModalAnswer(props: {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Responder postagem
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form>
+            <Form onSubmit={handleAnswer}>
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Responder postagem
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                     <Form.Group
                         className="mb-3"
                         controlId="exampleForm.ControlTextarea1"
@@ -215,26 +217,25 @@ function ModalAnswer(props: {
                             value={text}
                             style={{ resize: 'none' }}
                             maxLength={5000}
+                            required
                             onChange={(e) => setText(e.target.value)}
                             rows={3}
                         />
                     </Form.Group>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <button
-                    className="modal-answer-btn-close"
-                    onClick={props.onHide}
-                >
-                    Fechar
-                </button>
-                <button
-                    className="modal-answer-btn-submit"
-                    onClick={handleAnswer}
-                >
-                    Enviar
-                </button>
-            </Modal.Footer>
+                </Modal.Body>
+                <Modal.Footer>
+                    <button
+                        className="modal-answer-btn-close"
+                        type="button"
+                        onClick={props.onHide}
+                    >
+                        Fechar
+                    </button>
+                    <button className="modal-answer-btn-submit" type="submit">
+                        Enviar
+                    </button>
+                </Modal.Footer>
+            </Form>
         </Modal>
     )
 }

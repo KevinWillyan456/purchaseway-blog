@@ -15,8 +15,8 @@ function OptionsPost({
     postId: string
     content: { title: string; text: string }
 }) {
-    const [deleteModalShow, setDeleteModalShow] = useState(false)
-    const [editModalShow, setEditModalShow] = useState(false)
+    const [deleteModalShow, setDeleteModalShow] = useState<boolean>(false)
+    const [editModalShow, setEditModalShow] = useState<boolean>(false)
 
     return (
         <>
@@ -147,7 +147,9 @@ function ModalEdit(props: {
     const [title, setTitle] = useState(props.content.title)
     const [text, setText] = useState(props.content.text)
 
-    const handleEdit = () => {
+    const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
         axios
             .put(
                 import.meta.env.VITE_API_URL +
@@ -184,11 +186,11 @@ function ModalEdit(props: {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header closeButton>
-                    <Modal.Title>Editar postagem</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
+                <Form onSubmit={handleEdit}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Editar postagem</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlInput1"
@@ -199,6 +201,7 @@ function ModalEdit(props: {
                                 placeholder="Título da postagem"
                                 autoFocus
                                 value={title}
+                                required
                                 onChange={(e) => setTitle(e.target.value)}
                             />
                         </Form.Group>
@@ -212,26 +215,25 @@ function ModalEdit(props: {
                                 value={text}
                                 style={{ resize: 'none' }}
                                 maxLength={5000}
+                                required
                                 onChange={(e) => setText(e.target.value)}
                                 rows={3}
                             />
                         </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <button
-                        className="modal-edit-btn-close"
-                        onClick={props.onHide}
-                    >
-                        Fechar
-                    </button>
-                    <button
-                        className="modal-edit-btn-edit"
-                        onClick={handleEdit}
-                    >
-                        Salvar
-                    </button>
-                </Modal.Footer>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button
+                            className="modal-edit-btn-close"
+                            onClick={props.onHide}
+                            type="button"
+                        >
+                            Fechar
+                        </button>
+                        <button className="modal-edit-btn-edit" type="submit">
+                            Salvar
+                        </button>
+                    </Modal.Footer>
+                </Form>
             </Modal>
         </>
     )

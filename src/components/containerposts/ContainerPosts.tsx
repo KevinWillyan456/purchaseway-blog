@@ -17,6 +17,7 @@ export interface IPost {
 export interface IAnswer {
     _id: string
     userId: string
+    userName: string
     text: string
     curtidas: string[]
     dataCriacao: Date
@@ -82,7 +83,7 @@ function ContainerPosts() {
 
         posts.forEach((post) => {
             post.respostas.forEach((answer) => {
-                if (!answer.userId.match(/(\w{8}(-\w{4}){3}-\w{12}?)/g)) return
+                if (answer.userName) return
 
                 axios
                     .get(
@@ -110,8 +111,9 @@ function ContainerPosts() {
                                                 ) {
                                                     return {
                                                         ...prevAnswer,
-                                                        userId: response.data
-                                                            .user.nome,
+                                                        userName:
+                                                            response.data.user
+                                                                .nome,
                                                     }
                                                 }
                                                 return prevAnswer

@@ -39,7 +39,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 400px;
+    max-width: 380px;
 }
 .user-posted .wrapper .name-wrapper .posted-in {
     color: var(--color-light);

@@ -1,0 +1,30 @@
+.user-posted .options-answer .options-answer-icon {
+    transition: 200ms;
+    position: absolute;
+    top: 15px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-background);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 8px;
+}
+.user-posted .options-answer .options-answer-icon:hover {
+    background: var(--color-dark-background);
+}
+.user-posted .options-answer .options-answer-icon::after {
+    content: none;
+}
+.options-answer-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    --bs-dropdown-link-active-color: none;
+    --bs-dropdown-link-active-bg: var(--bs-tertiary-bg);
+}
