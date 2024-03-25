@@ -142,13 +142,37 @@ function ModalEdit(props: {
         text: string
     }
 }) {
-    // const { user } = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
     const [title, setTitle] = useState(props.content.title)
     const [text, setText] = useState(props.content.text)
 
     const handleEdit = () => {
-        alert('Função em desenvolvimento')
+        axios
+            .put(
+                import.meta.env.VITE_API_URL +
+                    '/posts/' +
+                    props.postId +
+                    '/' +
+                    user._id,
+                {
+                    title: title,
+                    text: text,
+                },
+                {
+                    headers: {
+                        Authorization: import.meta.env.VITE_API_KEY,
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+            .then(() => {
+                alert('Postagem editada com sucesso')
+                props.onHide()
+            })
+            .catch(() => {
+                alert('Erro ao editar postagem, tente novamente')
+            })
     }
 
     return (
