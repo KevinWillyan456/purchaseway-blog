@@ -6,7 +6,9 @@ import AnswersComponent from '../answerscomponent/AnswersComponent'
 import { IPost } from '../ContainerPosts'
 import { UserContext } from '../../../contexts/UserContext'
 import axios from 'axios'
+import { formatDistanceToNow } from 'date-fns'
 import './PostComponent.css'
+import { ptBR } from 'date-fns/locale'
 
 function PostComponent({ post }: { post: IPost }) {
     const [showAnswers, setShowAnswers] = useState(false)
@@ -66,14 +68,11 @@ function PostComponent({ post }: { post: IPost }) {
                             : post.proprietario}
                     </div>
                     <div className="posted-in">
-                        {new Date(post.dataCriacao).toLocaleDateString(
-                            'pt-BR',
-                            {
-                                day: '2-digit',
-                                month: 'long',
-                                year: 'numeric',
-                            }
-                        )}
+                        {formatDistanceToNow(new Date(post.dataCriacao), {
+                            locale: ptBR,
+                            addSuffix: true,
+                        })}
+                        {post.wasEdited && <span> (editado)</span>}
                     </div>
                 </div>
                 <div className="title-post text-truncate">

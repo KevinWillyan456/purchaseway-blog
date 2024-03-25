@@ -11,6 +11,7 @@ export interface IPost {
     proprietarioId: string
     curtidas: string[]
     dataCriacao: Date
+    wasEdited: boolean
 }
 
 export interface IAnswer {
