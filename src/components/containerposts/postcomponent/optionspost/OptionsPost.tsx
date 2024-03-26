@@ -199,6 +199,7 @@ function ModalEdit(props: {
                             <Form.Control
                                 type="text"
                                 placeholder="Título da postagem"
+                                maxLength={100}
                                 autoFocus
                                 value={title}
                                 required

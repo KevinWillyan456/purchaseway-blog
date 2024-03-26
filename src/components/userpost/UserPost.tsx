@@ -1,11 +1,15 @@
 import './UserPost.css'
 import Photograph from '../../icons/Photograph'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../contexts/UserContext'
 import axios from 'axios'
+import { Form, Modal } from 'react-bootstrap'
 
 function UserPost() {
     const { user } = useContext(UserContext)
+    const [showModal, setShowModal] = useState<boolean>(false)
+    const [imgUrl, setImgUrl] = useState<string>('')
+    const [imgValid, setImgValid] = useState<boolean>(false)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -32,6 +36,7 @@ function UserPost() {
                 {
                     title: title.value,
                     text: message.value,
+                    urlImg: imgValid ? imgUrl : '',
                 },
                 {
                     headers: {
@@ -54,28 +59,134 @@ function UserPost() {
     }
 
     return (
-        <form className="user-post-container" onSubmit={handleSubmit}>
-            <textarea
-                className="user-message focus-ring"
-                placeholder="No que está pensando?"
-                maxLength={5000}
-            ></textarea>
-            <div className="user-post-footer">
-                <div className="wrap">
-                    <div className="attach-image">
-                        <Photograph />
+        <>
+            <form className="user-post-container" onSubmit={handleSubmit}>
+                <textarea
+                    className="user-message focus-ring"
+                    placeholder="No que está pensando?"
+                    required
+                    maxLength={5000}
+                ></textarea>
+                <div className="user-post-footer">
+                    <div className="wrap">
+                        <button
+                            className="attach-image"
+                            type="button"
+                            onClick={() => setShowModal(true)}
+                        >
+                            <Photograph />
+                            {imgUrl !== '' && imgValid && (
+                                <abbr title="Uma imagem foi adicionada à postagem">
+                                    <span className="is-valid-img"></span>
+                                </abbr>
+                            )}
+                        </button>
+                        <input
+                            type="text"
+                            className="title-publish focus-ring"
+                            placeholder="Título da postagem"
+                            required
+                            maxLength={100}
+                        />
                     </div>
-                    <input
-                        type="text"
-                        className="title-publish focus-ring"
-                        placeholder="Título da publicação"
-                    />
+                    <button className="btn-publish" type="submit">
+                        Publicar
+                    </button>
                 </div>
-                <button className="btn-publish" type="submit">
-                    Publicar
-                </button>
-            </div>
-        </form>
+            </form>
+
+            <ModalImage
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                imgUrl={imgUrl}
+                setImgUrl={setImgUrl}
+                imgValid={imgValid}
+                setImgValid={setImgValid}
+            />
+        </>
+    )
+}
+
+function ModalImage(props: {
+    show: boolean
+    onHide: () => void
+    imgUrl: string
+    setImgUrl: (value: string) => void
+    imgValid: boolean
+    setImgValid: (value: boolean) => void
+}) {
+    const handleImage = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        props.onHide()
+    }
+
+    useEffect(
+        function () {
+            const img = new Image()
+            img.src = props.imgUrl
+
+            img.onload = () => {
+                props.setImgValid(true)
+            }
+            img.onerror = () => {
+                props.setImgValid(false)
+            }
+        },
+        [props]
+    )
+
+    return (
+        <>
+            <Modal
+                show={props.show}
+                onHide={props.onHide}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Form onSubmit={handleImage}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Adicionar imagem à postagem</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form.Group
+                            className="mb-3"
+                            controlId="exampleForm.ControlInput1"
+                        >
+                            <Form.Label>URL da imagem</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Adicione a URL da imagem"
+                                autoFocus
+                                value={props.imgUrl}
+                                required
+                                onChange={(e) =>
+                                    props.setImgUrl(e.target.value)
+                                }
+                            />
+                        </Form.Group>
+
+                        {props.imgUrl !== '' && props.imgValid ? (
+                            <div className="image-preview">
+                                <img
+                                    src={props.imgUrl}
+                                    alt="Imagem da postagem"
+                                />
+                            </div>
+                        ) : props.imgUrl ? (
+                            <div className="image-preview">
+                                <h5>URL da imagem inválida</h5>
+                            </div>
+                        ) : null}
+                    </Modal.Body>
+                    <Modal.Footer className="d-flex justify-content-center">
+                        <button className="modal-edit-btn-close" type="submit">
+                            OK
+                        </button>
+                    </Modal.Footer>
+                </Form>
+            </Modal>
+        </>
     )
 }
 
