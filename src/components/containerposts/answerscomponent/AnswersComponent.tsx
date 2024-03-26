@@ -102,7 +102,11 @@ function AnswersComponent({
                 </div>
             </div>
             {user._id === answer.userId && (
-                <OptionsAnswer postId={postId} answerId={answer._id} />
+                <OptionsAnswer
+                    postId={postId}
+                    answerId={answer._id}
+                    text={answer.text}
+                />
             )}
         </article>
     )
