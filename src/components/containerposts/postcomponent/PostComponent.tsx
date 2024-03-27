@@ -154,6 +154,8 @@ function PostComponent({ post }: { post: IPost }) {
     )
 }
 
+const MAX_LENGTH_TEXT = 5000
+
 function ModalAnswer(props: {
     show: boolean
     onHide: () => void
@@ -164,6 +166,16 @@ function ModalAnswer(props: {
 
     const handleAnswer = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        if (!text.replace(/\s/g, '').length) {
+            alert('O conteúdo da resposta não pode ser vazio')
+            return
+        }
+
+        if (text.length > MAX_LENGTH_TEXT) {
+            alert('O texto da resposta ultrapassou o limite de caracteres')
+            return
+        }
 
         axios
             .post(

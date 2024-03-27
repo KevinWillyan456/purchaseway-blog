@@ -206,6 +206,11 @@ function ModalEdit(props: {
             )
         }
 
+        if (!text.replace(/\s/g, '').length) {
+            alert('O conteúdo da postagem não pode ser vazio')
+            return
+        }
+
         axios
             .put(
                 import.meta.env.VITE_API_URL +

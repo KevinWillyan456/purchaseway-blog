@@ -5,6 +5,9 @@ import { UserContext } from '../../contexts/UserContext'
 import axios from 'axios'
 import { Form, Modal } from 'react-bootstrap'
 
+const MAX_LENGTH_MESSAGE = 5000
+const MAX_LENGTH_TITLE = 100
+
 function UserPost() {
     const { user } = useContext(UserContext)
     const [showModal, setShowModal] = useState<boolean>(false)
@@ -25,8 +28,25 @@ function UserPost() {
             return
         }
 
+        if (!message.value.replace(/\s/g, '').length) {
+            message.focus()
+            return
+        }
+
+        if (message.value.length > MAX_LENGTH_MESSAGE) {
+            alert(
+                `Mensagem deve ter no máximo ${MAX_LENGTH_MESSAGE} caracteres`
+            )
+            return
+        }
+
         if (title.value === '') {
             title.focus()
+            return
+        }
+
+        if (title.value.length > MAX_LENGTH_TITLE) {
+            alert(`Título deve ter no máximo ${MAX_LENGTH_TITLE} caracteres`)
             return
         }
 

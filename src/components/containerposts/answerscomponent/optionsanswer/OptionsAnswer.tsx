@@ -139,6 +139,8 @@ function ModalDelete(props: {
     )
 }
 
+const MAX_LENGTH_TEXT = 5000
+
 function ModalEdit(props: {
     show: boolean
     onHide: () => void
@@ -152,6 +154,16 @@ function ModalEdit(props: {
 
     const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        if (!text.replace(/\s/g, '').length) {
+            alert('O conteúdo da resposta não pode ser vazio')
+            return
+        }
+
+        if (text.length > MAX_LENGTH_TEXT) {
+            alert('O texto da resposta ultrapassou o limite de caracteres')
+            return
+        }
 
         axios
             .put(
