@@ -3,7 +3,7 @@ import Gear from '../../../../icons/Gear'
 import Pencil from '../../../../icons/Pencil'
 import axios from 'axios'
 import './OptionsPost.css'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../../../contexts/UserContext'
 import { Modal } from 'react-bootstrap'
 import { Form } from 'react-bootstrap'
@@ -13,7 +13,7 @@ function OptionsPost({
     content,
 }: {
     postId: string
-    content: { title: string; text: string }
+    content: { title: string; text: string; urlImg: string }
 }) {
     const [deleteModalShow, setDeleteModalShow] = useState<boolean>(false)
     const [editModalShow, setEditModalShow] = useState<boolean>(false)
@@ -133,6 +133,9 @@ function ModalDelete(props: {
     )
 }
 
+const MAX_TEXT_LENGTH = 5000
+const MAX_TITLE_LENGTH = 100
+
 function ModalEdit(props: {
     show: boolean
     onHide: () => void
@@ -140,15 +143,68 @@ function ModalEdit(props: {
     content: {
         title: string
         text: string
+        urlImg: string
     }
 }) {
     const { user } = useContext(UserContext)
 
     const [title, setTitle] = useState(props.content.title)
     const [text, setText] = useState(props.content.text)
+    const [urlImg, setUrlImg] = useState(props.content.urlImg)
+    const [showImg, setShowImg] = useState<boolean>(true)
+    const [imgValid, setImgValid] = useState<boolean>(false)
+    const [removeImg, setRemoveImg] = useState<boolean>(
+        props.content.urlImg === '' ? false : true
+    )
+
+    useEffect(
+        function () {
+            setImgValid(false)
+
+            if (!removeImg) {
+                setImgValid(true)
+                return
+            }
+            const img = new Image()
+            img.src = urlImg
+
+            img.onload = () => {
+                setImgValid(true)
+            }
+            img.onerror = () => {
+                setImgValid(false)
+            }
+        },
+        [props, removeImg, urlImg]
+    )
 
     const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        if (removeImg && urlImg === '') {
+            alert('Adicione uma URL de imagem')
+            return
+        }
+
+        if (imgValid === false && removeImg) {
+            return alert('URL da imagem inválida')
+        }
+
+        if (title === '' || text === '') {
+            return alert('Preencha todos os campos')
+        }
+
+        if (title.length > MAX_TITLE_LENGTH) {
+            return alert(
+                `O título deve ter no máximo ${MAX_TITLE_LENGTH} caracteres`
+            )
+        }
+
+        if (text.length > MAX_TEXT_LENGTH) {
+            return alert(
+                `O texto deve ter no máximo ${MAX_TEXT_LENGTH} caracteres`
+            )
+        }
 
         axios
             .put(
@@ -158,8 +214,9 @@ function ModalEdit(props: {
                     '/' +
                     user._id,
                 {
-                    title: title,
-                    text: text,
+                    title,
+                    text,
+                    urlImg: removeImg ? urlImg : '',
                 },
                 {
                     headers: {
@@ -221,6 +278,49 @@ function ModalEdit(props: {
                                 rows={3}
                             />
                         </Form.Group>
+                        {removeImg && (
+                            <Form.Group
+                                className="mb-3"
+                                controlId="exampleForm.ControlInput2"
+                            >
+                                <Form.Label>URL da imagem</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="URL da imagem"
+                                    value={urlImg}
+                                    onChange={(e) => setUrlImg(e.target.value)}
+                                    required
+                                />
+                            </Form.Group>
+                        )}
+                        {urlImg !== '' && showImg && removeImg && imgValid ? (
+                            <div className="image-preview">
+                                <img src={urlImg} alt="Imagem da postagem" />
+                            </div>
+                        ) : urlImg && showImg && removeImg ? (
+                            <div className="image-preview">
+                                <h5>URL da imagem inválida</h5>
+                            </div>
+                        ) : null}
+                        <div className="d-flex mt-3">
+                            {removeImg && (
+                                <button
+                                    className="modal-edit-btn-hide-img"
+                                    type="button"
+                                    onClick={() => setShowImg((prev) => !prev)}
+                                >
+                                    {showImg ? 'Ocultar' : 'Mostrar'} prévia da
+                                    imagem
+                                </button>
+                            )}
+                            <button
+                                className="modal-edit-btn-remove-img"
+                                type="button"
+                                onClick={() => setRemoveImg((prev) => !prev)}
+                            >
+                                {removeImg ? 'Remover' : 'Adicionar'} imagem
+                            </button>
+                        </div>
                     </Modal.Body>
                     <Modal.Footer>
                         <button

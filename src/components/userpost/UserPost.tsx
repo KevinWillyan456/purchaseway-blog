@@ -8,7 +8,7 @@ import { Form, Modal } from 'react-bootstrap'
 function UserPost() {
     const { user } = useContext(UserContext)
     const [showModal, setShowModal] = useState<boolean>(false)
-    const [imgUrl, setImgUrl] = useState<string>('')
+    const [urlImg, setUrlImg] = useState<string>('')
     const [imgValid, setImgValid] = useState<boolean>(false)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +36,7 @@ function UserPost() {
                 {
                     title: title.value,
                     text: message.value,
-                    urlImg: imgValid ? imgUrl : '',
+                    urlImg: imgValid ? urlImg : '',
                 },
                 {
                     headers: {
@@ -49,6 +49,8 @@ function UserPost() {
                 if (response.status === 201) {
                     message.value = ''
                     title.value = ''
+                    setUrlImg('')
+                    setImgValid(false)
 
                     alert('Postagem criada com sucesso!')
                 }
@@ -75,7 +77,7 @@ function UserPost() {
                             onClick={() => setShowModal(true)}
                         >
                             <Photograph />
-                            {imgUrl !== '' && imgValid && (
+                            {urlImg !== '' && imgValid && (
                                 <abbr title="Uma imagem foi adicionada à postagem">
                                     <span className="is-valid-img"></span>
                                 </abbr>
@@ -90,7 +92,7 @@ function UserPost() {
                         />
                     </div>
                     <button className="btn-publish" type="submit">
-                        Publicar
+                        Postar
                     </button>
                 </div>
             </form>
@@ -98,8 +100,8 @@ function UserPost() {
             <ModalImage
                 show={showModal}
                 onHide={() => setShowModal(false)}
-                imgUrl={imgUrl}
-                setImgUrl={setImgUrl}
+                urlImg={urlImg}
+                setUrlImg={setUrlImg}
                 imgValid={imgValid}
                 setImgValid={setImgValid}
             />
@@ -110,8 +112,8 @@ function UserPost() {
 function ModalImage(props: {
     show: boolean
     onHide: () => void
-    imgUrl: string
-    setImgUrl: (value: string) => void
+    urlImg: string
+    setUrlImg: (value: string) => void
     imgValid: boolean
     setImgValid: (value: boolean) => void
 }) {
@@ -123,7 +125,7 @@ function ModalImage(props: {
     useEffect(
         function () {
             const img = new Image()
-            img.src = props.imgUrl
+            img.src = props.urlImg
 
             img.onload = () => {
                 props.setImgValid(true)
@@ -158,22 +160,22 @@ function ModalImage(props: {
                                 type="text"
                                 placeholder="Adicione a URL da imagem"
                                 autoFocus
-                                value={props.imgUrl}
+                                value={props.urlImg}
                                 required
                                 onChange={(e) =>
-                                    props.setImgUrl(e.target.value)
+                                    props.setUrlImg(e.target.value)
                                 }
                             />
                         </Form.Group>
 
-                        {props.imgUrl !== '' && props.imgValid ? (
+                        {props.urlImg !== '' && props.imgValid ? (
                             <div className="image-preview">
                                 <img
-                                    src={props.imgUrl}
+                                    src={props.urlImg}
                                     alt="Imagem da postagem"
                                 />
                             </div>
-                        ) : props.imgUrl ? (
+                        ) : props.urlImg ? (
                             <div className="image-preview">
                                 <h5>URL da imagem inválida</h5>
                             </div>
