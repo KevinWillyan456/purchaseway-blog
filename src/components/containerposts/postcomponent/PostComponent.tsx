@@ -83,14 +83,37 @@ function PostComponent({ post }: { post: IPost }) {
                 <div className="content-post">
                     {post.conteudo.text}
                     {post.conteudo.urlImg && (
-                        <img
-                            style={{
-                                width: '100%',
-                                marginTop: '20px',
-                                borderRadius: '10px',
-                            }}
-                            src={post.conteudo.urlImg}
-                        />
+                        <>
+                            <h3 className="title-check-out">
+                                Confira esta imagem
+                            </h3>
+                            <img
+                                style={{
+                                    width: '100%',
+                                    marginTop: '20px',
+                                    borderRadius: '10px',
+                                }}
+                                src={post.conteudo.urlImg}
+                            />
+                        </>
+                    )}
+                    {post.conteudo.videoId && (
+                        <>
+                            <h3 className="title-check-out">
+                                Confira este vídeo
+                            </h3>
+                            <div className="video-post">
+                                <iframe
+                                    width="560"
+                                    height="315"
+                                    src={`https://www.youtube.com/embed/${post.conteudo.videoId}`}
+                                    title="YouTube video player"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                ></iframe>
+                            </div>
+                        </>
                     )}
                 </div>
                 <div className="actions-post">

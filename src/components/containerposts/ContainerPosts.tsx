@@ -5,7 +5,7 @@ import PostComponent from './postcomponent/PostComponent'
 
 export interface IPost {
     _id: string
-    conteudo: { text: string; urlImg: string; title: string }
+    conteudo: { text: string; urlImg: string; title: string; videoId: string }
     respostas: IAnswer[]
     proprietario: string
     proprietarioId: string

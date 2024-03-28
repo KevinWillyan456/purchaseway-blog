@@ -13,6 +13,9 @@ function UserPost() {
     const [showModal, setShowModal] = useState<boolean>(false)
     const [urlImg, setUrlImg] = useState<string>('')
     const [imgValid, setImgValid] = useState<boolean>(false)
+    const [videoId, setVideoId] = useState<string>('')
+    const [onlyIdByVideo, setOnlyIdByVideo] = useState<string>('')
+    const [videoIdValid, setVideoIdValid] = useState<boolean>(false)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -57,6 +60,7 @@ function UserPost() {
                     title: title.value,
                     text: message.value,
                     urlImg: imgValid ? urlImg : '',
+                    videoId: videoIdValid ? onlyIdByVideo : '',
                 },
                 {
                     headers: {
@@ -71,6 +75,9 @@ function UserPost() {
                     title.value = ''
                     setUrlImg('')
                     setImgValid(false)
+                    setVideoId('')
+                    setOnlyIdByVideo('')
+                    setVideoIdValid(false)
 
                     alert('Postagem criada com sucesso!')
                 }
@@ -97,8 +104,19 @@ function UserPost() {
                             onClick={() => setShowModal(true)}
                         >
                             <Photograph />
-                            {urlImg !== '' && imgValid && (
-                                <abbr title="Uma imagem foi adicionada à postagem">
+                            {((urlImg !== '' && imgValid) ||
+                                (videoId !== '' && videoIdValid)) && (
+                                <abbr
+                                    title={
+                                        urlImg && videoId
+                                            ? 'Uma imagem e um vídeo serão adicionados à postagem'
+                                            : urlImg
+                                            ? 'Uma imagem será adicionada à postagem'
+                                            : videoId
+                                            ? 'Um vídeo será adicionado à postagem'
+                                            : ''
+                                    }
+                                >
                                     <span className="is-valid-img"></span>
                                 </abbr>
                             )}
@@ -124,6 +142,12 @@ function UserPost() {
                 setUrlImg={setUrlImg}
                 imgValid={imgValid}
                 setImgValid={setImgValid}
+                videoId={videoId}
+                setVideoId={setVideoId}
+                videoIdValid={videoIdValid}
+                setVideoIdValid={setVideoIdValid}
+                onlyIdByVideo={onlyIdByVideo}
+                setOnlyIdByVideo={setOnlyIdByVideo}
             />
         </>
     )
@@ -136,6 +160,12 @@ function ModalImage(props: {
     setUrlImg: (value: string) => void
     imgValid: boolean
     setImgValid: (value: boolean) => void
+    videoId: string
+    setVideoId: (value: string) => void
+    videoIdValid: boolean
+    setVideoIdValid: (value: boolean) => void
+    onlyIdByVideo: string
+    setOnlyIdByVideo: (value: string) => void
 }) {
     const handleImage = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -157,6 +187,33 @@ function ModalImage(props: {
         [props]
     )
 
+    useEffect(
+        function () {
+            const pieces =
+                props.videoId.length === 11
+                    ? props.videoId
+                    : props.videoId.split('https://youtu.be/')[1]
+                    ? props.videoId.split('https://youtu.be/')[1].slice(0, 11)
+                    : props.videoId.split('https://youtube.com/watch?v=')[1]
+                    ? props.videoId
+                          .split('https://youtube.com/watch?v=')[1]
+                          .slice(0, 11)
+                    : props.videoId.split('https://www.youtube.com/watch?v=')[1]
+                    ? props.videoId
+                          .split('https://www.youtube.com/watch?v=')[1]
+                          .slice(0, 11)
+                    : null
+
+            if (!pieces || pieces.length !== 11) {
+                props.setVideoIdValid(false)
+                return
+            }
+            props.setVideoIdValid(true)
+            props.setOnlyIdByVideo(pieces)
+        },
+        [props]
+    )
+
     return (
         <>
             <Modal
@@ -168,7 +225,9 @@ function ModalImage(props: {
             >
                 <Form onSubmit={handleImage}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Adicionar imagem à postagem</Modal.Title>
+                        <Modal.Title>
+                            Adicionar imagem ou vídeo do YouTube à postagem
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Group
@@ -181,7 +240,6 @@ function ModalImage(props: {
                                 placeholder="Adicione a URL da imagem"
                                 autoFocus
                                 value={props.urlImg}
-                                required
                                 onChange={(e) =>
                                     props.setUrlImg(e.target.value)
                                 }
@@ -198,6 +256,38 @@ function ModalImage(props: {
                         ) : props.urlImg ? (
                             <div className="image-preview">
                                 <h5>URL da imagem inválida</h5>
+                            </div>
+                        ) : null}
+                        <Form.Group
+                            className="mb-3"
+                            controlId="exampleForm.ControlInput2"
+                        >
+                            <Form.Label>URL do vídeo do YouTube</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Adicione a URL do vídeo do YouTube"
+                                value={props.videoId}
+                                onChange={(e) =>
+                                    props.setVideoId(e.target.value)
+                                }
+                            />
+                        </Form.Group>
+
+                        {props.videoId !== '' && props.videoIdValid ? (
+                            <div className="video-preview">
+                                <iframe
+                                    width="560"
+                                    height="315"
+                                    src={`https://www.youtube.com/embed/${props.onlyIdByVideo}`}
+                                    title="YouTube video player"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                ></iframe>
+                            </div>
+                        ) : props.videoId ? (
+                            <div className="video-preview">
+                                <h5>URL do vídeo inválida</h5>
                             </div>
                         ) : null}
                     </Modal.Body>
