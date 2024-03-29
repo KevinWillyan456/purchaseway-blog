@@ -151,7 +151,6 @@ function ModalEdit(props: {
     const [title, setTitle] = useState(props.content.title)
     const [text, setText] = useState(props.content.text)
     const [urlImg, setUrlImg] = useState(props.content.urlImg)
-    const [showImg, setShowImg] = useState<boolean>(true)
     const [imgValid, setImgValid] = useState<boolean>(false)
     const [removeImg, setRemoveImg] = useState<boolean>(
         props.content.urlImg === '' ? false : true
@@ -298,26 +297,16 @@ function ModalEdit(props: {
                                 />
                             </Form.Group>
                         )}
-                        {urlImg !== '' && showImg && removeImg && imgValid ? (
+                        {urlImg !== '' && removeImg && imgValid ? (
                             <div className="image-preview">
                                 <img src={urlImg} alt="Imagem da postagem" />
                             </div>
-                        ) : urlImg && showImg && removeImg ? (
+                        ) : urlImg && removeImg ? (
                             <div className="image-preview">
                                 <h5>URL da imagem inválida</h5>
                             </div>
                         ) : null}
                         <div className="d-flex mt-3">
-                            {removeImg && (
-                                <button
-                                    className="modal-edit-btn-hide-img"
-                                    type="button"
-                                    onClick={() => setShowImg((prev) => !prev)}
-                                >
-                                    {showImg ? 'Ocultar' : 'Mostrar'} prévia da
-                                    imagem
-                                </button>
-                            )}
                             <button
                                 className="modal-edit-btn-remove-img"
                                 type="button"
