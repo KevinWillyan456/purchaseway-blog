@@ -115,3 +115,20 @@
 .modal-edit-btn-remove-img:hover {
     background-color: var(--color-dark-orange);
 }
+.modal-edit-btn-remove-video {
+    transition: 200ms;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-orange);
+    color: var(--color-white);
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-edit-btn-remove-video:hover {
+    background-color: var(--color-dark-orange);
+}

@@ -13,7 +13,7 @@ function OptionsPost({
     content,
 }: {
     postId: string
-    content: { title: string; text: string; urlImg: string }
+    content: { title: string; text: string; urlImg: string; videoId: string }
 }) {
     const [deleteModalShow, setDeleteModalShow] = useState<boolean>(false)
     const [editModalShow, setEditModalShow] = useState<boolean>(false)
@@ -144,6 +144,7 @@ function ModalEdit(props: {
         title: string
         text: string
         urlImg: string
+        videoId: string
     }
 }) {
     const { user } = useContext(UserContext)
@@ -154,6 +155,14 @@ function ModalEdit(props: {
     const [imgValid, setImgValid] = useState<boolean>(false)
     const [removeImg, setRemoveImg] = useState<boolean>(
         props.content.urlImg === '' ? false : true
+    )
+    const [videoId, setVideoId] = useState(
+        props.content.videoId ? `https://youtu.be/${props.content.videoId}` : ''
+    )
+    const [videoIdValid, setVideoIdValid] = useState<boolean>(false)
+    const [onlyIdByVideo, setOnlyIdByVideo] = useState<string>('')
+    const [removeVideoId, setRemoveVideoId] = useState<boolean>(
+        props.content.videoId === '' ? false : true
     )
 
     useEffect(
@@ -177,6 +186,41 @@ function ModalEdit(props: {
         [props, removeImg, urlImg]
     )
 
+    useEffect(
+        function () {
+            setVideoIdValid(false)
+
+            if (!removeVideoId) {
+                setVideoIdValid(true)
+                return
+            }
+
+            const pieces =
+                videoId.length === 11
+                    ? videoId
+                    : videoId.split('https://youtu.be/')[1]
+                    ? videoId.split('https://youtu.be/')[1].slice(0, 11)
+                    : videoId.split('https://youtube.com/watch?v=')[1]
+                    ? videoId
+                          .split('https://youtube.com/watch?v=')[1]
+                          .slice(0, 11)
+                    : videoId.split('https://www.youtube.com/watch?v=')[1]
+                    ? videoId
+                          .split('https://www.youtube.com/watch?v=')[1]
+                          .slice(0, 11)
+                    : null
+
+            if (!pieces || pieces.length !== 11) {
+                setVideoIdValid(false)
+                return
+            }
+
+            setVideoIdValid(true)
+            setOnlyIdByVideo(pieces)
+        },
+        [props, removeVideoId, videoId]
+    )
+
     const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
@@ -187,6 +231,15 @@ function ModalEdit(props: {
 
         if (imgValid === false && removeImg) {
             return alert('URL da imagem inválida')
+        }
+
+        if (removeVideoId && videoId === '') {
+            alert('Adicione um ID de video do YouTube')
+            return
+        }
+
+        if (videoIdValid === false && removeVideoId) {
+            return alert('ID do vídeo do YouTube inválido')
         }
 
         if (title === '' || text === '') {
@@ -221,6 +274,7 @@ function ModalEdit(props: {
                     title,
                     text,
                     urlImg: removeImg ? urlImg : '',
+                    videoId: removeVideoId ? onlyIdByVideo : '',
                 },
                 {
                     headers: {
@@ -313,6 +367,49 @@ function ModalEdit(props: {
                                 onClick={() => setRemoveImg((prev) => !prev)}
                             >
                                 {removeImg ? 'Remover' : 'Adicionar'} imagem
+                            </button>
+                        </div>
+                        {removeVideoId && (
+                            <Form.Group
+                                className="mb-3 mt-3"
+                                controlId="exampleForm.ControlInput3"
+                            >
+                                <Form.Label>URL do vídeo do YouTube</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="URL do vídeo do YouTube"
+                                    value={videoId}
+                                    onChange={(e) => setVideoId(e.target.value)}
+                                    required
+                                />
+                            </Form.Group>
+                        )}
+                        {videoId !== '' && removeVideoId && videoIdValid ? (
+                            <div className="video-preview">
+                                <iframe
+                                    width="560"
+                                    height="315"
+                                    src={`https://www.youtube.com/embed/${onlyIdByVideo}`}
+                                    title="YouTube video player"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                ></iframe>
+                            </div>
+                        ) : videoId && removeVideoId ? (
+                            <div className="video-preview">
+                                <h5>URL do vídeo do YouTube inválida</h5>
+                            </div>
+                        ) : null}
+                        <div className="d-flex mt-3">
+                            <button
+                                className="modal-edit-btn-remove-video"
+                                type="button"
+                                onClick={() =>
+                                    setRemoveVideoId((prev) => !prev)
+                                }
+                            >
+                                {removeVideoId ? 'Remover' : 'Adicionar'} vídeo
                             </button>
                         </div>
                     </Modal.Body>
