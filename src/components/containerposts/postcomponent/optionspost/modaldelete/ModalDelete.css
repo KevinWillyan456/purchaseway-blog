@@ -1,0 +1,35 @@
+.modal-delete-btn-close {
+    transition: 200ms;
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-blue);
+    color: var(--color-white);
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-delete-btn-close:hover {
+    background-color: var(--color-dark-blue);
+}
+.modal-delete-btn-delete {
+    transition: 200ms;
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-orange);
+    color: var(--color-white);
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-delete-btn-delete:hover {
+    background-color: var(--color-dark-orange);
+}

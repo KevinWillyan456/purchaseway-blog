@@ -169,41 +169,6 @@
     justify-content: center;
     font-family: sans-serif;
 }
-.modal-answer-btn-close {
-    transition: 200ms;
-    width: 80px;
-    height: 40px;
-    border-radius: 10px;
-    background: var(--color-blue);
-    color: var(--color-white);
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.modal-answer-btn-close:hover {
-    background-color: var(--color-dark-blue);
-}
-.modal-answer-btn-submit {
-    transition: 200ms;
-    width: 80px;
-    height: 40px;
-    border-radius: 10px;
-    background: var(--color-orange);
-    color: var(--color-white);
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.modal-answer-btn-submit:hover {
-    background-color: var(--color-dark-orange);
-}
 .title-check-out {
     color: var(--color-dark);
     font-size: 28px;
