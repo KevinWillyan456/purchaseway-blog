@@ -10,12 +10,20 @@ import { formatDistanceToNow } from 'date-fns'
 import './PostComponent.css'
 import { ptBR } from 'date-fns/locale'
 import ModalAnswer from './modalanswer/ModalAnswer'
+import AlertComponent from '../../alertcomponent/AlertComponent'
 
 function PostComponent({ post }: { post: IPost }) {
     const [showAnswers, setShowAnswers] = useState<boolean>(false)
     const [answerModalShow, setAnswerModalShow] = useState<boolean>(false)
     const [postLikes, setPostLikes] = useState<string[]>(post.curtidas)
     const { user } = useContext(UserContext)
+
+    const [showAlertComponent, setShowAlertComponent] = useState(false)
+    const [messageAlertComponent, setMessageAlertComponent] =
+        useState<string>('')
+    const [typeAlertComponent, setTypeAlertComponent] = useState<
+        'success' | 'error'
+    >('success')
 
     const handleToggleAnswers = () => {
         setShowAnswers((prev) => !prev)
@@ -47,18 +55,38 @@ function PostComponent({ post }: { post: IPost }) {
                         setPostLikes(response.data.post.curtidas)
                     })
                     .catch(() => {
-                        alert(
+                        setShowAlertComponent(true)
+                        setMessageAlertComponent(
                             'Erro ao interagir com a postagem, tente novamente'
                         )
+                        setTypeAlertComponent('error')
+
+                        setTimeout(() => {
+                            setShowAlertComponent(false)
+                        }, 3000)
                     })
             })
             .catch(() => {
-                alert('Erro ao interagir com a postagem, tente novamente')
+                setShowAlertComponent(true)
+                setMessageAlertComponent(
+                    'Erro ao interagir com a postagem, tente novamente'
+                )
+                setTypeAlertComponent('error')
+
+                setTimeout(() => {
+                    setShowAlertComponent(false)
+                }, 3000)
             })
     }
 
     return (
         <article className="user-posted">
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
             <div className="user-picture-posts">
                 <User />
             </div>

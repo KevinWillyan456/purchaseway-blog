@@ -1,8 +1,17 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import './MainSingIn.css'
+import AlertComponent from '../alertcomponent/AlertComponent'
+import { useState } from 'react'
 
 function MainSingIn() {
+    const [showAlertComponent, setShowAlertComponent] = useState(false)
+    const [messageAlertComponent, setMessageAlertComponent] =
+        useState<string>('')
+    const [typeAlertComponent, setTypeAlertComponent] = useState<
+        'success' | 'error'
+    >('success')
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const form = event.currentTarget as HTMLFormElement
@@ -13,22 +22,46 @@ function MainSingIn() {
         const stayConnected = (form[3] as HTMLInputElement).checked
 
         if (!nome || !email || !senha) {
-            alert('Preencha todos os campos')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('Preencha todos os campos')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            alert('E-mail inválido')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('E-mail inválido')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
         if (senha.length < 6) {
-            alert('Senha deve ter no mínimo 6 caracteres')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('Senha deve ter no mínimo 6 caracteres')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
         if (nome.length < 3) {
-            alert('Nome deve ter no mínimo 3 caracteres')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('Nome deve ter no mínimo 3 caracteres')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
@@ -59,81 +92,102 @@ function MainSingIn() {
             })
             .catch((error) => {
                 if (error.response?.status === 409) {
-                    alert('E-mail já cadastrado')
+                    setShowAlertComponent(true)
+                    setMessageAlertComponent('E-mail já cadastrado')
+                    setTypeAlertComponent('error')
+
+                    setTimeout(() => {
+                        setShowAlertComponent(false)
+                    }, 3000)
                 } else {
-                    alert('Erro ao criar conta')
+                    setShowAlertComponent(true)
+                    setMessageAlertComponent('Erro ao criar conta')
+                    setTypeAlertComponent('error')
+
+                    setTimeout(() => {
+                        setShowAlertComponent(false)
+                    }, 3000)
                 }
             })
     }
 
     return (
-        <main className="d-flex align-items-center bg-body-tertiary main-singin">
-            <section className="form-signin w-100 m-auto">
-                <form onSubmit={handleSubmit}>
-                    <div className="main-singin-logo">
-                        <img
-                            src="/purchaseway-blog-favicon-medium.png"
-                            alt="logo"
-                        />
-                    </div>
-                    <h1 className="h3 mb-3 fw-normal main-singin-create-account">
-                        Crie sua conta
-                    </h1>
+        <>
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
 
-                    <div className="form-floating">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="floatingName"
-                            placeholder="name@example.com"
-                            required
-                        />
-                        <label htmlFor="floatingName">Nome</label>
-                    </div>
-                    <div className="form-floating">
-                        <input
-                            type="email"
-                            className="form-control email-input"
-                            id="floatingInput"
-                            placeholder="name@example.com"
-                            required
-                        />
-                        <label htmlFor="floatingInput">E-mail</label>
-                    </div>
-                    <div className="form-floating">
-                        <input
-                            type="password"
-                            className="form-control"
-                            id="floatingPassword"
-                            placeholder="Password"
-                            required
-                        />
-                        <label htmlFor="floatingPassword">Senha</label>
-                    </div>
+            <main className="d-flex align-items-center bg-body-tertiary main-singin">
+                <section className="form-signin w-100 m-auto">
+                    <form onSubmit={handleSubmit}>
+                        <div className="main-singin-logo">
+                            <img
+                                src="/purchaseway-blog-favicon-medium.png"
+                                alt="logo"
+                            />
+                        </div>
+                        <h1 className="h3 mb-3 fw-normal main-singin-create-account">
+                            Crie sua conta
+                        </h1>
 
-                    <div className="form-check text-start my-3">
-                        <input
-                            className="form-check-input"
-                            type="checkbox"
-                            value="remember-me"
-                            id="flexCheckDefault"
-                        />
-                        <label
-                            className="form-check-label"
-                            htmlFor="flexCheckDefault"
+                        <div className="form-floating">
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="floatingName"
+                                placeholder="name@example.com"
+                                required
+                            />
+                            <label htmlFor="floatingName">Nome</label>
+                        </div>
+                        <div className="form-floating">
+                            <input
+                                type="email"
+                                className="form-control email-input"
+                                id="floatingInput"
+                                placeholder="name@example.com"
+                                required
+                            />
+                            <label htmlFor="floatingInput">E-mail</label>
+                        </div>
+                        <div className="form-floating">
+                            <input
+                                type="password"
+                                className="form-control"
+                                id="floatingPassword"
+                                placeholder="Password"
+                                required
+                            />
+                            <label htmlFor="floatingPassword">Senha</label>
+                        </div>
+
+                        <div className="form-check text-start my-3">
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                value="remember-me"
+                                id="flexCheckDefault"
+                            />
+                            <label
+                                className="form-check-label"
+                                htmlFor="flexCheckDefault"
+                            >
+                                Lembre de mim
+                            </label>
+                        </div>
+                        <button
+                            className="btn btn-primary w-100 py-2"
+                            type="submit"
                         >
-                            Lembre de mim
-                        </label>
-                    </div>
-                    <button
-                        className="btn btn-primary w-100 py-2"
-                        type="submit"
-                    >
-                        Criar
-                    </button>
-                </form>
-            </section>
-        </main>
+                            Criar
+                        </button>
+                    </form>
+                </section>
+            </main>
+        </>
     )
 }
 

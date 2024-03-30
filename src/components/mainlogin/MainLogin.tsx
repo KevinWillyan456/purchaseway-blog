@@ -1,8 +1,17 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import './MainLogin.css'
+import { useState } from 'react'
+import AlertComponent from '../alertcomponent/AlertComponent'
 
 function MainLogin() {
+    const [showAlertComponent, setShowAlertComponent] = useState(false)
+    const [messageAlertComponent, setMessageAlertComponent] =
+        useState<string>('')
+    const [typeAlertComponent, setTypeAlertComponent] = useState<
+        'success' | 'error'
+    >('success')
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const form = event.currentTarget as HTMLFormElement
@@ -12,17 +21,35 @@ function MainLogin() {
         const stayConnected = (form[2] as HTMLInputElement).checked
 
         if (!email || !senha) {
-            alert('Preencha todos os campos')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('Email ou senha incorretos')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            alert('Email ou senha incorretos')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('Email ou senha incorretos')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
         if (senha.length < 6) {
-            alert('Email ou senha incorretos')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('Email ou senha incorretos')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
@@ -55,71 +82,91 @@ function MainLogin() {
                     error.response?.status === 401 ||
                     error.response?.status === 404
                 ) {
-                    alert('Email ou senha incorretos')
+                    setShowAlertComponent(true)
+                    setMessageAlertComponent('Email ou senha incorretos')
+                    setTypeAlertComponent('error')
+
+                    setTimeout(() => {
+                        setShowAlertComponent(false)
+                    }, 3000)
                 } else {
-                    alert('Erro ao fazer login')
+                    setShowAlertComponent(true)
+                    setMessageAlertComponent('Erro ao fazer login')
+                    setTypeAlertComponent('error')
+
+                    setTimeout(() => {
+                        setShowAlertComponent(false)
+                    }, 3000)
                 }
             })
     }
 
     return (
-        <main className="d-flex align-items-center bg-body-tertiary main-singin">
-            <section className="form-login w-100 m-auto">
-                <form onSubmit={handleSubmit}>
-                    <div className="main-singin-logo">
-                        <img
-                            src="/purchaseway-blog-favicon-medium.png"
-                            alt="logo"
-                        />
-                    </div>
-                    <h1 className="h3 mb-3 fw-normal main-singin-create-account">
-                        Faça login na sua conta
-                    </h1>
+        <>
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
+            <main className="d-flex align-items-center bg-body-tertiary main-singin">
+                <section className="form-login w-100 m-auto">
+                    <form onSubmit={handleSubmit}>
+                        <div className="main-singin-logo">
+                            <img
+                                src="/purchaseway-blog-favicon-medium.png"
+                                alt="logo"
+                            />
+                        </div>
+                        <h1 className="h3 mb-3 fw-normal main-singin-create-account">
+                            Faça login na sua conta
+                        </h1>
 
-                    <div className="form-floating">
-                        <input
-                            type="email"
-                            className="form-control"
-                            id="floatingInput"
-                            placeholder="name@example.com"
-                            required
-                        />
-                        <label htmlFor="floatingInput">E-mail</label>
-                    </div>
-                    <div className="form-floating">
-                        <input
-                            type="password"
-                            className="form-control"
-                            id="floatingPassword"
-                            placeholder="Password"
-                            required
-                        />
-                        <label htmlFor="floatingPassword">Senha</label>
-                    </div>
+                        <div className="form-floating">
+                            <input
+                                type="email"
+                                className="form-control"
+                                id="floatingInput"
+                                placeholder="name@example.com"
+                                required
+                            />
+                            <label htmlFor="floatingInput">E-mail</label>
+                        </div>
+                        <div className="form-floating">
+                            <input
+                                type="password"
+                                className="form-control"
+                                id="floatingPassword"
+                                placeholder="Password"
+                                required
+                            />
+                            <label htmlFor="floatingPassword">Senha</label>
+                        </div>
 
-                    <div className="form-check text-start my-3">
-                        <input
-                            className="form-check-input"
-                            type="checkbox"
-                            value="remember-me"
-                            id="flexCheckDefault"
-                        />
-                        <label
-                            className="form-check-label"
-                            htmlFor="flexCheckDefault"
+                        <div className="form-check text-start my-3">
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                value="remember-me"
+                                id="flexCheckDefault"
+                            />
+                            <label
+                                className="form-check-label"
+                                htmlFor="flexCheckDefault"
+                            >
+                                Lembre de mim
+                            </label>
+                        </div>
+                        <button
+                            className="btn btn-primary w-100 py-2"
+                            type="submit"
                         >
-                            Lembre de mim
-                        </label>
-                    </div>
-                    <button
-                        className="btn btn-primary w-100 py-2"
-                        type="submit"
-                    >
-                        Entrar
-                    </button>
-                </form>
-            </section>
-        </main>
+                            Entrar
+                        </button>
+                    </form>
+                </section>
+            </main>
+        </>
     )
 }
 

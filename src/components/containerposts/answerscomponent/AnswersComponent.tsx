@@ -8,6 +8,7 @@ import { UserContext } from '../../../contexts/UserContext'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import OptionsAnswer from './optionsanswer/OptionsAnswer'
+import AlertComponent from '../../alertcomponent/AlertComponent'
 
 function AnswersComponent({
     answer,
@@ -18,6 +19,12 @@ function AnswersComponent({
 }) {
     const [answerLikes, setAnswerLikes] = useState<string[]>(answer.curtidas)
     const { user } = useContext(UserContext)
+    const [showAlertComponent, setShowAlertComponent] = useState(false)
+    const [messageAlertComponent, setMessageAlertComponent] =
+        useState<string>('')
+    const [typeAlertComponent, setTypeAlertComponent] = useState<
+        'success' | 'error'
+    >('success')
 
     const handleLike = () => {
         axios
@@ -52,18 +59,38 @@ function AnswersComponent({
                         )
                     })
                     .catch(() => {
-                        alert(
+                        setShowAlertComponent(true)
+                        setMessageAlertComponent(
                             'Erro ao interagir com a resposta, tente novamente'
                         )
+                        setTypeAlertComponent('error')
+
+                        setTimeout(() => {
+                            setShowAlertComponent(false)
+                        }, 3000)
                     })
             })
             .catch(() => {
-                alert('Erro ao interagir com a resposta, tente novamente')
+                setShowAlertComponent(true)
+                setMessageAlertComponent(
+                    'Erro ao interagir com a resposta, tente novamente'
+                )
+                setTypeAlertComponent('error')
+
+                setTimeout(() => {
+                    setShowAlertComponent(false)
+                }, 3000)
             })
     }
 
     return (
         <article className="user-posted-answering">
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
             <div className="user-picture-posts">
                 <User />
             </div>

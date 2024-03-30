@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useContext, useState } from 'react'
 import { Form, Modal } from 'react-bootstrap'
 import { UserContext } from '../../../../../contexts/UserContext'
+import AlertComponent from '../../../../alertcomponent/AlertComponent'
 
 const MAX_LENGTH_TEXT = 5000
 
@@ -16,16 +17,40 @@ function ModalEdit(props: {
 
     const [text, setText] = useState(props.text)
 
+    const [showAlertComponent, setShowAlertComponent] = useState(false)
+    const [messageAlertComponent, setMessageAlertComponent] =
+        useState<string>('')
+    const [typeAlertComponent, setTypeAlertComponent] = useState<
+        'success' | 'error'
+    >('success')
+
     const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         if (!text.replace(/\s/g, '').length) {
-            alert('O conteúdo da resposta não pode ser vazio')
+            setShowAlertComponent(true)
+            setMessageAlertComponent(
+                'O conteúdo da resposta não pode ser vazio'
+            )
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+
             return
         }
 
         if (text.length > MAX_LENGTH_TEXT) {
-            alert('O texto da resposta ultrapassou o limite de caracteres')
+            setShowAlertComponent(true)
+            setMessageAlertComponent(
+                'O texto da resposta ultrapassou o limite de caracteres'
+            )
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
@@ -49,16 +74,39 @@ function ModalEdit(props: {
                 }
             )
             .then(() => {
-                alert('Resposta editada com sucesso')
+                setShowAlertComponent(true)
+                setMessageAlertComponent('Resposta editada com sucesso')
+                setTypeAlertComponent('success')
+
+                setTimeout(() => {
+                    setShowAlertComponent(false)
+                }, 3000)
+
                 props.onHide()
             })
             .catch(() => {
-                alert('Erro ao editar resposta, tente novamente')
+                setShowAlertComponent(true)
+                setMessageAlertComponent(
+                    'Erro ao editar resposta, tente novamente'
+                )
+                setTypeAlertComponent('error')
+
+                setTimeout(() => {
+                    setShowAlertComponent(false)
+                }, 3000)
+
+                props.onHide()
             })
     }
 
     return (
         <>
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
             <Modal
                 show={props.show}
                 onHide={props.onHide}
@@ -81,6 +129,7 @@ function ModalEdit(props: {
                                 value={text}
                                 style={{ resize: 'none' }}
                                 maxLength={5000}
+                                autoFocus
                                 required
                                 onChange={(e) => setText(e.target.value)}
                                 rows={5}

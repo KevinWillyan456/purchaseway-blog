@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from 'react'
 import { Form, Modal } from 'react-bootstrap'
 import { UserContext } from '../../../../../contexts/UserContext'
 import './ModalEdit.css'
+import AlertComponent from '../../../../alertcomponent/AlertComponent'
 
 const MAX_TEXT_LENGTH = 5000
 const MAX_TITLE_LENGTH = 100
@@ -35,6 +36,13 @@ function ModalEdit(props: {
     const [removeVideoId, setRemoveVideoId] = useState<boolean>(
         props.content.videoId === '' ? false : true
     )
+
+    const [showAlertComponent, setShowAlertComponent] = useState(false)
+    const [messageAlertComponent, setMessageAlertComponent] =
+        useState<string>('')
+    const [typeAlertComponent, setTypeAlertComponent] = useState<
+        'success' | 'error'
+    >('success')
 
     useEffect(
         function () {
@@ -96,41 +104,99 @@ function ModalEdit(props: {
         e.preventDefault()
 
         if (removeImg && urlImg === '') {
-            alert('Adicione uma URL de imagem')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('Adicione uma URL de imagem')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
         if (imgValid === false && removeImg) {
-            return alert('URL da imagem inválida')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('URL da imagem inválida')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+            return
         }
 
         if (removeVideoId && videoId === '') {
-            alert('Adicione um ID de video do YouTube')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('Adicione um ID de video do YouTube')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+
             return
         }
 
         if (videoIdValid === false && removeVideoId) {
-            return alert('ID do vídeo do YouTube inválido')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('ID do vídeo do YouTube inválido')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+            return
         }
 
         if (title === '' || text === '') {
-            return alert('Preencha todos os campos')
+            setShowAlertComponent(true)
+            setMessageAlertComponent('Preencha todos os campos')
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+
+            return
         }
 
         if (title.length > MAX_TITLE_LENGTH) {
-            return alert(
+            setShowAlertComponent(true)
+            setMessageAlertComponent(
                 `O título deve ter no máximo ${MAX_TITLE_LENGTH} caracteres`
             )
+
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+            return
         }
 
         if (text.length > MAX_TEXT_LENGTH) {
-            return alert(
+            setShowAlertComponent(true)
+            setMessageAlertComponent(
                 `O texto deve ter no máximo ${MAX_TEXT_LENGTH} caracteres`
             )
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+            return
         }
 
         if (!text.replace(/\s/g, '').length) {
-            alert('O conteúdo da postagem não pode ser vazio')
+            setShowAlertComponent(true)
+            setMessageAlertComponent(
+                'O conteúdo da postagem não pode ser vazio'
+            )
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
@@ -155,16 +221,39 @@ function ModalEdit(props: {
                 }
             )
             .then(() => {
-                alert('Postagem editada com sucesso')
+                setShowAlertComponent(true)
+                setMessageAlertComponent('Postagem editada com sucesso')
+                setTypeAlertComponent('success')
+
+                setTimeout(() => {
+                    setShowAlertComponent(false)
+                }, 3000)
+
                 props.onHide()
             })
             .catch(() => {
-                alert('Erro ao editar postagem, tente novamente')
+                setShowAlertComponent(true)
+                setMessageAlertComponent(
+                    'Erro ao editar postagem, tente novamente'
+                )
+                setTypeAlertComponent('error')
+
+                setTimeout(() => {
+                    setShowAlertComponent(false)
+                }, 3000)
+
+                props.onHide()
             })
     }
 
     return (
         <>
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
             <Modal
                 show={props.show}
                 onHide={props.onHide}

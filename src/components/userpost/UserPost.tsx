@@ -4,6 +4,7 @@ import { useContext, useState } from 'react'
 import { UserContext } from '../../contexts/UserContext'
 import axios from 'axios'
 import ModalImageAndVideo from './modalimageandvideo/ModalImageAndVideo'
+import AlertComponent from '../alertcomponent/AlertComponent'
 
 const MAX_LENGTH_MESSAGE = 5000
 const MAX_LENGTH_TITLE = 100
@@ -16,6 +17,12 @@ function UserPost() {
     const [videoId, setVideoId] = useState<string>('')
     const [onlyIdByVideo, setOnlyIdByVideo] = useState<string>('')
     const [videoIdValid, setVideoIdValid] = useState<boolean>(false)
+    const [showAlertComponent, setShowAlertComponent] = useState(false)
+    const [messageAlertComponent, setMessageAlertComponent] =
+        useState<string>('')
+    const [typeAlertComponent, setTypeAlertComponent] = useState<
+        'success' | 'error'
+    >('success')
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -37,9 +44,15 @@ function UserPost() {
         }
 
         if (message.value.length > MAX_LENGTH_MESSAGE) {
-            alert(
+            setShowAlertComponent(true)
+            setMessageAlertComponent(
                 `Mensagem deve ter no máximo ${MAX_LENGTH_MESSAGE} caracteres`
             )
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
@@ -49,7 +62,15 @@ function UserPost() {
         }
 
         if (title.value.length > MAX_LENGTH_TITLE) {
-            alert(`Título deve ter no máximo ${MAX_LENGTH_TITLE} caracteres`)
+            setShowAlertComponent(true)
+            setMessageAlertComponent(
+                `Título deve ter no máximo ${MAX_LENGTH_TITLE} caracteres`
+            )
+            setTypeAlertComponent('error')
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
             return
         }
 
@@ -78,17 +99,34 @@ function UserPost() {
                     setVideoId('')
                     setOnlyIdByVideo('')
                     setVideoIdValid(false)
+                    setShowAlertComponent(true)
+                    setMessageAlertComponent('Postagem criada com sucesso!')
+                    setTypeAlertComponent('success')
 
-                    alert('Postagem criada com sucesso!')
+                    setTimeout(() => {
+                        setShowAlertComponent(false)
+                    }, 3000)
                 }
             })
             .catch(() => {
-                alert('Erro ao criar postagem!')
+                setShowAlertComponent(true)
+                setMessageAlertComponent('Erro ao criar postagem!')
+                setTypeAlertComponent('error')
+
+                setTimeout(() => {
+                    setShowAlertComponent(false)
+                }, 3000)
             })
     }
 
     return (
         <>
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
             <form className="user-post-container" onSubmit={handleSubmit}>
                 <textarea
                     className="user-message focus-ring"

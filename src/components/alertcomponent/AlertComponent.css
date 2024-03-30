@@ -1,0 +1,22 @@
+.modal-alert-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px 20px 20px;
+}
+.modal-alert-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--color-black);
+    padding: 0 40px;
+    overflow: hidden;
+    max-height: 9rem;
+    text-overflow: ellipsis;
+}
+.modal-alert-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
