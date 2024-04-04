@@ -7,6 +7,7 @@ import React, {
 } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios'
+import { IPost } from '../components/containerposts/ContainerPosts'
 
 export interface IUser {
     _id: string
@@ -18,12 +19,14 @@ export interface IUser {
     posts: number
 }
 
-interface UserContextType {
+interface GlobalContextType {
     user: IUser
+    posts: IPost[]
     setUser: Dispatch<SetStateAction<IUser>>
+    setPosts: Dispatch<SetStateAction<IPost[]>>
 }
 
-export const UserContext = createContext<UserContextType>({
+export const GlobalContext = createContext<GlobalContextType>({
     user: {
         _id: '',
         nome: 'Carregando...',
@@ -34,13 +37,15 @@ export const UserContext = createContext<UserContextType>({
         posts: 0,
     },
     setUser: () => {},
+    posts: [],
+    setPosts: () => {},
 })
 
 interface ProviderProps {
     children: React.ReactNode
 }
 
-export function UserContextProvider({ children }: ProviderProps) {
+export function GlobalContextProvider({ children }: ProviderProps) {
     const [user, setUser] = useState<IUser>({
         _id: '',
         nome: 'Carregando...',
@@ -50,6 +55,7 @@ export function UserContextProvider({ children }: ProviderProps) {
         curtidas: 0,
         posts: 0,
     })
+    const [posts, setPosts] = useState<IPost[]>([])
 
     useEffect(() => {
         const token = Cookies.get('token')
@@ -81,8 +87,8 @@ export function UserContextProvider({ children }: ProviderProps) {
     }, [])
 
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <GlobalContext.Provider value={{ user, setUser, posts, setPosts }}>
             {children}
-        </UserContext.Provider>
+        </GlobalContext.Provider>
     )
 }

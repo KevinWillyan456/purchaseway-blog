@@ -1,7 +1,7 @@
 import './UserPost.css'
 import Photograph from '../../icons/Photograph'
 import { useContext, useState } from 'react'
-import { UserContext } from '../../contexts/UserContext'
+import { GlobalContext } from '../../contexts/GlobalContext'
 import axios from 'axios'
 import ModalImageAndVideo from './modalimageandvideo/ModalImageAndVideo'
 import AlertComponent from '../alertcomponent/AlertComponent'
@@ -10,7 +10,7 @@ const MAX_LENGTH_MESSAGE = 5000
 const MAX_LENGTH_TITLE = 100
 
 function UserPost() {
-    const { user } = useContext(UserContext)
+    const { user } = useContext(GlobalContext)
     const [showModal, setShowModal] = useState<boolean>(false)
     const [urlImg, setUrlImg] = useState<string>('')
     const [imgValid, setImgValid] = useState<boolean>(false)

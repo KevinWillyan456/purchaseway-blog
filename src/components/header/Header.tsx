@@ -3,12 +3,12 @@ import Close from '../../icons/Close'
 import MagnifyingGlass from '../../icons/MagnifyingGlass'
 import './Header.css'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../../contexts/UserContext'
+import { GlobalContext } from '../../contexts/GlobalContext'
 import Cookies from 'js-cookie'
 
 function Header() {
     const [search, setSearch] = useState('')
-    const { user, setUser } = useContext(UserContext)
+    const { user, setUser } = useContext(GlobalContext)
 
     return (
         <header className="header">

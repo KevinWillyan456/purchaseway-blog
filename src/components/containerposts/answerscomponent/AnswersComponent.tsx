@@ -4,7 +4,7 @@ import User from '../../../icons/User'
 import { IAnswer } from '../ContainerPosts'
 import './AnswersComponent.css'
 import axios from 'axios'
-import { UserContext } from '../../../contexts/UserContext'
+import { GlobalContext } from '../../../contexts/GlobalContext'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import OptionsAnswer from './optionsanswer/OptionsAnswer'
@@ -18,7 +18,7 @@ function AnswersComponent({
     postId: string
 }) {
     const [answerLikes, setAnswerLikes] = useState<string[]>(answer.curtidas)
-    const { user } = useContext(UserContext)
+    const { user } = useContext(GlobalContext)
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
         useState<string>('')

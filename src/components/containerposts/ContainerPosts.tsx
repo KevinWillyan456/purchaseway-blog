@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './ContainerPosts.css'
 import axios from 'axios'
 import PostComponent from './postcomponent/PostComponent'
+import { GlobalContext } from '../../contexts/GlobalContext'
 
 export interface IPost {
     _id: string
@@ -25,7 +26,7 @@ export interface IAnswer {
 }
 
 function ContainerPosts() {
-    const [posts, setPosts] = useState<IPost[]>([])
+    const { posts, setPosts } = useContext(GlobalContext)
     const [emptyPosts, setEmptyPosts] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
 
@@ -47,7 +48,7 @@ function ContainerPosts() {
             .catch(() => {
                 setError(true)
             })
-    }, [])
+    }, [setPosts])
 
     useEffect(() => {
         posts.forEach((post) => {
@@ -127,13 +128,13 @@ function ContainerPosts() {
                     })
             })
         })
-    }, [posts])
+    }, [posts, setPosts])
 
     return (
         <section className="container-posts">
             {posts.length === 0 ? (
                 <div className="loading">Carregando...</div>
-            ) : emptyPosts ? (
+            ) : emptyPosts && !error && posts.length === 0 ? (
                 <div className="empty-posts">Nenhuma postagem disponível</div>
             ) : error ? (
                 <div className="error">Erro na comunicação com o servidor</div>

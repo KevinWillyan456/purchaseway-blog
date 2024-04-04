@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useContext, useState, useEffect } from 'react'
 import { Form, Modal } from 'react-bootstrap'
-import { UserContext } from '../../../../../contexts/UserContext'
+import { GlobalContext } from '../../../../../contexts/GlobalContext'
 import './ModalEdit.css'
 import AlertComponent from '../../../../alertcomponent/AlertComponent'
 
@@ -19,7 +19,7 @@ function ModalEdit(props: {
         videoId: string
     }
 }) {
-    const { user } = useContext(UserContext)
+    const { user } = useContext(GlobalContext)
 
     const [title, setTitle] = useState(props.content.title)
     const [text, setText] = useState(props.content.text)

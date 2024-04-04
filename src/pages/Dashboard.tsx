@@ -3,7 +3,7 @@ import Footer from '../components/footer/Footer'
 import Header from '../components/header/Header'
 import MainDashboard from '../components/maindashboard/MainDashboard'
 import authenticate from '../utils/AuthUtils'
-import { UserContextProvider } from '../contexts/UserContext'
+import { GlobalContextProvider } from '../contexts/GlobalContext'
 
 function Dashboard() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -21,11 +21,11 @@ function Dashboard() {
     return (
         <>
             {isAuthenticated ? (
-                <UserContextProvider>
+                <GlobalContextProvider>
                     <Header />
                     <MainDashboard />
                     <Footer />
-                </UserContextProvider>
+                </GlobalContextProvider>
             ) : (
                 requestHasEnded && (window.location.href = '/login')
             )}

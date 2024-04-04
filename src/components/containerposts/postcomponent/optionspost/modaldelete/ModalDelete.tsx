@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useContext, useState } from 'react'
 import { Modal } from 'react-bootstrap'
-import { UserContext } from '../../../../../contexts/UserContext'
+import { GlobalContext } from '../../../../../contexts/GlobalContext'
 import './ModalDelete.css'
 import AlertComponent from '../../../../alertcomponent/AlertComponent'
 
@@ -10,7 +10,7 @@ function ModalDelete(props: {
     onHide: () => void
     postId: string
 }) {
-    const { user } = useContext(UserContext)
+    const { user } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =

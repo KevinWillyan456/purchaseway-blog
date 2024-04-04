@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useContext } from 'react'
 import { Form, Modal } from 'react-bootstrap'
-import { UserContext } from '../../../../contexts/UserContext'
+import { GlobalContext } from '../../../../contexts/GlobalContext'
 import './ModalAnswer.css'
 import AlertComponent from '../../../alertcomponent/AlertComponent'
 
@@ -13,7 +13,7 @@ function ModalAnswer(props: {
     postId: string
 }) {
     const [text, setText] = useState<string>('')
-    const { user } = useContext(UserContext)
+    const { user } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =

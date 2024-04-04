@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useContext, useState } from 'react'
 import { Form, Modal } from 'react-bootstrap'
-import { UserContext } from '../../../../../contexts/UserContext'
+import { GlobalContext } from '../../../../../contexts/GlobalContext'
 import AlertComponent from '../../../../alertcomponent/AlertComponent'
 
 const MAX_LENGTH_TEXT = 5000
@@ -13,7 +13,7 @@ function ModalEdit(props: {
     answerId: string
     text: string
 }) {
-    const { user } = useContext(UserContext)
+    const { user } = useContext(GlobalContext)
 
     const [text, setText] = useState(props.text)
 

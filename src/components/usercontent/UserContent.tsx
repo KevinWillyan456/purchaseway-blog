@@ -1,11 +1,11 @@
 import './UserContent.css'
 import User from '../../icons/User'
 import Pencil from '../../icons/Pencil'
-import { UserContext } from '../../contexts/UserContext'
+import { GlobalContext } from '../../contexts/GlobalContext'
 import { useContext } from 'react'
 
 function UserContent() {
-    const { user } = useContext(UserContext)
+    const { user } = useContext(GlobalContext)
 
     return (
         <article className="user-container">

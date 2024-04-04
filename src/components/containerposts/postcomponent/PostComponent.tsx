@@ -4,7 +4,7 @@ import User from '../../../icons/User'
 import OptionsPost from './optionspost/OptionsPost'
 import AnswersComponent from '../answerscomponent/AnswersComponent'
 import { IPost } from '../ContainerPosts'
-import { UserContext } from '../../../contexts/UserContext'
+import { GlobalContext } from '../../../contexts/GlobalContext'
 import axios from 'axios'
 import { formatDistanceToNow } from 'date-fns'
 import './PostComponent.css'
@@ -16,7 +16,7 @@ function PostComponent({ post }: { post: IPost }) {
     const [showAnswers, setShowAnswers] = useState<boolean>(false)
     const [answerModalShow, setAnswerModalShow] = useState<boolean>(false)
     const [postLikes, setPostLikes] = useState<string[]>(post.curtidas)
-    const { user } = useContext(UserContext)
+    const { user } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
