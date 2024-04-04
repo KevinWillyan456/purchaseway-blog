@@ -4,27 +4,6 @@ import axios from 'axios'
 import PostComponent from './postcomponent/PostComponent'
 import { GlobalContext } from '../../contexts/GlobalContext'
 
-export interface IPost {
-    _id: string
-    conteudo: { text: string; urlImg: string; title: string; videoId: string }
-    respostas: IAnswer[]
-    proprietario: string
-    proprietarioId: string
-    curtidas: string[]
-    dataCriacao: Date
-    wasEdited: boolean
-}
-
-export interface IAnswer {
-    _id: string
-    userId: string
-    userName: string
-    text: string
-    curtidas: string[]
-    dataCriacao: Date
-    wasEdited: boolean
-}
-
 function ContainerPosts() {
     const { posts, setPosts } = useContext(GlobalContext)
     const [emptyPosts, setEmptyPosts] = useState<boolean>(false)

@@ -7,7 +7,6 @@ import React, {
 } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios'
-import { IPost } from '../components/containerposts/ContainerPosts'
 
 export interface IUser {
     _id: string
@@ -18,12 +17,33 @@ export interface IUser {
     curtidas: number
     posts: number
 }
+export interface IPost {
+    _id: string
+    conteudo: { text: string; urlImg: string; title: string; videoId: string }
+    respostas: IAnswer[]
+    proprietario: string
+    proprietarioId: string
+    curtidas: string[]
+    dataCriacao: Date
+    wasEdited: boolean
+}
+
+export interface IAnswer {
+    _id: string
+    userId: string
+    userName: string
+    text: string
+    curtidas: string[]
+    dataCriacao: Date
+    wasEdited: boolean
+}
 
 interface GlobalContextType {
     user: IUser
     posts: IPost[]
     setUser: Dispatch<SetStateAction<IUser>>
     setPosts: Dispatch<SetStateAction<IPost[]>>
+    updatePosts: () => void
 }
 
 export const GlobalContext = createContext<GlobalContextType>({
@@ -39,6 +59,7 @@ export const GlobalContext = createContext<GlobalContextType>({
     setUser: () => {},
     posts: [],
     setPosts: () => {},
+    updatePosts: () => {},
 })
 
 interface ProviderProps {
@@ -86,8 +107,14 @@ export function GlobalContextProvider({ children }: ProviderProps) {
         }
     }, [])
 
+    const updatePosts = () => {
+        // em desenvolvimento
+    }
+
     return (
-        <GlobalContext.Provider value={{ user, setUser, posts, setPosts }}>
+        <GlobalContext.Provider
+            value={{ user, setUser, posts, setPosts, updatePosts }}
+        >
             {children}
         </GlobalContext.Provider>
     )
