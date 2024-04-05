@@ -111,7 +111,7 @@ function ContainerPosts() {
 
     return (
         <section className="container-posts">
-            {posts.length === 0 ? (
+            {posts.length === 0 && !emptyPosts && !error ? (
                 <div className="loading">Carregando...</div>
             ) : emptyPosts && !error && posts.length === 0 ? (
                 <div className="empty-posts">Nenhuma postagem disponível</div>
