@@ -44,6 +44,7 @@ interface GlobalContextType {
     setUser: Dispatch<SetStateAction<IUser>>
     setPosts: Dispatch<SetStateAction<IPost[]>>
     updatePosts: () => void
+    updateUserData: () => void
 }
 
 export const GlobalContext = createContext<GlobalContextType>({
@@ -60,6 +61,7 @@ export const GlobalContext = createContext<GlobalContextType>({
     posts: [],
     setPosts: () => {},
     updatePosts: () => {},
+    updateUserData: () => {},
 })
 
 interface ProviderProps {
@@ -100,9 +102,6 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                         curtidas: response.data.user.curtidas,
                         posts: response.data.posts,
                     })
-                })
-                .catch((error) => {
-                    console.error(error)
                 })
         }
     }, [])
@@ -196,9 +195,42 @@ export function GlobalContextProvider({ children }: ProviderProps) {
             })
     }
 
+    const updateUserData = () => {
+        const token = Cookies.get('token')
+
+        if (token) {
+            axios
+                .get(import.meta.env.VITE_API_URL + '/get-user-by-token', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: import.meta.env.VITE_API_KEY,
+                        token,
+                    },
+                })
+                .then((response) => {
+                    setUser({
+                        _id: response.data.user._id,
+                        nome: response.data.user.nome,
+                        senha: response.data.user.senha,
+                        email: response.data.user.email,
+                        dataCriacao: response.data.user.dataCriacao,
+                        curtidas: response.data.user.curtidas,
+                        posts: response.data.posts,
+                    })
+                })
+        }
+    }
+
     return (
         <GlobalContext.Provider
-            value={{ user, setUser, posts, setPosts, updatePosts }}
+            value={{
+                user,
+                setUser,
+                posts,
+                setPosts,
+                updatePosts,
+                updateUserData,
+            }}
         >
             {children}
         </GlobalContext.Provider>

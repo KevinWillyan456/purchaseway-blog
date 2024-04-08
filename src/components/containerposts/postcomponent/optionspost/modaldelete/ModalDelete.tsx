@@ -10,7 +10,7 @@ function ModalDelete(props: {
     onHide: () => void
     postId: string
 }) {
-    const { user, updatePosts } = useContext(GlobalContext)
+    const { user, updatePosts, updateUserData } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -38,6 +38,7 @@ function ModalDelete(props: {
                 setMessageAlertComponent('Postagem excluída com sucesso')
                 setTypeAlertComponent('success')
                 updatePosts()
+                updateUserData()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)
