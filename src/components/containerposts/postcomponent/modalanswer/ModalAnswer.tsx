@@ -13,7 +13,7 @@ function ModalAnswer(props: {
     postId: string
 }) {
     const [text, setText] = useState<string>('')
-    const { user } = useContext(GlobalContext)
+    const { user, updatePosts } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -76,6 +76,7 @@ function ModalAnswer(props: {
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Resposta enviada com sucesso')
                 setTypeAlertComponent('success')
+                updatePosts()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)

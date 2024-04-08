@@ -13,7 +13,7 @@ function ModalEdit(props: {
     answerId: string
     text: string
 }) {
-    const { user } = useContext(GlobalContext)
+    const { user, updatePosts } = useContext(GlobalContext)
 
     const [text, setText] = useState(props.text)
 
@@ -77,6 +77,7 @@ function ModalEdit(props: {
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Resposta editada com sucesso')
                 setTypeAlertComponent('success')
+                updatePosts()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)

@@ -19,7 +19,7 @@ function ModalEdit(props: {
         videoId: string
     }
 }) {
-    const { user } = useContext(GlobalContext)
+    const { user, updatePosts } = useContext(GlobalContext)
 
     const [title, setTitle] = useState(props.content.title)
     const [text, setText] = useState(props.content.text)
@@ -224,6 +224,7 @@ function ModalEdit(props: {
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Postagem editada com sucesso')
                 setTypeAlertComponent('success')
+                updatePosts()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)

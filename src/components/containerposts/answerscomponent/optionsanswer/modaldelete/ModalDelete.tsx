@@ -10,7 +10,7 @@ function ModalDelete(props: {
     postId: string
     answerId: string
 }) {
-    const { user } = useContext(GlobalContext)
+    const { user, updatePosts } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -39,6 +39,7 @@ function ModalDelete(props: {
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Resposta excluída com sucesso')
                 setTypeAlertComponent('success')
+                updatePosts()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)
