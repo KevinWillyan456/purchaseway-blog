@@ -41,6 +41,10 @@ export interface IAnswer {
 interface GlobalContextType {
     user: IUser
     posts: IPost[]
+    emptyPosts: boolean
+    setEmptyPosts: Dispatch<SetStateAction<boolean>>
+    error: boolean
+    setError: Dispatch<SetStateAction<boolean>>
     setUser: Dispatch<SetStateAction<IUser>>
     setPosts: Dispatch<SetStateAction<IPost[]>>
     updatePosts: () => void
@@ -59,6 +63,10 @@ export const GlobalContext = createContext<GlobalContextType>({
     },
     setUser: () => {},
     posts: [],
+    emptyPosts: false,
+    setEmptyPosts: () => {},
+    error: false,
+    setError: () => {},
     setPosts: () => {},
     updatePosts: () => {},
     updateUserData: () => {},
@@ -79,6 +87,8 @@ export function GlobalContextProvider({ children }: ProviderProps) {
         posts: 0,
     })
     const [posts, setPosts] = useState<IPost[]>([])
+    const [emptyPosts, setEmptyPosts] = useState<boolean>(false)
+    const [error, setError] = useState<boolean>(false)
 
     useEffect(() => {
         const token = Cookies.get('token')
@@ -114,7 +124,16 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                     Authorization: import.meta.env.VITE_API_KEY,
                 },
             })
-            .then((response) => setPosts(response.data.posts))
+            .then((response) => {
+                if (response.data.length === 0) {
+                    setEmptyPosts(true)
+                } else {
+                    setPosts(response.data.posts)
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
     }
 
     const updateUserData = () => {
@@ -150,6 +169,10 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                 setUser,
                 posts,
                 setPosts,
+                emptyPosts,
+                setEmptyPosts,
+                error,
+                setError,
                 updatePosts,
                 updateUserData,
             }}

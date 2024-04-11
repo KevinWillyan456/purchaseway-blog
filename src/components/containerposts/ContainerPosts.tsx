@@ -1,13 +1,12 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import './ContainerPosts.css'
 import axios from 'axios'
 import PostComponent from './postcomponent/PostComponent'
 import { GlobalContext } from '../../contexts/GlobalContext'
 
 function ContainerPosts() {
-    const { posts, setPosts } = useContext(GlobalContext)
-    const [emptyPosts, setEmptyPosts] = useState<boolean>(false)
-    const [error, setError] = useState<boolean>(false)
+    const { posts, setPosts, emptyPosts, setEmptyPosts, error, setError } =
+        useContext(GlobalContext)
 
     useEffect(() => {
         axios
@@ -27,7 +26,7 @@ function ContainerPosts() {
             .catch(() => {
                 setError(true)
             })
-    }, [setPosts])
+    }, [setEmptyPosts, setError, setPosts])
 
     return (
         <section className="container-posts">
