@@ -34,16 +34,8 @@ function ModalDelete(props: {
                 }
             )
             .then(() => {
-                setShowAlertComponent(true)
-                setMessageAlertComponent('Postagem excluída com sucesso')
-                setTypeAlertComponent('success')
                 updatePosts()
                 updateUserData()
-
-                setTimeout(() => {
-                    setShowAlertComponent(false)
-                }, 3000)
-
                 props.onHide()
             })
             .catch(() => {

@@ -36,15 +36,7 @@ function ModalDelete(props: {
                 }
             )
             .then(() => {
-                setShowAlertComponent(true)
-                setMessageAlertComponent('Resposta excluída com sucesso')
-                setTypeAlertComponent('success')
                 updatePosts()
-
-                setTimeout(() => {
-                    setShowAlertComponent(false)
-                }, 3000)
-
                 props.onHide()
             })
             .catch(() => {
