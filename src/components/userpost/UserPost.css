@@ -95,5 +95,5 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: #df1919;
+    background: var(--color-red);
 }
