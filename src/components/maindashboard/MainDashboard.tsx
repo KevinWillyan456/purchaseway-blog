@@ -5,14 +5,22 @@ import ContainerPosts from '../containerposts/ContainerPosts'
 import Up from '../../icons/Up'
 import { useEffect, useState } from 'react'
 
+type TabSelected = 'postagens' | 'perfil'
+
 function MainDashboard() {
     const [isVisible, setIsVisible] = useState(false)
+    const [tabSelected, setTabSelected] = useState<TabSelected>('postagens')
 
     const handleScroll = () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
         })
+    }
+
+    const handleTabSelected = (tab: TabSelected) => {
+        if (tab === tabSelected) return
+        setTabSelected(tab)
     }
 
     useEffect(() => {
@@ -35,6 +43,24 @@ function MainDashboard() {
                     <UserContent />
                     <UserPost />
                 </div>
+                <section className="menu-dashboard">
+                    <button
+                        className={`menu-dashboard-tab${
+                            tabSelected === 'postagens' ? '-selected' : ''
+                        }`}
+                        onClick={() => handleTabSelected('postagens')}
+                    >
+                        Postagens
+                    </button>
+                    <button
+                        className={`menu-dashboard-tab${
+                            tabSelected === 'perfil' ? '-selected' : ''
+                        }`}
+                        onClick={() => handleTabSelected('perfil')}
+                    >
+                        Perfil
+                    </button>
+                </section>
                 <ContainerPosts />
             </div>
             {isVisible && (
