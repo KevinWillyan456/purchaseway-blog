@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './ContainerUser.css'
 import UserInformation from './tabs/userinformation/UserInformation'
+import UserEdit from './tabs/useredit/UserEdit'
+import UserAccount from './tabs/useraccount/UserAccount'
 
 type TabSelected = 'informacoes' | 'editar' | 'conta'
 
@@ -46,7 +48,13 @@ function ContainerUser() {
                 </button>
             </article>
             <section className="content-user">
-                <UserInformation />
+                {tabSelected === 'informacoes' ? (
+                    <UserInformation />
+                ) : tabSelected === 'editar' ? (
+                    <UserEdit />
+                ) : (
+                    <UserAccount />
+                )}
             </section>
         </section>
     )

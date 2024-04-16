@@ -1,0 +1,80 @@
+.user-edit {
+    animation: userEditExpand 200ms;
+    padding: 20px;
+}
+@keyframes userEditExpand {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.user-edit-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.user-edit-container .user-edit-picture {
+    width: 120px;
+    min-width: 120px;
+    height: 120px;
+    min-height: 120px;
+    border-radius: 50%;
+    background: var(--color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.user-edit-container .user-edit-name {
+    color: var(--color-dark);
+    font-size: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.user-edit .user-edit-details {
+    margin-top: 40px;
+    position: relative;
+    min-height: 260px;
+}
+.user-edit-input-name {
+    width: 280px;
+}
+.user-edit-details .user-edit-button-change-picture {
+    transition: 200ms;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-orange);
+    color: var(--color-white);
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+.user-edit-details .user-edit-button-change-picture:hover {
+    background-color: var(--color-dark-orange);
+}
+.user-edit-details .user-edit-button-save {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transition: 200ms;
+    width: 90px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-blue);
+    color: var(--color-white);
+    font-size: 16px;
+    border: none;
+    margin-top: 3px;
+}
+.user-edit-details .user-edit-button-save:hover {
+    background-color: var(--color-dark-blue);
+}
