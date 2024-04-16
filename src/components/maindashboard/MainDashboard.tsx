@@ -4,6 +4,7 @@ import UserPost from '../userpost/UserPost'
 import ContainerPosts from '../containerposts/ContainerPosts'
 import Up from '../../icons/Up'
 import { useEffect, useState } from 'react'
+import ContainerUser from '../containeruser/ContainerUser'
 
 type TabSelected = 'postagens' | 'perfil'
 
@@ -61,7 +62,11 @@ function MainDashboard() {
                         Perfil
                     </button>
                 </section>
-                <ContainerPosts />
+                {tabSelected === 'postagens' ? (
+                    <ContainerPosts />
+                ) : (
+                    <ContainerUser />
+                )}
             </div>
             {isVisible && (
                 <button className="up-button" onClick={handleScroll}>
