@@ -62,6 +62,7 @@
     left: 20px;
     color: var(--color-aqua);
     font-size: 20px;
+    font-family: sans-serif;
 }
 .user-container .user-likes-text {
     position: absolute;
@@ -76,4 +77,5 @@
     left: 136px;
     color: var(--color-aqua);
     font-size: 20px;
+    font-family: sans-serif;
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './ContainerUser.css'
+import UserInformation from './tabs/userinformation/UserInformation'
 
 type TabSelected = 'informacoes' | 'editar' | 'conta'
 
@@ -44,7 +45,9 @@ function ContainerUser() {
                     Conta
                 </button>
             </article>
-            <section className="content-user"></section>
+            <section className="content-user">
+                <UserInformation />
+            </section>
         </section>
     )
 }

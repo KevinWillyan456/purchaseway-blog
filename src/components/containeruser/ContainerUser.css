@@ -7,6 +7,7 @@
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
 }
 @keyframes containerUserExpand {
     from {
@@ -20,6 +21,7 @@
 }
 .container-user .menu-user {
     max-width: 180px;
+    min-width: 180px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -54,4 +56,8 @@
 }
 .container-user .menu-user .menu-tab.selected:hover {
     background: #026172;
+}
+.container-user .content-user {
+    width: 100%;
+    max-width: calc(100% - 180px);
 }

@@ -1,0 +1,40 @@
+.user-information {
+    padding: 20px;
+}
+.user-information-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.user-information-container .user-information-picture {
+    width: 120px;
+    min-width: 120px;
+    height: 120px;
+    min-height: 120px;
+    border-radius: 50%;
+    background: var(--color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.user-information-container .user-information-name {
+    color: var(--color-dark);
+    font-size: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.user-information .user-information-details {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.user-information-details-item {
+    color: var(--color-dark);
+    font-size: 20px;
+}
+.user-information-details-item span {
+    font-weight: bold;
+    font-family: sans-serif;
+}
