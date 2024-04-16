@@ -4,11 +4,11 @@ import './UserInformation.css'
 function UserInformation() {
     return (
         <article className="user-information">
-            <div className="user-information-container">
-                <div className="user-information-picture">
+            <div className="user-menu-container">
+                <div className="user-menu-picture">
                     <UserLarge />
                 </div>
-                <div className="user-information-name">Joe Dawn</div>
+                <div className="user-menu-name">Joe Dawn</div>
             </div>
 
             <div className="user-information-details">

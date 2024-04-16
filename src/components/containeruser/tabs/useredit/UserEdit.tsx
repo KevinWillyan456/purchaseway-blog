@@ -1,4 +1,4 @@
-import { Form, Modal } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import UserLarge from '../../../../icons/UserLarge'
 import './UserEdit.css'
 import { useState } from 'react'
@@ -59,29 +59,27 @@ function UserEdit() {
                 type={typeAlertComponent}
             />
             <article className="user-edit">
-                <div className="user-edit-container">
-                    <div className="user-edit-picture">
+                <div className="user-menu-container">
+                    <div className="user-menu-picture">
                         <UserLarge />
                     </div>
-                    <div className="user-edit-name">Joe Dawn</div>
+                    <div className="user-menu-name">Joe Dawn</div>
                 </div>
 
                 <Form onSubmit={handleSubmit}>
                     <div className="user-edit-details">
-                        <Modal.Body>
-                            <Form.Group controlId="exampleForm.ControlInput1">
-                                <Form.Label>Mudar nome</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Digite seu nome"
-                                    className="user-edit-input-name"
-                                    maxLength={100}
-                                    value={name}
-                                    required
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                            </Form.Group>
-                        </Modal.Body>
+                        <Form.Group controlId="exampleForm.ControlInput1">
+                            <Form.Label>Mudar nome</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Digite seu nome"
+                                className="user-edit-input-name"
+                                maxLength={100}
+                                value={name}
+                                required
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </Form.Group>
 
                         <button
                             className="user-edit-button-change-picture"

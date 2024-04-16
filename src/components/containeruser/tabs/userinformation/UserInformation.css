@@ -1,8 +1,8 @@
 .user-information {
-    animation: userInformationExpand 200ms;
+    animation: userMenuExpand 200ms;
     padding: 20px;
 }
-@keyframes userInformationExpand {
+@keyframes userMenuExpand {
     from {
         opacity: 0;
         transform: scale(0.8);
@@ -12,12 +12,12 @@
         transform: scale(1);
     }
 }
-.user-information-container {
+.user-menu-container {
     display: flex;
     align-items: center;
     gap: 14px;
 }
-.user-information-container .user-information-picture {
+.user-menu-container .user-menu-picture {
     width: 120px;
     min-width: 120px;
     height: 120px;
@@ -28,7 +28,7 @@
     align-items: center;
     justify-content: center;
 }
-.user-information-container .user-information-name {
+.user-menu-container .user-menu-name {
     color: var(--color-dark);
     font-size: 32px;
     overflow: hidden;

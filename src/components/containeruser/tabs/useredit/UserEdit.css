@@ -1,39 +1,6 @@
 .user-edit {
-    animation: userEditExpand 200ms;
+    animation: userMenuExpand 200ms;
     padding: 20px;
-}
-@keyframes userEditExpand {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-.user-edit-container {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-.user-edit-container .user-edit-picture {
-    width: 120px;
-    min-width: 120px;
-    height: 120px;
-    min-height: 120px;
-    border-radius: 50%;
-    background: var(--color-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.user-edit-container .user-edit-name {
-    color: var(--color-dark);
-    font-size: 32px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 .user-edit .user-edit-details {
     margin-top: 40px;
