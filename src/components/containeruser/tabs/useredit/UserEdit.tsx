@@ -1,11 +1,18 @@
 import { Form } from 'react-bootstrap'
 import UserLarge from '../../../../icons/UserLarge'
 import './UserEdit.css'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import AlertComponent from '../../../alertcomponent/AlertComponent'
+import { GlobalContext } from '../../../../contexts/GlobalContext'
+import axios from 'axios'
+
+const USER_NAME_MIN_LENGTH = 3
+const USER_NAME_MAX_LENGTH = 100
 
 function UserEdit() {
-    const [name, setName] = useState<string>('')
+    const { user, userInfo, updateUserData, updateUserInfo } =
+        useContext(GlobalContext)
+    const [name, setName] = useState<string>(userInfo.nome)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -16,6 +23,8 @@ function UserEdit() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        if (name === userInfo.nome) return
 
         if (name === '') {
             setShowAlertComponent(true)
@@ -29,7 +38,7 @@ function UserEdit() {
             return
         }
 
-        if (name.length < 3) {
+        if (name.length < USER_NAME_MIN_LENGTH) {
             setShowAlertComponent(true)
             setMessageAlertComponent('Nome deve ter no mínimo 3 caracteres')
             setTypeAlertComponent('error')
@@ -41,13 +50,39 @@ function UserEdit() {
             return
         }
 
-        setShowAlertComponent(true)
-        setMessageAlertComponent('Nome alterado com sucesso')
-        setTypeAlertComponent('success')
+        if (name.length > USER_NAME_MAX_LENGTH) {
+            setShowAlertComponent(true)
+            setMessageAlertComponent('Nome ultrapassou o limite de caracteres')
+            setTypeAlertComponent('error')
+            document.getElementById('exampleForm.ControlInput1')?.focus()
 
-        setTimeout(() => {
-            setShowAlertComponent(false)
-        }, 3000)
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+            return
+        }
+
+        axios
+            .put(
+                import.meta.env.VITE_API_URL + '/users/' + user._id,
+                { nome: name },
+                {
+                    headers: {
+                        Authorization: import.meta.env.VITE_API_KEY,
+                    },
+                }
+            )
+            .then((response) => {
+                if (response.status !== 200) {
+                    setShowAlertComponent(true)
+                    setMessageAlertComponent('Erro ao alterar nome')
+                    setTypeAlertComponent('error')
+                    return
+                } else {
+                    updateUserData()
+                    updateUserInfo()
+                }
+            })
     }
 
     return (
@@ -63,7 +98,7 @@ function UserEdit() {
                     <div className="user-menu-picture">
                         <UserLarge />
                     </div>
-                    <div className="user-menu-name">Joe Dawn</div>
+                    <div className="user-menu-name">{userInfo.nome}</div>
                 </div>
 
                 <Form onSubmit={handleSubmit}>
@@ -74,7 +109,7 @@ function UserEdit() {
                                 type="text"
                                 placeholder="Digite seu nome"
                                 className="user-edit-input-name"
-                                maxLength={100}
+                                maxLength={USER_NAME_MAX_LENGTH}
                                 value={name}
                                 required
                                 onChange={(e) => setName(e.target.value)}
@@ -87,7 +122,14 @@ function UserEdit() {
                         >
                             Mudar foto de perfil
                         </button>
-                        <button className="user-edit-button-save" type="submit">
+                        <button
+                            className={
+                                name === userInfo.nome
+                                    ? 'user-edit-button-save disabled'
+                                    : 'user-edit-button-save'
+                            }
+                            type="submit"
+                        >
                             Salvar
                         </button>
                     </div>

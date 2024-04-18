@@ -43,11 +43,23 @@
     position: absolute;
     top: 20px;
     left: 92px;
-    overflow: hidden;
+    padding-right: 4px;
+    overflow-y: auto;
     max-width: 107px;
     max-height: 65px;
     color: var(--color-dark);
     font-size: 16px;
+}
+.user-container .user-name::-webkit-scrollbar {
+    width: 4px;
+}
+.user-container .user-name::-webkit-scrollbar-thumb {
+    background: var(--color-dark);
+    border-radius: 10px;
+}
+.user-container .user-name::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: var(--color-dark-orange);
 }
 .user-container .user-posts-text {
     position: absolute;

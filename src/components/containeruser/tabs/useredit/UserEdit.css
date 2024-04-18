@@ -29,6 +29,7 @@
     background-color: var(--color-dark-orange);
 }
 .user-edit-details .user-edit-button-save {
+    transition: 200ms;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -44,4 +45,8 @@
 }
 .user-edit-details .user-edit-button-save:hover {
     background-color: var(--color-dark-blue);
+}
+.user-edit-details .user-edit-button-save.disabled {
+    background-color: #0285bd99;
+    cursor: not-allowed;
 }
