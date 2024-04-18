@@ -10,7 +10,8 @@ function ModalDelete(props: {
     onHide: () => void
     postId: string
 }) {
-    const { user, updatePosts, updateUserData } = useContext(GlobalContext)
+    const { user, updatePosts, updateUserData, updateUserInfo } =
+        useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -36,6 +37,7 @@ function ModalDelete(props: {
             .then(() => {
                 updatePosts()
                 updateUserData()
+                updateUserInfo()
                 props.onHide()
             })
             .catch(() => {

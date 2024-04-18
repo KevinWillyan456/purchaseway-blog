@@ -17,6 +17,17 @@ export interface IUser {
     curtidas: number
     posts: number
 }
+
+const userEmpty: IUser = {
+    _id: '',
+    nome: 'Carregando...',
+    senha: '',
+    email: '',
+    dataCriacao: new Date(),
+    curtidas: 0,
+    posts: 0,
+}
+
 export interface IPost {
     _id: string
     conteudo: { text: string; urlImg: string; title: string; videoId: string }
@@ -38,29 +49,47 @@ export interface IAnswer {
     wasEdited: boolean
 }
 
+interface IUserInfo {
+    nome: string
+    dataCriacao: Date
+    posts: number
+    curtidasPosts: number
+    respostasPosts: number
+    imagensCompartilhadas: number
+    videosCompartilhados: number
+}
+
+const userInfoEmpty: IUserInfo = {
+    nome: 'Carregando...',
+    dataCriacao: new Date(),
+    posts: 0,
+    curtidasPosts: 0,
+    respostasPosts: 0,
+    imagensCompartilhadas: 0,
+    videosCompartilhados: 0,
+}
+
 interface GlobalContextType {
     user: IUser
+    setUser: Dispatch<SetStateAction<IUser>>
     posts: IPost[]
+    setPosts: Dispatch<SetStateAction<IPost[]>>
     emptyPosts: boolean
     setEmptyPosts: Dispatch<SetStateAction<boolean>>
     error: boolean
     setError: Dispatch<SetStateAction<boolean>>
-    setUser: Dispatch<SetStateAction<IUser>>
-    setPosts: Dispatch<SetStateAction<IPost[]>>
+    userInfo: IUserInfo
+    setUserInfo: Dispatch<SetStateAction<IUserInfo>>
+
     updatePosts: () => void
     updateUserData: () => void
+    updateUserInfo: () => void
 }
 
 export const GlobalContext = createContext<GlobalContextType>({
-    user: {
-        _id: '',
-        nome: 'Carregando...',
-        senha: '',
-        email: '',
-        dataCriacao: new Date(),
-        curtidas: 0,
-        posts: 0,
-    },
+    user: userEmpty,
+    userInfo: userInfoEmpty,
+    setUserInfo: () => {},
     setUser: () => {},
     posts: [],
     emptyPosts: false,
@@ -70,6 +99,7 @@ export const GlobalContext = createContext<GlobalContextType>({
     setPosts: () => {},
     updatePosts: () => {},
     updateUserData: () => {},
+    updateUserInfo: () => {},
 })
 
 interface ProviderProps {
@@ -77,18 +107,11 @@ interface ProviderProps {
 }
 
 export function GlobalContextProvider({ children }: ProviderProps) {
-    const [user, setUser] = useState<IUser>({
-        _id: '',
-        nome: 'Carregando...',
-        senha: '',
-        email: '',
-        dataCriacao: new Date(),
-        curtidas: 0,
-        posts: 0,
-    })
+    const [user, setUser] = useState<IUser>(userEmpty)
     const [posts, setPosts] = useState<IPost[]>([])
     const [emptyPosts, setEmptyPosts] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
+    const [userInfo, setUserInfo] = useState<IUserInfo>(userInfoEmpty)
 
     useEffect(() => {
         const token = Cookies.get('token')
@@ -111,6 +134,28 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                         dataCriacao: response.data.user.dataCriacao,
                         curtidas: response.data.user.curtidas,
                         posts: response.data.posts,
+                    })
+                })
+
+            axios
+                .get(import.meta.env.VITE_API_URL + '/get-user-info', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: import.meta.env.VITE_API_KEY,
+                        token,
+                    },
+                })
+                .then((response) => {
+                    setUserInfo({
+                        nome: response.data.user.nome,
+                        dataCriacao: response.data.user.dataCriacao,
+                        posts: response.data.user.posts,
+                        curtidasPosts: response.data.user.curtidasPosts,
+                        respostasPosts: response.data.user.respostasPosts,
+                        imagensCompartilhadas:
+                            response.data.user.imagensCompartilhadas,
+                        videosCompartilhados:
+                            response.data.user.videosCompartilhados,
                     })
                 })
         }
@@ -162,6 +207,34 @@ export function GlobalContextProvider({ children }: ProviderProps) {
         }
     }
 
+    const updateUserInfo = () => {
+        const token = Cookies.get('token')
+
+        if (token) {
+            axios
+                .get(import.meta.env.VITE_API_URL + '/get-user-info', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: import.meta.env.VITE_API_KEY,
+                        token,
+                    },
+                })
+                .then((response) => {
+                    setUserInfo({
+                        nome: response.data.user.nome,
+                        dataCriacao: response.data.user.dataCriacao,
+                        posts: response.data.user.posts,
+                        curtidasPosts: response.data.user.curtidasPosts,
+                        respostasPosts: response.data.user.respostasPosts,
+                        imagensCompartilhadas:
+                            response.data.user.imagensCompartilhadas,
+                        videosCompartilhados:
+                            response.data.user.videosCompartilhados,
+                    })
+                })
+        }
+    }
+
     return (
         <GlobalContext.Provider
             value={{
@@ -172,9 +245,12 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                 emptyPosts,
                 setEmptyPosts,
                 error,
+                userInfo,
+                setUserInfo,
                 setError,
                 updatePosts,
                 updateUserData,
+                updateUserInfo,
             }}
         >
             {children}

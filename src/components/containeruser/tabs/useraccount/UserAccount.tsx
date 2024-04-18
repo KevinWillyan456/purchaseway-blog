@@ -46,7 +46,7 @@ function UserAccount() {
                         Para deletar sua conta digite seu email
                     </Form.Label>
                     <Form.Control
-                        type="text"
+                        type="email"
                         placeholder="Digite seu nome"
                         className="user-account-input-name"
                         maxLength={100}

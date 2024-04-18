@@ -15,7 +15,7 @@ function PostComponent({ post }: { post: IPost }) {
     const [showAnswers, setShowAnswers] = useState<boolean>(false)
     const [answerModalShow, setAnswerModalShow] = useState<boolean>(false)
     const [postLikes, setPostLikes] = useState<string[]>(post.curtidas)
-    const { user, updateUserData } = useContext(GlobalContext)
+    const { user, updateUserData, updateUserInfo } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -53,6 +53,7 @@ function PostComponent({ post }: { post: IPost }) {
                     .then((response) => {
                         setPostLikes(response.data.post.curtidas)
                         updateUserData()
+                        updateUserInfo()
                     })
                     .catch(() => {
                         setShowAlertComponent(true)
