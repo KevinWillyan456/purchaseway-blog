@@ -82,12 +82,6 @@ function PostComponent({ post }: { post: IPost }) {
 
     return (
         <article className="user-posted">
-            <AlertComponent
-                show={showAlertComponent}
-                onHide={() => setShowAlertComponent(false)}
-                message={messageAlertComponent}
-                type={typeAlertComponent}
-            />
             <div className="user-picture-posts">
                 <User />
             </div>
@@ -201,6 +195,13 @@ function PostComponent({ post }: { post: IPost }) {
                 show={answerModalShow}
                 onHide={() => setAnswerModalShow(false)}
                 postId={post._id}
+            />
+
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
             />
         </article>
     )

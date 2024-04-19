@@ -125,12 +125,6 @@ function UserPost() {
 
     return (
         <>
-            <AlertComponent
-                show={showAlertComponent}
-                onHide={() => setShowAlertComponent(false)}
-                message={messageAlertComponent}
-                type={typeAlertComponent}
-            />
             <form className="user-post-container" onSubmit={handleSubmit}>
                 <textarea
                     className="user-message focus-ring"
@@ -190,6 +184,13 @@ function UserPost() {
                 setVideoIdValid={setVideoIdValid}
                 onlyIdByVideo={onlyIdByVideo}
                 setOnlyIdByVideo={setOnlyIdByVideo}
+            />
+
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
             />
         </>
     )

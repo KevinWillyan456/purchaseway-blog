@@ -86,56 +86,55 @@ function UserEdit() {
     }
 
     return (
-        <>
+        <article className="user-edit">
+            <div className="user-menu-container">
+                <div className="user-menu-picture">
+                    <UserLarge />
+                </div>
+                <div className="user-menu-name">{userInfo.nome}</div>
+            </div>
+
+            <Form onSubmit={handleSubmit}>
+                <div className="user-edit-details">
+                    <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Label>Mudar nome</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Digite seu nome"
+                            className="user-edit-input-name"
+                            maxLength={USER_NAME_MAX_LENGTH}
+                            value={name}
+                            required
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </Form.Group>
+
+                    <button
+                        className="user-edit-button-change-picture"
+                        type="button"
+                    >
+                        Mudar foto de perfil
+                    </button>
+                    <button
+                        className={
+                            name === userInfo.nome
+                                ? 'user-edit-button-save disabled'
+                                : 'user-edit-button-save'
+                        }
+                        type="submit"
+                    >
+                        Salvar
+                    </button>
+                </div>
+            </Form>
+
             <AlertComponent
                 show={showAlertComponent}
                 onHide={() => setShowAlertComponent(false)}
                 message={messageAlertComponent}
                 type={typeAlertComponent}
             />
-            <article className="user-edit">
-                <div className="user-menu-container">
-                    <div className="user-menu-picture">
-                        <UserLarge />
-                    </div>
-                    <div className="user-menu-name">{userInfo.nome}</div>
-                </div>
-
-                <Form onSubmit={handleSubmit}>
-                    <div className="user-edit-details">
-                        <Form.Group controlId="exampleForm.ControlInput1">
-                            <Form.Label>Mudar nome</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Digite seu nome"
-                                className="user-edit-input-name"
-                                maxLength={USER_NAME_MAX_LENGTH}
-                                value={name}
-                                required
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </Form.Group>
-
-                        <button
-                            className="user-edit-button-change-picture"
-                            type="button"
-                        >
-                            Mudar foto de perfil
-                        </button>
-                        <button
-                            className={
-                                name === userInfo.nome
-                                    ? 'user-edit-button-save disabled'
-                                    : 'user-edit-button-save'
-                            }
-                            type="submit"
-                        >
-                            Salvar
-                        </button>
-                    </div>
-                </Form>
-            </article>
-        </>
+        </article>
     )
 }
 

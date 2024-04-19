@@ -84,12 +84,6 @@ function AnswersComponent({
 
     return (
         <article className="user-posted-answering">
-            <AlertComponent
-                show={showAlertComponent}
-                onHide={() => setShowAlertComponent(false)}
-                message={messageAlertComponent}
-                type={typeAlertComponent}
-            />
             <div className="user-picture-posts">
                 <User />
             </div>
@@ -127,6 +121,7 @@ function AnswersComponent({
                     </div>
                 </div>
             </div>
+
             {user._id === answer.userId && (
                 <OptionsAnswer
                     postId={postId}
@@ -134,6 +129,13 @@ function AnswersComponent({
                     text={answer.text}
                 />
             )}
+
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
         </article>
     )
 }

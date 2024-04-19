@@ -57,12 +57,6 @@ function ModalDelete(props: {
 
     return (
         <>
-            <AlertComponent
-                show={showAlertComponent}
-                onHide={() => setShowAlertComponent(false)}
-                message={messageAlertComponent}
-                type={typeAlertComponent}
-            />
             <Modal
                 show={props.show}
                 onHide={props.onHide}
@@ -93,6 +87,13 @@ function ModalDelete(props: {
                     </button>
                 </Modal.Footer>
             </Modal>
+
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
         </>
     )
 }

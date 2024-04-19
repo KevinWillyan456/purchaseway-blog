@@ -99,13 +99,6 @@ function ModalAnswer(props: {
 
     return (
         <>
-            <AlertComponent
-                show={showAlertComponent}
-                onHide={() => setShowAlertComponent(false)}
-                message={messageAlertComponent}
-                type={typeAlertComponent}
-            />
-
             <Modal
                 show={props.show}
                 onHide={props.onHide}
@@ -154,6 +147,13 @@ function ModalAnswer(props: {
                     </Modal.Footer>
                 </Form>
             </Modal>
+
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
         </>
     )
 }

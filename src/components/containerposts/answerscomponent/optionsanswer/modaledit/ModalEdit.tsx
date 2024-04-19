@@ -102,12 +102,6 @@ function ModalEdit(props: {
 
     return (
         <>
-            <AlertComponent
-                show={showAlertComponent}
-                onHide={() => setShowAlertComponent(false)}
-                message={messageAlertComponent}
-                type={typeAlertComponent}
-            />
             <Modal
                 show={props.show}
                 onHide={props.onHide}
@@ -151,6 +145,13 @@ function ModalEdit(props: {
                     </Modal.Footer>
                 </Form>
             </Modal>
+
+            <AlertComponent
+                show={showAlertComponent}
+                onHide={() => setShowAlertComponent(false)}
+                message={messageAlertComponent}
+                type={typeAlertComponent}
+            />
         </>
     )
 }
