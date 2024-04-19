@@ -4,7 +4,12 @@ import { Modal } from 'react-bootstrap'
 import { GlobalContext } from '../../../../../contexts/GlobalContext'
 import AlertComponent from '../../../../alertcomponent/AlertComponent'
 
-function ModalDeleteAllPosts(props: { show: boolean; onHide: () => void }) {
+interface IModalDeleteAllPostsProps {
+    show: boolean
+    onHide: () => void
+}
+
+function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
     const { user, updateUserData, updateUserInfo } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)

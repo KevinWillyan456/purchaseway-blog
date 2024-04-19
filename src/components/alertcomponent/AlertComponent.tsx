@@ -3,12 +3,14 @@ import './AlertComponent.css'
 import Success from '../../icons/Success'
 import Error from '../../icons/Error'
 
-function AlertComponent(props: {
+interface IAlertComponentProps {
     show: boolean
     onHide: () => void
     message: string
     type: 'success' | 'error'
-}) {
+}
+
+function AlertComponent(props: IAlertComponentProps) {
     return (
         <Modal
             show={props.show}

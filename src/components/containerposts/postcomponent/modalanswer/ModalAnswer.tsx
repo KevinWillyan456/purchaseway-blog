@@ -7,11 +7,13 @@ import AlertComponent from '../../../alertcomponent/AlertComponent'
 
 const MAX_LENGTH_TEXT = 5000
 
-function ModalAnswer(props: {
+interface IModalAnswerProps {
     show: boolean
     onHide: () => void
     postId: string
-}) {
+}
+
+function ModalAnswer(props: IModalAnswerProps) {
     const [text, setText] = useState<string>('')
     const { user, updatePosts } = useContext(GlobalContext)
 

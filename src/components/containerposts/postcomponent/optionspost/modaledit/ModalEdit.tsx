@@ -8,7 +8,7 @@ import AlertComponent from '../../../../alertcomponent/AlertComponent'
 const MAX_TEXT_LENGTH = 5000
 const MAX_TITLE_LENGTH = 100
 
-function ModalEdit(props: {
+interface IModalEditProps {
     show: boolean
     onHide: () => void
     postId: string
@@ -18,7 +18,9 @@ function ModalEdit(props: {
         urlImg: string
         videoId: string
     }
-}) {
+}
+
+function ModalEdit(props: IModalEditProps) {
     const { user, updatePosts } = useContext(GlobalContext)
 
     const [title, setTitle] = useState(props.content.title)

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Form, Modal } from 'react-bootstrap'
 import './ModalImageAndVideo.css'
 
-function ModalImageAndVideo(props: {
+interface IModalImageAndVideoProps {
     show: boolean
     onHide: () => void
     urlImg: string
@@ -15,7 +15,9 @@ function ModalImageAndVideo(props: {
     setVideoIdValid: (value: boolean) => void
     onlyIdByVideo: string
     setOnlyIdByVideo: (value: string) => void
-}) {
+}
+
+function ModalImageAndVideo(props: IModalImageAndVideoProps) {
     const handleImage = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         props.onHide()

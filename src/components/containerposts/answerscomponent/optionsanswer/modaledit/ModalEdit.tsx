@@ -6,13 +6,15 @@ import AlertComponent from '../../../../alertcomponent/AlertComponent'
 
 const MAX_LENGTH_TEXT = 5000
 
-function ModalEdit(props: {
+interface IModalEditProps {
     show: boolean
     onHide: () => void
     postId: string
     answerId: string
     text: string
-}) {
+}
+
+function ModalEdit(props: IModalEditProps) {
     const { user, updatePosts } = useContext(GlobalContext)
 
     const [text, setText] = useState(props.text)

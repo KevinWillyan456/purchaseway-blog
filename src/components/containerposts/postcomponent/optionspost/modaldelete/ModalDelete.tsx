@@ -5,11 +5,13 @@ import { GlobalContext } from '../../../../../contexts/GlobalContext'
 import './ModalDelete.css'
 import AlertComponent from '../../../../alertcomponent/AlertComponent'
 
-function ModalDelete(props: {
+interface IModalDeleteProps {
     show: boolean
     onHide: () => void
     postId: string
-}) {
+}
+
+function ModalDelete(props: IModalDeleteProps) {
     const { user, updatePosts, updateUserData, updateUserInfo } =
         useContext(GlobalContext)
 
