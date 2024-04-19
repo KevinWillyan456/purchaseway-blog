@@ -18,7 +18,7 @@ interface IModalImageAndVideoProps {
 }
 
 function ModalImageAndVideo(props: IModalImageAndVideoProps) {
-    const handleImage = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleImageAndVideo = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         props.onHide()
     }
@@ -74,7 +74,7 @@ function ModalImageAndVideo(props: IModalImageAndVideoProps) {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Form onSubmit={handleImage}>
+                <Form onSubmit={handleImageAndVideo}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                             Adicionar imagem ou vídeo do YouTube à postagem

@@ -144,11 +144,14 @@ function UserPost() {
                                 (videoId !== '' && videoIdValid)) && (
                                 <abbr
                                     title={
-                                        urlImg && videoId
+                                        urlImg &&
+                                        imgValid &&
+                                        videoId &&
+                                        videoIdValid
                                             ? 'Uma imagem e um vídeo serão adicionados à postagem'
-                                            : urlImg
+                                            : urlImg && imgValid
                                             ? 'Uma imagem será adicionada à postagem'
-                                            : videoId
+                                            : videoId && videoIdValid
                                             ? 'Um vídeo será adicionado à postagem'
                                             : ''
                                     }

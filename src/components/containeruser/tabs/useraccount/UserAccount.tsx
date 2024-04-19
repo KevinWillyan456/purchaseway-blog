@@ -1,12 +1,14 @@
 import { Form } from 'react-bootstrap'
 import UserLarge from '../../../../icons/UserLarge'
 import './UserAccount.css'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import ModalDeleteAllPosts from './modaldeleteallposts/ModalDeleteAllPosts'
+import { GlobalContext } from '../../../../contexts/GlobalContext'
 
 const EXAMPLE_EMAIL = 'joedawn@email.com'
 
 function UserAccount() {
+    const { userInfo } = useContext(GlobalContext)
     const [email, setEmail] = useState<string>('')
     const [showModalDeleteAllPosts, setShowModalDeleteAllPosts] =
         useState(false)
@@ -27,7 +29,7 @@ function UserAccount() {
                 <div className="user-menu-picture">
                     <UserLarge />
                 </div>
-                <div className="user-menu-name">Joe Dawn</div>
+                <div className="user-menu-name">{userInfo.nome}</div>
             </div>
 
             <div className="user-account-details">
