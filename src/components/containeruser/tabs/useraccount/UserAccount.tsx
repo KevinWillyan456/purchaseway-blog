@@ -2,17 +2,14 @@ import { Form } from 'react-bootstrap'
 import UserLarge from '../../../../icons/UserLarge'
 import './UserAccount.css'
 import { useState } from 'react'
+import ModalDeleteAllPosts from './modaldeleteallposts/ModalDeleteAllPosts'
 
 const EXAMPLE_EMAIL = 'joedawn@email.com'
 
 function UserAccount() {
     const [email, setEmail] = useState<string>('')
-
-    const handleDeletePosts = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-
-        alert('Todas as postagens foram deletadas com sucesso')
-    }
+    const [showModalDeleteAllPosts, setShowModalDeleteAllPosts] =
+        useState(false)
 
     const handleDeleteAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -36,7 +33,7 @@ function UserAccount() {
             <div className="user-account-details">
                 <button
                     className="user-account-button-delete-posts"
-                    onClick={handleDeletePosts}
+                    onClick={() => setShowModalDeleteAllPosts(true)}
                 >
                     Deletar todas as postagens
                 </button>
@@ -67,6 +64,11 @@ function UserAccount() {
                     Deletar conta
                 </button>
             </div>
+
+            <ModalDeleteAllPosts
+                show={showModalDeleteAllPosts}
+                onHide={() => setShowModalDeleteAllPosts(false)}
+            />
         </article>
     )
 }
