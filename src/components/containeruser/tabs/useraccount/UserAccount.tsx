@@ -4,24 +4,14 @@ import './UserAccount.css'
 import { useContext, useState } from 'react'
 import ModalDeleteAllPosts from './modaldeleteallposts/ModalDeleteAllPosts'
 import { GlobalContext } from '../../../../contexts/GlobalContext'
-
-const EXAMPLE_EMAIL = 'joedawn@email.com'
+import ModalDeleteAccount from './modaldeleteaccount/ModalDeleteAccount'
 
 function UserAccount() {
-    const { userInfo } = useContext(GlobalContext)
+    const { user, userInfo } = useContext(GlobalContext)
     const [email, setEmail] = useState<string>('')
     const [showModalDeleteAllPosts, setShowModalDeleteAllPosts] =
         useState(false)
-
-    const handleDeleteAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-
-        if (email !== EXAMPLE_EMAIL) {
-            return
-        }
-
-        alert('Conta deletada com sucesso')
-    }
+    const [showModalDeleteAccount, setShowModalDeleteAccount] = useState(false)
 
     return (
         <article className="user-account">
@@ -57,11 +47,15 @@ function UserAccount() {
 
                 <button
                     className={
-                        email === EXAMPLE_EMAIL
+                        email === user.email
                             ? 'user-account-button-delete-account'
                             : 'user-account-button-delete-account-disabled'
                     }
-                    onClick={handleDeleteAccount}
+                    onClick={() => {
+                        if (email === user.email) {
+                            setShowModalDeleteAccount(true)
+                        }
+                    }}
                 >
                     Deletar conta
                 </button>
@@ -70,6 +64,12 @@ function UserAccount() {
             <ModalDeleteAllPosts
                 show={showModalDeleteAllPosts}
                 onHide={() => setShowModalDeleteAllPosts(false)}
+            />
+
+            <ModalDeleteAccount
+                show={showModalDeleteAccount}
+                onHide={() => setShowModalDeleteAccount(false)}
+                email={email}
             />
         </article>
     )

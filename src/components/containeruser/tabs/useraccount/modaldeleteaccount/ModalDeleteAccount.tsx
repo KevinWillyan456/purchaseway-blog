@@ -3,14 +3,16 @@ import { useContext, useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { GlobalContext } from '../../../../../contexts/GlobalContext'
 import AlertComponent from '../../../../alertcomponent/AlertComponent'
+import Cookies from 'js-cookie'
 
-interface IModalDeleteAllPostsProps {
+interface IModalDeleteAccountProps {
     show: boolean
     onHide: () => void
+    email: string
 }
 
-function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
-    const { user, updateUserData, updateUserInfo } = useContext(GlobalContext)
+function ModalDeleteAccount(props: IModalDeleteAccountProps) {
+    const { user } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -19,12 +21,20 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
         'success' | 'error'
     >('success')
 
-    const handleDeletePosts = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleDeleteAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
+
+        if (props.email !== user.email) {
+            return
+        }
 
         axios
             .delete(
-                import.meta.env.VITE_API_URL + '/delete-all-posts/' + user._id,
+                import.meta.env.VITE_API_URL +
+                    '/users/' +
+                    user._id +
+                    '/' +
+                    user.email,
                 {
                     headers: {
                         Authorization: import.meta.env.VITE_API_KEY,
@@ -32,17 +42,17 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
                 }
             )
             .then(() => {
-                updateUserData()
-                updateUserInfo()
                 props.onHide()
+                Cookies.remove('token')
+                window.location.href = '/'
             })
             .catch(() => {
+                props.onHide()
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
-                    'Erro ao deletar as postagens, tente novamente'
+                    'Erro ao deletar a conta, tente novamente'
                 )
                 setTypeAlertComponent('error')
-                props.onHide()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)
@@ -61,14 +71,14 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Deletar todas as postagens
+                        Deletar conta
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h5>Tem certeza que deseja deletar todas as postagens?</h5>
+                    <h5>Tem certeza que deseja deletar a sua conta?</h5>
                     <p>
-                        Essa ação não pode ser desfeita e todas as postagens
-                        criadas por você serão deletadas permanentemente.
+                        Essa ação não pode ser desfeita e todas as postagens e
+                        dados serão perdidos permanentemente.
                     </p>
                 </Modal.Body>
                 <Modal.Footer>
@@ -79,10 +89,10 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
                         Fechar
                     </button>
                     <button
-                        className="user-account-modal-button-delete-posts"
-                        onClick={handleDeletePosts}
+                        className="user-account-modal-button-delete-account"
+                        onClick={handleDeleteAccount}
                     >
-                        Deletar todas as postagens
+                        Deletar conta
                     </button>
                 </Modal.Footer>
             </Modal>
@@ -97,4 +107,4 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
     )
 }
 
-export default ModalDeleteAllPosts
+export default ModalDeleteAccount

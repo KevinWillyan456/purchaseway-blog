@@ -34,7 +34,8 @@
 }
 .user-account .user-account-button-delete-account:hover,
 .user-account .user-account-button-delete-posts:hover,
-.user-account-modal-button-delete-posts:hover {
+.user-account-modal-button-delete-posts:hover,
+.user-account-modal-button-delete-account:hover {
     background-color: #c91717;
 }
 .user-account .user-account-button-delete-account-disabled {
@@ -50,6 +51,17 @@
 .user-account-modal-button-delete-posts {
     transition: 200ms;
     width: 220px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.user-account-modal-button-delete-account {
+    transition: 200ms;
+    width: 140px;
     height: 40px;
     border-radius: 10px;
     background-color: var(--color-red);

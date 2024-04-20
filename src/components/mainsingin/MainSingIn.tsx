@@ -26,6 +26,14 @@ function MainSingIn() {
             setMessageAlertComponent('Preencha todos os campos')
             setTypeAlertComponent('error')
 
+            if (!nome) {
+                document.getElementById('floatingName')?.focus()
+            } else if (!email) {
+                document.getElementById('floatingInput')?.focus()
+            } else if (!senha) {
+                document.getElementById('floatingPassword')?.focus()
+            }
+
             setTimeout(() => {
                 setShowAlertComponent(false)
             }, 3000)
@@ -36,6 +44,7 @@ function MainSingIn() {
             setShowAlertComponent(true)
             setMessageAlertComponent('E-mail inválido')
             setTypeAlertComponent('error')
+            document.getElementById('floatingInput')?.focus()
 
             setTimeout(() => {
                 setShowAlertComponent(false)
@@ -47,6 +56,7 @@ function MainSingIn() {
             setShowAlertComponent(true)
             setMessageAlertComponent('Senha deve ter no mínimo 6 caracteres')
             setTypeAlertComponent('error')
+            document.getElementById('floatingPassword')?.focus()
 
             setTimeout(() => {
                 setShowAlertComponent(false)
@@ -58,6 +68,7 @@ function MainSingIn() {
             setShowAlertComponent(true)
             setMessageAlertComponent('Nome deve ter no mínimo 3 caracteres')
             setTypeAlertComponent('error')
+            document.getElementById('floatingName')?.focus()
 
             setTimeout(() => {
                 setShowAlertComponent(false)
