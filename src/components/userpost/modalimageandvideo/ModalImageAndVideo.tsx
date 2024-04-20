@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Form, Modal } from 'react-bootstrap'
 import './ModalImageAndVideo.css'
+import ConvertYoutubeId from '../../../utils/ConvertYoutubeId'
 
 interface IModalImageAndVideoProps {
     show: boolean
@@ -40,20 +41,7 @@ function ModalImageAndVideo(props: IModalImageAndVideoProps) {
 
     useEffect(
         function () {
-            const pieces =
-                props.videoId.length === 11
-                    ? props.videoId
-                    : props.videoId.split('https://youtu.be/')[1]
-                    ? props.videoId.split('https://youtu.be/')[1].slice(0, 11)
-                    : props.videoId.split('https://youtube.com/watch?v=')[1]
-                    ? props.videoId
-                          .split('https://youtube.com/watch?v=')[1]
-                          .slice(0, 11)
-                    : props.videoId.split('https://www.youtube.com/watch?v=')[1]
-                    ? props.videoId
-                          .split('https://www.youtube.com/watch?v=')[1]
-                          .slice(0, 11)
-                    : null
+            const pieces = ConvertYoutubeId(props.videoId)
 
             if (!pieces || pieces.length !== 11) {
                 props.setVideoIdValid(false)

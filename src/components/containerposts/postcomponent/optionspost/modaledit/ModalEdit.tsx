@@ -4,6 +4,7 @@ import { Form, Modal } from 'react-bootstrap'
 import { GlobalContext } from '../../../../../contexts/GlobalContext'
 import './ModalEdit.css'
 import AlertComponent from '../../../../alertcomponent/AlertComponent'
+import ConvertYoutubeId from '../../../../../utils/ConvertYoutubeId'
 
 const MAX_TEXT_LENGTH = 5000
 const MAX_TITLE_LENGTH = 100
@@ -76,20 +77,7 @@ function ModalEdit(props: IModalEditProps) {
                 return
             }
 
-            const pieces =
-                videoId.length === 11
-                    ? videoId
-                    : videoId.split('https://youtu.be/')[1]
-                    ? videoId.split('https://youtu.be/')[1].slice(0, 11)
-                    : videoId.split('https://youtube.com/watch?v=')[1]
-                    ? videoId
-                          .split('https://youtube.com/watch?v=')[1]
-                          .slice(0, 11)
-                    : videoId.split('https://www.youtube.com/watch?v=')[1]
-                    ? videoId
-                          .split('https://www.youtube.com/watch?v=')[1]
-                          .slice(0, 11)
-                    : null
+            const pieces = ConvertYoutubeId(videoId)
 
             if (!pieces || pieces.length !== 11) {
                 setVideoIdValid(false)
