@@ -11,9 +11,11 @@ function MainSingIn() {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+
         const form = event.currentTarget as HTMLFormElement
 
         const nome = (form[0] as HTMLInputElement).value.trim()
@@ -76,6 +78,9 @@ function MainSingIn() {
             return
         }
 
+        if (onceSubmit) return
+        setOnceSubmit(true)
+
         axios
             .post(
                 import.meta.env.VITE_API_URL + '/users',
@@ -93,6 +98,8 @@ function MainSingIn() {
                 }
             )
             .then((response) => {
+                setOnceSubmit(false)
+
                 Cookies.set('token', response.data.token, {
                     expires: response.data.stayConnected ? 7 : 1,
                 })
@@ -102,6 +109,8 @@ function MainSingIn() {
                 }
             })
             .catch((error) => {
+                setOnceSubmit(false)
+
                 if (error.response?.status === 409) {
                     setShowAlertComponent(true)
                     setMessageAlertComponent('E-mail já cadastrado')
@@ -112,7 +121,9 @@ function MainSingIn() {
                     }, 3000)
                 } else {
                     setShowAlertComponent(true)
-                    setMessageAlertComponent('Erro ao criar conta')
+                    setMessageAlertComponent(
+                        'Erro ao criar conta, tente novamente'
+                    )
                     setTypeAlertComponent('error')
 
                     setTimeout(() => {

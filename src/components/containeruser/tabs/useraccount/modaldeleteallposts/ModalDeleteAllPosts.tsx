@@ -18,9 +18,13 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleDeletePosts = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
+
+        if (onceSubmit) return
+        setOnceSubmit(true)
 
         axios
             .delete(
@@ -32,11 +36,13 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
                 }
             )
             .then(() => {
+                setOnceSubmit(false)
                 updateUserData()
                 updateUserInfo()
                 props.onHide()
             })
             .catch(() => {
+                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao deletar as postagens, tente novamente'

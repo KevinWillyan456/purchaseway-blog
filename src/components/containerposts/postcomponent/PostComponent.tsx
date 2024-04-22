@@ -23,12 +23,16 @@ function PostComponent({ post }: { post: IPost }) {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleToggleAnswers = () => {
         setShowAnswers((prev) => !prev)
     }
 
     const handleLike = () => {
+        if (onceSubmit) return
+        setOnceSubmit(true)
+
         axios
             .put(
                 import.meta.env.VITE_API_URL +
@@ -44,6 +48,7 @@ function PostComponent({ post }: { post: IPost }) {
                 }
             )
             .then(() => {
+                setOnceSubmit(false)
                 axios
                     .get(import.meta.env.VITE_API_URL + '/posts/' + post._id, {
                         headers: {
@@ -68,6 +73,7 @@ function PostComponent({ post }: { post: IPost }) {
                     })
             })
             .catch(() => {
+                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao interagir com a postagem, tente novamente'

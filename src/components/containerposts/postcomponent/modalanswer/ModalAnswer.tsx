@@ -23,6 +23,7 @@ function ModalAnswer(props: IModalAnswerProps) {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleAnswer = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -54,6 +55,9 @@ function ModalAnswer(props: IModalAnswerProps) {
             return
         }
 
+        if (onceSubmit) return
+        setOnceSubmit(true)
+
         axios
             .post(
                 import.meta.env.VITE_API_URL +
@@ -72,6 +76,7 @@ function ModalAnswer(props: IModalAnswerProps) {
                 }
             )
             .then(() => {
+                setOnceSubmit(false)
                 setText('')
                 props.onHide()
 
@@ -85,6 +90,7 @@ function ModalAnswer(props: IModalAnswerProps) {
                 }, 3000)
             })
             .catch(() => {
+                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao responder a postagem, tente novamente'

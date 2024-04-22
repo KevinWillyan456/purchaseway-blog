@@ -20,6 +20,7 @@ function UserEdit() {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -62,6 +63,9 @@ function UserEdit() {
             return
         }
 
+        if (onceSubmit) return
+        setOnceSubmit(true)
+
         axios
             .put(
                 import.meta.env.VITE_API_URL + '/users/' + user._id,
@@ -72,16 +76,22 @@ function UserEdit() {
                     },
                 }
             )
-            .then((response) => {
-                if (response.status !== 200) {
-                    setShowAlertComponent(true)
-                    setMessageAlertComponent('Erro ao alterar nome')
-                    setTypeAlertComponent('error')
-                    return
-                } else {
-                    updateUserData()
-                    updateUserInfo()
-                }
+            .then(() => {
+                setOnceSubmit(false)
+                updateUserData()
+                updateUserInfo()
+            })
+            .catch(() => {
+                setOnceSubmit(false)
+                setShowAlertComponent(true)
+                setMessageAlertComponent(
+                    'Erro ao alterar nome, tente novamente'
+                )
+                setTypeAlertComponent('error')
+
+                setTimeout(() => {
+                    setShowAlertComponent(false)
+                }, 3000)
             })
     }
 

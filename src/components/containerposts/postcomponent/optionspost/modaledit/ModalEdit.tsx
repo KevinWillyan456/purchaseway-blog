@@ -46,6 +46,7 @@ function ModalEdit(props: IModalEditProps) {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     useEffect(
         function () {
@@ -190,6 +191,9 @@ function ModalEdit(props: IModalEditProps) {
             return
         }
 
+        if (onceSubmit) return
+        setOnceSubmit(true)
+
         axios
             .put(
                 import.meta.env.VITE_API_URL +
@@ -211,6 +215,7 @@ function ModalEdit(props: IModalEditProps) {
                 }
             )
             .then(() => {
+                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Postagem editada com sucesso')
                 setTypeAlertComponent('success')
@@ -223,6 +228,7 @@ function ModalEdit(props: IModalEditProps) {
                 props.onHide()
             })
             .catch(() => {
+                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao editar postagem, tente novamente'

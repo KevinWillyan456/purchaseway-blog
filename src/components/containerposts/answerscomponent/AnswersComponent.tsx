@@ -24,8 +24,12 @@ function AnswersComponent({
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleLike = () => {
+        if (onceSubmit) return
+        setOnceSubmit(true)
+
         axios
             .put(
                 import.meta.env.VITE_API_URL +
@@ -43,6 +47,8 @@ function AnswersComponent({
                 }
             )
             .then(() => {
+                setOnceSubmit(false)
+
                 axios
                     .get(import.meta.env.VITE_API_URL + '/posts/' + postId, {
                         headers: {
@@ -70,6 +76,8 @@ function AnswersComponent({
                     })
             })
             .catch(() => {
+                setOnceSubmit(false)
+
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao interagir com a resposta, tente novamente'

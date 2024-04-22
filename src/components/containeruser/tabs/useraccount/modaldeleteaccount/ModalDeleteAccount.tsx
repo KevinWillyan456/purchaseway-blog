@@ -20,13 +20,15 @@ function ModalDeleteAccount(props: IModalDeleteAccountProps) {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleDeleteAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
 
-        if (props.email !== user.email) {
+        if (props.email !== user.email || onceSubmit) {
             return
         }
+        setOnceSubmit(true)
 
         axios
             .delete(
@@ -42,11 +44,13 @@ function ModalDeleteAccount(props: IModalDeleteAccountProps) {
                 }
             )
             .then(() => {
+                setOnceSubmit(false)
                 props.onHide()
                 Cookies.remove('token')
                 window.location.href = '/'
             })
             .catch(() => {
+                setOnceSubmit(false)
                 props.onHide()
                 setShowAlertComponent(true)
                 setMessageAlertComponent(

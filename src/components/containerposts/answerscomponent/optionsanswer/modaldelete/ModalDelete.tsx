@@ -20,8 +20,12 @@ function ModalDelete(props: IModalDeleteProps) {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleDelete = () => {
+        if (onceSubmit) return
+        setOnceSubmit(true)
+
         axios
             .delete(
                 import.meta.env.VITE_API_URL +
@@ -38,10 +42,12 @@ function ModalDelete(props: IModalDeleteProps) {
                 }
             )
             .then(() => {
+                setOnceSubmit(false)
                 updatePosts()
                 props.onHide()
             })
             .catch(() => {
+                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao excluir resposta, tente novamente'

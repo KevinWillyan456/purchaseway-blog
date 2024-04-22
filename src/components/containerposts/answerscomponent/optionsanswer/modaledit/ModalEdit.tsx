@@ -25,6 +25,7 @@ function ModalEdit(props: IModalEditProps) {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -56,6 +57,9 @@ function ModalEdit(props: IModalEditProps) {
             return
         }
 
+        if (onceSubmit) return
+        setOnceSubmit(true)
+
         axios
             .put(
                 import.meta.env.VITE_API_URL +
@@ -76,6 +80,7 @@ function ModalEdit(props: IModalEditProps) {
                 }
             )
             .then(() => {
+                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Resposta editada com sucesso')
                 setTypeAlertComponent('success')
@@ -88,6 +93,7 @@ function ModalEdit(props: IModalEditProps) {
                 props.onHide()
             })
             .catch(() => {
+                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao editar resposta, tente novamente'

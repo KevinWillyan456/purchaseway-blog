@@ -24,9 +24,11 @@ function UserPost() {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
         const message = e.currentTarget.querySelector(
             '.user-message'
         ) as HTMLTextAreaElement
@@ -75,6 +77,9 @@ function UserPost() {
             return
         }
 
+        if (onceSubmit) return
+        setOnceSubmit(true)
+
         axios
             .post(
                 import.meta.env.VITE_API_URL + '/posts/' + user._id,
@@ -92,6 +97,8 @@ function UserPost() {
                 }
             )
             .then((response) => {
+                setOnceSubmit(false)
+
                 if (response.status === 201) {
                     message.value = ''
                     title.value = ''
@@ -113,8 +120,12 @@ function UserPost() {
                 }
             })
             .catch(() => {
+                setOnceSubmit(false)
+
                 setShowAlertComponent(true)
-                setMessageAlertComponent('Erro ao criar postagem!')
+                setMessageAlertComponent(
+                    'Erro ao criar postagem, tente novamente'
+                )
                 setTypeAlertComponent('error')
 
                 setTimeout(() => {

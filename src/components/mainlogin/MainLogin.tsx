@@ -11,9 +11,11 @@ function MainLogin() {
     const [typeAlertComponent, setTypeAlertComponent] = useState<
         'success' | 'error'
     >('success')
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+
         const form = event.currentTarget as HTMLFormElement
 
         const email = (form[0] as HTMLInputElement).value.trim()
@@ -53,6 +55,9 @@ function MainLogin() {
             return
         }
 
+        if (onceSubmit) return
+        setOnceSubmit(true)
+
         axios
             .post(
                 import.meta.env.VITE_API_URL + '/login',
@@ -69,6 +74,7 @@ function MainLogin() {
                 }
             )
             .then((response) => {
+                setOnceSubmit(false)
                 Cookies.set('token', response.data.token, {
                     expires: response.data.stayConnected ? 7 : 1,
                 })
@@ -78,6 +84,8 @@ function MainLogin() {
                 }
             })
             .catch((error) => {
+                setOnceSubmit(false)
+
                 if (
                     error.response?.status === 401 ||
                     error.response?.status === 404
@@ -91,7 +99,9 @@ function MainLogin() {
                     }, 3000)
                 } else {
                     setShowAlertComponent(true)
-                    setMessageAlertComponent('Erro ao fazer login')
+                    setMessageAlertComponent(
+                        'Erro ao fazer login, tente novamente'
+                    )
                     setTypeAlertComponent('error')
 
                     setTimeout(() => {
