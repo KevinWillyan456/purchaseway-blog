@@ -5,6 +5,7 @@ import { useContext, useState } from 'react'
 import AlertComponent from '../../../alertcomponent/AlertComponent'
 import { GlobalContext } from '../../../../contexts/GlobalContext'
 import axios from 'axios'
+import ChangeProfilePhoto from '../../../changeprofilephoto/ChangeProfilePhoto'
 
 const USER_NAME_MIN_LENGTH = 3
 const USER_NAME_MAX_LENGTH = 100
@@ -21,6 +22,8 @@ function UserEdit() {
         'success' | 'error'
     >('success')
     const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
+
+    const [showChangeProfilePhoto, setShowChangeProfilePhoto] = useState(false)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -122,6 +125,7 @@ function UserEdit() {
                     <button
                         className="user-edit-button-change-picture"
                         type="button"
+                        onClick={() => setShowChangeProfilePhoto(true)}
                     >
                         Mudar foto de perfil
                     </button>
@@ -137,6 +141,11 @@ function UserEdit() {
                     </button>
                 </div>
             </Form>
+
+            <ChangeProfilePhoto
+                show={showChangeProfilePhoto}
+                onHide={() => setShowChangeProfilePhoto(false)}
+            />
 
             <AlertComponent
                 show={showAlertComponent}

@@ -16,6 +16,7 @@ export interface IUser {
     dataCriacao: Date
     curtidas: number
     posts: number
+    fotoPerfil: string
 }
 
 const userEmpty: IUser = {
@@ -26,6 +27,7 @@ const userEmpty: IUser = {
     dataCriacao: new Date(),
     curtidas: 0,
     posts: 0,
+    fotoPerfil: '',
 }
 
 export interface IPost {
@@ -133,6 +135,7 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                         email: response.data.user.email,
                         dataCriacao: response.data.user.dataCriacao,
                         curtidas: response.data.user.curtidas,
+                        fotoPerfil: response.data.user.fotoPerfil,
                         posts: response.data.posts,
                     })
                 })
@@ -201,6 +204,7 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                         email: response.data.user.email,
                         dataCriacao: response.data.user.dataCriacao,
                         curtidas: response.data.user.curtidas,
+                        fotoPerfil: response.data.user.fotoPerfil,
                         posts: response.data.posts,
                     })
                 })

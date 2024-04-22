@@ -1,0 +1,39 @@
+.modal-edit-profile-photo {
+    width: 120px;
+    min-width: 120px;
+    height: 120px;
+    min-height: 120px;
+    border-radius: 50%;
+    background: var(--color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    overflow: hidden;
+    pointer-events: none;
+}
+.modal-edit-profile-photo img {
+    width: 100%;
+}
+.modal-edit-profile-photo-invalid {
+    text-align: center;
+    margin: 58px;
+}
+.modal-edit-profile-photo-btn-remove-img {
+    transition: 200ms;
+    width: 160px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-orange);
+    color: var(--color-white);
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.modal-edit-profile-photo-btn-remove-img:hover {
+    background-color: var(--color-dark-orange);
+}
