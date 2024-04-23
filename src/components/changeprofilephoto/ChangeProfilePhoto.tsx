@@ -62,6 +62,18 @@ function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
             return
         }
 
+        if (invalidPhoto) {
+            setShowAlertComponent(true)
+            setMessageAlertComponent('URL da imagem inválida')
+            setTypeAlertComponent('error')
+            document.getElementById('exampleForm.ControlInput4')?.focus()
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+            return
+        }
+
         if (onceSubmit) return
         setOnceSubmit(true)
 
@@ -123,7 +135,7 @@ function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
                         <Modal.Title>Editar foto de perfil</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {photo === '' || !invalidPhoto ? (
+                        {photo === '' || !invalidPhoto || removePhoto ? (
                             <div className="modal-edit-profile-photo">
                                 {photo === '' || removePhoto ? (
                                     <UserLarge />
