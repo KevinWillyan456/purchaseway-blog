@@ -6,6 +6,7 @@ import AlertComponent from '../../../alertcomponent/AlertComponent'
 import { GlobalContext } from '../../../../contexts/GlobalContext'
 import axios from 'axios'
 import ChangeProfilePhoto from '../../../changeprofilephoto/ChangeProfilePhoto'
+import ModalChangePassword from './modalchangepassword/ModalChangePassword'
 
 const USER_NAME_MIN_LENGTH = 3
 const USER_NAME_MAX_LENGTH = 100
@@ -15,7 +16,7 @@ function UserEdit() {
         useContext(GlobalContext)
     const [name, setName] = useState<string>(userInfo.nome)
 
-    const [showAlertComponent, setShowAlertComponent] = useState(false)
+    const [showAlertComponent, setShowAlertComponent] = useState<boolean>(false)
     const [messageAlertComponent, setMessageAlertComponent] =
         useState<string>('')
     const [typeAlertComponent, setTypeAlertComponent] = useState<
@@ -23,7 +24,10 @@ function UserEdit() {
     >('success')
     const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
-    const [showChangeProfilePhoto, setShowChangeProfilePhoto] = useState(false)
+    const [showChangeProfilePhoto, setShowChangeProfilePhoto] =
+        useState<boolean>(false)
+
+    const [showChangePassword, setShowChangePassword] = useState<boolean>(false)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -137,6 +141,15 @@ function UserEdit() {
                     >
                         Mudar foto de perfil
                     </button>
+
+                    <button
+                        className="user-edit-button-change-password"
+                        type="button"
+                        onClick={() => setShowChangePassword(true)}
+                    >
+                        Mudar senha
+                    </button>
+
                     <button
                         className={
                             name === userInfo.nome
@@ -153,6 +166,11 @@ function UserEdit() {
             <ChangeProfilePhoto
                 show={showChangeProfilePhoto}
                 onHide={() => setShowChangeProfilePhoto(false)}
+            />
+
+            <ModalChangePassword
+                show={showChangePassword}
+                onHide={() => setShowChangePassword(false)}
             />
 
             <AlertComponent

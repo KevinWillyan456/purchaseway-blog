@@ -62,7 +62,7 @@ function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
             return
         }
 
-        if (invalidPhoto) {
+        if (invalidPhoto && !removePhoto) {
             setShowAlertComponent(true)
             setMessageAlertComponent('URL da imagem inválida')
             setTypeAlertComponent('error')

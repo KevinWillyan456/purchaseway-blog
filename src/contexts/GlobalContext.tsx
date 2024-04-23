@@ -11,7 +11,6 @@ import axios from 'axios'
 export interface IUser {
     _id: string
     nome: string
-    senha: string
     email: string
     dataCriacao: Date
     curtidas: number
@@ -22,7 +21,6 @@ export interface IUser {
 const userEmpty: IUser = {
     _id: '',
     nome: 'Carregando...',
-    senha: '',
     email: '',
     dataCriacao: new Date(),
     curtidas: 0,
@@ -133,7 +131,6 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                     setUser({
                         _id: response.data.user._id,
                         nome: response.data.user.nome,
-                        senha: response.data.user.senha,
                         email: response.data.user.email,
                         dataCriacao: response.data.user.dataCriacao,
                         curtidas: response.data.user.curtidas,
@@ -202,7 +199,6 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                     setUser({
                         _id: response.data.user._id,
                         nome: response.data.user.nome,
-                        senha: response.data.user.senha,
                         email: response.data.user.email,
                         dataCriacao: response.data.user.dataCriacao,
                         curtidas: response.data.user.curtidas,
