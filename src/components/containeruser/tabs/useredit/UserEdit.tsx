@@ -102,7 +102,14 @@ function UserEdit() {
         <article className="user-edit">
             <div className="user-menu-container">
                 <div className="user-menu-picture">
-                    <UserLarge />
+                    {user.fotoPerfil ? (
+                        <img
+                            src={user.fotoPerfil}
+                            alt="Foto de perfil do usuário"
+                        />
+                    ) : (
+                        <UserLarge />
+                    )}
                 </div>
                 <div className="user-menu-name">{userInfo.nome}</div>
             </div>

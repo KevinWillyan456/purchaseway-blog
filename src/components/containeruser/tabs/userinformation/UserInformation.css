@@ -27,6 +27,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    pointer-events: none;
+}
+.user-menu-container .user-menu-picture img {
+    width: 100%;
 }
 .user-menu-container .user-menu-name {
     color: var(--color-dark);

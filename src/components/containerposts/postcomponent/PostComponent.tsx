@@ -89,7 +89,11 @@ function PostComponent({ post }: { post: IPost }) {
     return (
         <article className="user-posted">
             <div className="user-picture-posts">
-                <User />
+                {post.fotoPerfil ? (
+                    <img src={post.fotoPerfil} alt="Foto de perfil" />
+                ) : (
+                    <User />
+                )}
             </div>
             <div className="wrapper">
                 <div className="name-wrapper">
@@ -201,6 +205,7 @@ function PostComponent({ post }: { post: IPost }) {
                 show={answerModalShow}
                 onHide={() => setAnswerModalShow(false)}
                 postId={post._id}
+                setShowAnswers={setShowAnswers}
             />
 
             <AlertComponent

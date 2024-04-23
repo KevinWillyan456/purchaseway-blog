@@ -6,13 +6,20 @@ import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
 function UserInformation() {
-    const { userInfo } = useContext(GlobalContext)
+    const { user, userInfo } = useContext(GlobalContext)
 
     return (
         <article className="user-information">
             <div className="user-menu-container">
                 <div className="user-menu-picture">
-                    <UserLarge />
+                    {user.fotoPerfil ? (
+                        <img
+                            src={user.fotoPerfil}
+                            alt="Foto de perfil do usuário"
+                        />
+                    ) : (
+                        <UserLarge />
+                    )}
                 </div>
                 <div className="user-menu-name">{userInfo.nome}</div>
             </div>

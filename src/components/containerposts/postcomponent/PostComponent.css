@@ -24,6 +24,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    pointer-events: none;
+}
+.user-posted .user-picture-posts img {
+    width: 100%;
 }
 .user-posted .wrapper {
     width: 100%;

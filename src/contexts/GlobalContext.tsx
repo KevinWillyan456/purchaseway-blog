@@ -39,6 +39,7 @@ export interface IPost {
     curtidas: string[]
     dataCriacao: Date
     wasEdited: boolean
+    fotoPerfil: string
 }
 
 export interface IAnswer {
@@ -49,6 +50,7 @@ export interface IAnswer {
     curtidas: string[]
     dataCriacao: Date
     wasEdited: boolean
+    fotoPerfil: string
 }
 
 interface IUserInfo {

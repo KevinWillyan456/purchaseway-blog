@@ -93,7 +93,11 @@ function AnswersComponent({
     return (
         <article className="user-posted-answering">
             <div className="user-picture-posts">
-                <User />
+                {answer.fotoPerfil ? (
+                    <img src={answer.fotoPerfil} alt="Foto do usuário" />
+                ) : (
+                    <User />
+                )}
             </div>
             <div className="wrapper">
                 <div className="name-wrapper">

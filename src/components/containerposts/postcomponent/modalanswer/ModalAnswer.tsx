@@ -11,6 +11,7 @@ interface IModalAnswerProps {
     show: boolean
     onHide: () => void
     postId: string
+    setShowAnswers: (value: boolean) => void
 }
 
 function ModalAnswer(props: IModalAnswerProps) {
@@ -84,6 +85,7 @@ function ModalAnswer(props: IModalAnswerProps) {
                 setMessageAlertComponent('Resposta enviada com sucesso')
                 setTypeAlertComponent('success')
                 updatePosts()
+                props.setShowAnswers(true)
 
                 setTimeout(() => {
                     setShowAlertComponent(false)

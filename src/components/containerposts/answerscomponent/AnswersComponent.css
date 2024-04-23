@@ -26,6 +26,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    pointer-events: none;
+}
+.user-posted-answering .user-picture-posts img {
+    width: 100%;
 }
 .user-posted-answering .wrapper .name-wrapper {
     display: flex;
