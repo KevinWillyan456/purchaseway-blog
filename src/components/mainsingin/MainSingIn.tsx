@@ -4,6 +4,11 @@ import './MainSingIn.css'
 import AlertComponent from '../alertcomponent/AlertComponent'
 import { useState } from 'react'
 
+const USER_NAME_MIN_LENGTH = 3
+const USER_NAME_MAX_LENGTH = 100
+const USER_PASSWORD_MIN_LENGTH = 6
+const USER_PASSWORD_MAX_LENGTH = 100
+
 function MainSingIn() {
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -54,9 +59,11 @@ function MainSingIn() {
             return
         }
 
-        if (senha.length < 6) {
+        if (senha.length < USER_PASSWORD_MIN_LENGTH) {
             setShowAlertComponent(true)
-            setMessageAlertComponent('Senha deve ter no mínimo 6 caracteres')
+            setMessageAlertComponent(
+                `Senha deve ter no mínimo ${USER_PASSWORD_MIN_LENGTH} caracteres`
+            )
             setTypeAlertComponent('error')
             document.getElementById('floatingPassword')?.focus()
 
@@ -66,9 +73,39 @@ function MainSingIn() {
             return
         }
 
-        if (nome.length < 3) {
+        if (senha.length > USER_PASSWORD_MAX_LENGTH) {
             setShowAlertComponent(true)
-            setMessageAlertComponent('Nome deve ter no mínimo 3 caracteres')
+            setMessageAlertComponent(
+                `Senha ultrapassou o limite de ${USER_PASSWORD_MAX_LENGTH} caracteres`
+            )
+            setTypeAlertComponent('error')
+            document.getElementById('floatingPassword')?.focus()
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+            return
+        }
+
+        if (nome.length < USER_NAME_MIN_LENGTH) {
+            setShowAlertComponent(true)
+            setMessageAlertComponent(
+                `Nome deve ter no mínimo ${USER_NAME_MIN_LENGTH} caracteres`
+            )
+            setTypeAlertComponent('error')
+            document.getElementById('floatingName')?.focus()
+
+            setTimeout(() => {
+                setShowAlertComponent(false)
+            }, 3000)
+            return
+        }
+
+        if (nome.length > USER_NAME_MAX_LENGTH) {
+            setShowAlertComponent(true)
+            setMessageAlertComponent(
+                `Nome ultrapassou o limite de ${USER_NAME_MAX_LENGTH} caracteres`
+            )
             setTypeAlertComponent('error')
             document.getElementById('floatingName')?.focus()
 
