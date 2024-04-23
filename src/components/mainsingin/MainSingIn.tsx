@@ -98,8 +98,6 @@ function MainSingIn() {
                 }
             )
             .then((response) => {
-                setOnceSubmit(false)
-
                 Cookies.set('token', response.data.token, {
                     expires: response.data.stayConnected ? 7 : 1,
                 })
@@ -109,8 +107,6 @@ function MainSingIn() {
                 }
             })
             .catch((error) => {
-                setOnceSubmit(false)
-
                 if (error.response?.status === 409) {
                     setShowAlertComponent(true)
                     setMessageAlertComponent('E-mail já cadastrado')
@@ -130,6 +126,9 @@ function MainSingIn() {
                         setShowAlertComponent(false)
                     }, 3000)
                 }
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

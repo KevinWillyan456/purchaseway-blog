@@ -97,8 +97,6 @@ function UserPost() {
                 }
             )
             .then((response) => {
-                setOnceSubmit(false)
-
                 if (response.status === 201) {
                     message.value = ''
                     title.value = ''
@@ -120,8 +118,6 @@ function UserPost() {
                 }
             })
             .catch(() => {
-                setOnceSubmit(false)
-
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao criar postagem, tente novamente'
@@ -131,6 +127,9 @@ function UserPost() {
                 setTimeout(() => {
                     setShowAlertComponent(false)
                 }, 3000)
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

@@ -48,7 +48,6 @@ function PostComponent({ post }: { post: IPost }) {
                 }
             )
             .then(() => {
-                setOnceSubmit(false)
                 axios
                     .get(import.meta.env.VITE_API_URL + '/posts/' + post._id, {
                         headers: {
@@ -73,7 +72,6 @@ function PostComponent({ post }: { post: IPost }) {
                     })
             })
             .catch(() => {
-                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao interagir com a postagem, tente novamente'
@@ -83,6 +81,9 @@ function PostComponent({ post }: { post: IPost }) {
                 setTimeout(() => {
                     setShowAlertComponent(false)
                 }, 3000)
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

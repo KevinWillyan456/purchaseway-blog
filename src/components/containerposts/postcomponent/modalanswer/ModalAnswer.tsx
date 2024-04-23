@@ -77,7 +77,6 @@ function ModalAnswer(props: IModalAnswerProps) {
                 }
             )
             .then(() => {
-                setOnceSubmit(false)
                 setText('')
                 props.onHide()
 
@@ -92,7 +91,6 @@ function ModalAnswer(props: IModalAnswerProps) {
                 }, 3000)
             })
             .catch(() => {
-                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao responder a postagem, tente novamente'
@@ -104,6 +102,9 @@ function ModalAnswer(props: IModalAnswerProps) {
                 }, 3000)
 
                 props.onHide()
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

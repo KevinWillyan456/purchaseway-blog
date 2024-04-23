@@ -42,12 +42,10 @@ function ModalDelete(props: IModalDeleteProps) {
                 }
             )
             .then(() => {
-                setOnceSubmit(false)
                 updatePosts()
                 props.onHide()
             })
             .catch(() => {
-                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao excluir resposta, tente novamente'
@@ -59,6 +57,9 @@ function ModalDelete(props: IModalDeleteProps) {
                 }, 3000)
 
                 props.onHide()
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

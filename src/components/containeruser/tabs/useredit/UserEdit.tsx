@@ -80,12 +80,10 @@ function UserEdit() {
                 }
             )
             .then(() => {
-                setOnceSubmit(false)
                 updateUserData()
                 updateUserInfo()
             })
             .catch(() => {
-                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao alterar nome, tente novamente'
@@ -95,6 +93,9 @@ function UserEdit() {
                 setTimeout(() => {
                     setShowAlertComponent(false)
                 }, 3000)
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

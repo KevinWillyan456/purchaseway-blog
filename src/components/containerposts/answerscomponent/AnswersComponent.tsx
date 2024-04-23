@@ -47,8 +47,6 @@ function AnswersComponent({
                 }
             )
             .then(() => {
-                setOnceSubmit(false)
-
                 axios
                     .get(import.meta.env.VITE_API_URL + '/posts/' + postId, {
                         headers: {
@@ -76,8 +74,6 @@ function AnswersComponent({
                     })
             })
             .catch(() => {
-                setOnceSubmit(false)
-
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao interagir com a resposta, tente novamente'
@@ -87,6 +83,9 @@ function AnswersComponent({
                 setTimeout(() => {
                     setShowAlertComponent(false)
                 }, 3000)
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

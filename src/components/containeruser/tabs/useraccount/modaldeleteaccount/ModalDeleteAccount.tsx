@@ -44,13 +44,11 @@ function ModalDeleteAccount(props: IModalDeleteAccountProps) {
                 }
             )
             .then(() => {
-                setOnceSubmit(false)
                 props.onHide()
                 Cookies.remove('token')
                 window.location.href = '/'
             })
             .catch(() => {
-                setOnceSubmit(false)
                 props.onHide()
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
@@ -61,6 +59,9 @@ function ModalDeleteAccount(props: IModalDeleteAccountProps) {
                 setTimeout(() => {
                     setShowAlertComponent(false)
                 }, 3000)
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

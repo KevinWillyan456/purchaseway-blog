@@ -74,7 +74,6 @@ function MainLogin() {
                 }
             )
             .then((response) => {
-                setOnceSubmit(false)
                 Cookies.set('token', response.data.token, {
                     expires: response.data.stayConnected ? 7 : 1,
                 })
@@ -84,8 +83,6 @@ function MainLogin() {
                 }
             })
             .catch((error) => {
-                setOnceSubmit(false)
-
                 if (
                     error.response?.status === 401 ||
                     error.response?.status === 404
@@ -108,6 +105,9 @@ function MainLogin() {
                         setShowAlertComponent(false)
                     }, 3000)
                 }
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

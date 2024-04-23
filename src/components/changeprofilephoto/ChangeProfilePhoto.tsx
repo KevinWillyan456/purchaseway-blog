@@ -93,7 +93,6 @@ function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
                 }
             )
             .then(() => {
-                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Foto de perfil alterada com sucesso')
                 setTypeAlertComponent('success')
@@ -109,7 +108,6 @@ function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
                 }, 3000)
             })
             .catch(() => {
-                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao alterar foto de perfil, tente novamente'
@@ -119,6 +117,9 @@ function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
                 setTimeout(() => {
                     setShowAlertComponent(false)
                 }, 3000)
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

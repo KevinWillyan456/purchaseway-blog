@@ -80,7 +80,6 @@ function ModalEdit(props: IModalEditProps) {
                 }
             )
             .then(() => {
-                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Resposta editada com sucesso')
                 setTypeAlertComponent('success')
@@ -93,7 +92,6 @@ function ModalEdit(props: IModalEditProps) {
                 props.onHide()
             })
             .catch(() => {
-                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao editar resposta, tente novamente'
@@ -105,6 +103,9 @@ function ModalEdit(props: IModalEditProps) {
                 }, 3000)
 
                 props.onHide()
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 

@@ -36,13 +36,11 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
                 }
             )
             .then(() => {
-                setOnceSubmit(false)
                 updateUserData()
                 updateUserInfo()
                 props.onHide()
             })
             .catch(() => {
-                setOnceSubmit(false)
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
                     'Erro ao deletar as postagens, tente novamente'
@@ -53,6 +51,9 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
                 setTimeout(() => {
                     setShowAlertComponent(false)
                 }, 3000)
+            })
+            .finally(() => {
+                setOnceSubmit(false)
             })
     }
 
