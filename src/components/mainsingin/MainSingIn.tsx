@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import './MainSingIn.css'
 import AlertComponent from '../alertcomponent/AlertComponent'
 import { useState } from 'react'
+import ContinueWithGoogle from '../continuewithgoogle/ContinueWithGoogle'
 
 const USER_NAME_MIN_LENGTH = 3
 const USER_NAME_MAX_LENGTH = 100
@@ -228,13 +229,11 @@ function MainSingIn() {
                             Lembre de mim
                         </label>
                     </div>
-                    <button
-                        className="btn btn-primary w-100 py-2"
-                        type="submit"
-                    >
+                    <button className="main-singin-button" type="submit">
                         Criar
                     </button>
                 </form>
+                <ContinueWithGoogle />
             </section>
 
             <AlertComponent

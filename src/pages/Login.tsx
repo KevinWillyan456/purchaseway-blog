@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Header from '../components/header/Header'
 import MainLogin from '../components/mainlogin/MainLogin'
 import authenticate from '../utils/AuthUtils'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 function Login() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -22,8 +23,12 @@ function Login() {
                 ? (window.location.href = '/dashboard')
                 : requestHasEnded && (
                       <>
-                          <Header />
-                          <MainLogin />
+                          <GoogleOAuthProvider
+                              clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
+                          >
+                              <Header />
+                              <MainLogin />
+                          </GoogleOAuthProvider>
                       </>
                   )}
         </>

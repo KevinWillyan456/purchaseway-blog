@@ -104,6 +104,13 @@ export const GlobalContext = createContext<GlobalContextType>({
     updateUserInfo: () => {},
 })
 
+export interface IGoogleLogin {
+    email: string
+    name: string
+    sub: string
+    picture: string
+}
+
 interface ProviderProps {
     children: React.ReactNode
 }

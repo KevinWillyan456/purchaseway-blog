@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import './MainLogin.css'
 import { useState } from 'react'
 import AlertComponent from '../alertcomponent/AlertComponent'
+import ContinueWithGoogle from '../continuewithgoogle/ContinueWithGoogle'
 
 function MainLogin() {
     const [showAlertComponent, setShowAlertComponent] = useState(false)
@@ -160,13 +161,12 @@ function MainLogin() {
                             Lembre de mim
                         </label>
                     </div>
-                    <button
-                        className="btn btn-primary w-100 py-2"
-                        type="submit"
-                    >
+                    <button className="main-login-button" type="submit">
                         Entrar
                     </button>
                 </form>
+
+                <ContinueWithGoogle />
             </section>
 
             <AlertComponent
