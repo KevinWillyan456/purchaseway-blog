@@ -138,6 +138,11 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                         posts: response.data.posts,
                     })
                 })
+                .catch(() => {
+                    Cookies.remove('token')
+                    setUser(userEmpty)
+                    window.location.href = '/login'
+                })
 
             axios
                 .get(import.meta.env.VITE_API_URL + '/get-user-info', {
@@ -159,6 +164,11 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                         videosCompartilhados:
                             response.data.user.videosCompartilhados,
                     })
+                })
+                .catch(() => {
+                    Cookies.remove('token')
+                    setUser(userEmpty)
+                    window.location.href = '/login'
                 })
         }
     }, [])
