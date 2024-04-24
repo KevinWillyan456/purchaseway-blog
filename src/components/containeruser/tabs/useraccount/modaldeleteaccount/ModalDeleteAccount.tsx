@@ -30,19 +30,15 @@ function ModalDeleteAccount(props: IModalDeleteAccountProps) {
         }
         setOnceSubmit(true)
 
+        const token = Cookies.get('token')
+
         axios
-            .delete(
-                import.meta.env.VITE_API_URL +
-                    '/users/' +
-                    user._id +
-                    '/' +
-                    user.email,
-                {
-                    headers: {
-                        Authorization: import.meta.env.VITE_API_KEY,
-                    },
-                }
-            )
+            .delete(import.meta.env.VITE_API_URL + '/users/' + user.email, {
+                headers: {
+                    Authorization: import.meta.env.VITE_API_KEY,
+                    token,
+                },
+            })
             .then(() => {
                 props.onHide()
                 Cookies.remove('token')
