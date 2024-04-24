@@ -8,23 +8,29 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import SingIn from './pages/SingIn'
 import Login from './pages/Login'
+import NotFound from './components/errorcomponents/notfound/NotFound'
+import SomethingWrong from './components/errorcomponents/somethingwrong/SomethingWrong'
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Home />,
+        errorElement: <NotFound />,
     },
     {
         path: 'dashboard',
         element: <Dashboard />,
+        errorElement: <SomethingWrong />,
     },
     {
         path: 'singin',
         element: <SingIn />,
+        errorElement: <SomethingWrong />,
     },
     {
         path: 'login',
         element: <Login />,
+        errorElement: <SomethingWrong />,
     },
 ])
 
