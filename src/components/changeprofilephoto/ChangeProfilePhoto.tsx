@@ -28,6 +28,11 @@ function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
     const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
 
     useEffect(() => {
+        setPhoto(user.fotoPerfil)
+        setRemovePhoto(user.fotoPerfil === '')
+    }, [user])
+
+    useEffect(() => {
         setInvalidPhoto(false)
 
         if (photo === '') {
