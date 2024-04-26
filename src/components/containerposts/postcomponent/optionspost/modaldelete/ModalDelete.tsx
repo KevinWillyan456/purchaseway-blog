@@ -12,8 +12,13 @@ interface IModalDeleteProps {
 }
 
 function ModalDelete(props: IModalDeleteProps) {
-    const { user, updatePosts, updateUserData, updateUserInfo } =
-        useContext(GlobalContext)
+    const {
+        user,
+        updatePosts,
+        updateUserData,
+        updateUserInfo,
+        updateUserPosts,
+    } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -42,6 +47,7 @@ function ModalDelete(props: IModalDeleteProps) {
             )
             .then(() => {
                 updatePosts()
+                updateUserPosts()
                 updateUserData()
                 updateUserInfo()
                 props.onHide()

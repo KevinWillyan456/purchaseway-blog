@@ -10,7 +10,8 @@ interface IModalDeleteAllPostsProps {
 }
 
 function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
-    const { user, updateUserData, updateUserInfo } = useContext(GlobalContext)
+    const { user, updateUserData, updateUserInfo, updateUserPosts } =
+        useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -38,6 +39,7 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
             .then(() => {
                 updateUserData()
                 updateUserInfo()
+                updateUserPosts()
                 props.onHide()
             })
             .catch(() => {

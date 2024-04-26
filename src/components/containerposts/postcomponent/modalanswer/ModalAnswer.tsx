@@ -16,7 +16,7 @@ interface IModalAnswerProps {
 
 function ModalAnswer(props: IModalAnswerProps) {
     const [text, setText] = useState<string>('')
-    const { user, updatePosts } = useContext(GlobalContext)
+    const { user, updatePosts, updateUserPosts } = useContext(GlobalContext)
 
     const [showAlertComponent, setShowAlertComponent] = useState(false)
     const [messageAlertComponent, setMessageAlertComponent] =
@@ -84,6 +84,7 @@ function ModalAnswer(props: IModalAnswerProps) {
                 setMessageAlertComponent('Resposta enviada com sucesso')
                 setTypeAlertComponent('success')
                 updatePosts()
+                updateUserPosts()
                 props.setShowAnswers(true)
 
                 setTimeout(() => {

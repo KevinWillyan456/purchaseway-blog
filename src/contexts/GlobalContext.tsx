@@ -80,12 +80,19 @@ interface GlobalContextType {
     setEmptyPosts: Dispatch<SetStateAction<boolean>>
     error: boolean
     setError: Dispatch<SetStateAction<boolean>>
+    emptyUserPosts: boolean
+    setEmptyUserPosts: Dispatch<SetStateAction<boolean>>
+    errorUserPosts: boolean
+    setErrorUserPosts: Dispatch<SetStateAction<boolean>>
     userInfo: IUserInfo
     setUserInfo: Dispatch<SetStateAction<IUserInfo>>
+    userPosts: IPost[]
+    setUserPosts: Dispatch<SetStateAction<IPost[]>>
 
     updatePosts: () => void
     updateUserData: () => void
     updateUserInfo: () => void
+    updateUserPosts: () => void
 }
 
 export const GlobalContext = createContext<GlobalContextType>({
@@ -96,12 +103,19 @@ export const GlobalContext = createContext<GlobalContextType>({
     posts: [],
     emptyPosts: false,
     setEmptyPosts: () => {},
+    errorUserPosts: false,
+    setErrorUserPosts: () => {},
+    emptyUserPosts: false,
+    setEmptyUserPosts: () => {},
     error: false,
     setError: () => {},
     setPosts: () => {},
     updatePosts: () => {},
     updateUserData: () => {},
     updateUserInfo: () => {},
+    userPosts: [],
+    setUserPosts: () => {},
+    updateUserPosts: () => {},
 })
 
 export interface IGoogleLogin {
@@ -121,6 +135,9 @@ export function GlobalContextProvider({ children }: ProviderProps) {
     const [emptyPosts, setEmptyPosts] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
     const [userInfo, setUserInfo] = useState<IUserInfo>(userInfoEmpty)
+    const [userPosts, setUserPosts] = useState<IPost[]>([])
+    const [emptyUserPosts, setEmptyUserPosts] = useState<boolean>(false)
+    const [errorUserPosts, setErrorUserPosts] = useState<boolean>(false)
 
     useEffect(() => {
         const token = Cookies.get('token')
@@ -254,6 +271,29 @@ export function GlobalContextProvider({ children }: ProviderProps) {
         }
     }
 
+    const updateUserPosts = () => {
+        const token = Cookies.get('token')
+
+        axios
+            .get(import.meta.env.VITE_API_URL + '/get-user-posts', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: import.meta.env.VITE_API_KEY,
+                    token,
+                },
+            })
+            .then((response) => {
+                if (response.data.length === 0) {
+                    setEmptyUserPosts(true)
+                } else {
+                    setUserPosts(response.data.posts)
+                }
+            })
+            .catch(() => {
+                setErrorUserPosts(true)
+            })
+    }
+
     return (
         <GlobalContext.Provider
             value={{
@@ -266,10 +306,17 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                 error,
                 userInfo,
                 setUserInfo,
+                userPosts,
+                setUserPosts,
                 setError,
+                emptyUserPosts,
+                setEmptyUserPosts,
+                errorUserPosts,
+                setErrorUserPosts,
                 updatePosts,
                 updateUserData,
                 updateUserInfo,
+                updateUserPosts,
             }}
         >
             {children}

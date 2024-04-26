@@ -15,7 +15,7 @@ interface IModalEditProps {
 }
 
 function ModalEdit(props: IModalEditProps) {
-    const { user, updatePosts } = useContext(GlobalContext)
+    const { user, updatePosts, updateUserPosts } = useContext(GlobalContext)
 
     const [text, setText] = useState(props.text)
 
@@ -84,6 +84,7 @@ function ModalEdit(props: IModalEditProps) {
                 setMessageAlertComponent('Resposta editada com sucesso')
                 setTypeAlertComponent('success')
                 updatePosts()
+                updateUserPosts()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)

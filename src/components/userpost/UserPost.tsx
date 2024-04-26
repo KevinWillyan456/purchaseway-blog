@@ -10,8 +10,13 @@ const MAX_LENGTH_MESSAGE = 5000
 const MAX_LENGTH_TITLE = 100
 
 function UserPost() {
-    const { user, updatePosts, updateUserData, updateUserInfo } =
-        useContext(GlobalContext)
+    const {
+        user,
+        updatePosts,
+        updateUserData,
+        updateUserInfo,
+        updateUserPosts,
+    } = useContext(GlobalContext)
     const [showModal, setShowModal] = useState<boolean>(false)
     const [urlImg, setUrlImg] = useState<string>('')
     const [imgValid, setImgValid] = useState<boolean>(false)
@@ -111,6 +116,7 @@ function UserPost() {
                     updatePosts()
                     updateUserData()
                     updateUserInfo()
+                    updateUserPosts()
 
                     setTimeout(() => {
                         setShowAlertComponent(false)
