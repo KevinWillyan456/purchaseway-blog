@@ -12,7 +12,7 @@ interface IChangeProfilePhotoProps {
 }
 
 function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
-    const { user, updateUserData } = useContext(GlobalContext)
+    const { user, updateUserData, updateUserPosts } = useContext(GlobalContext)
     const [photo, setPhoto] = useState<string>(user.fotoPerfil)
     const [removePhoto, setRemovePhoto] = useState<boolean>(
         user.fotoPerfil === ''
@@ -102,6 +102,7 @@ function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
                 setMessageAlertComponent('Foto de perfil alterada com sucesso')
                 setTypeAlertComponent('success')
                 updateUserData()
+                updateUserPosts()
                 props.onHide()
 
                 if (removePhoto) {
