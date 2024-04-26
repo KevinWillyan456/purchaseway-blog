@@ -30,6 +30,7 @@ function ContinueWithGoogle() {
                     senha: data.sub,
                     picture: pictureFormatted,
                     stayConnected: true,
+                    isGoogle: true,
                 },
                 {
                     headers: {
@@ -56,6 +57,7 @@ function ContinueWithGoogle() {
                                 email: data.email,
                                 senha: data.sub,
                                 stayConnected: true,
+                                isGoogle: true,
                             },
                             {
                                 headers: {

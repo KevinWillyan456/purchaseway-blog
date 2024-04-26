@@ -16,6 +16,8 @@ export interface IUser {
     curtidas: number
     posts: number
     fotoPerfil: string
+    isGoogle: boolean
+    hasGooglePassword: boolean
 }
 
 const userEmpty: IUser = {
@@ -26,6 +28,8 @@ const userEmpty: IUser = {
     curtidas: 0,
     posts: 0,
     fotoPerfil: '',
+    isGoogle: false,
+    hasGooglePassword: false,
 }
 
 export interface IPost {
@@ -159,6 +163,8 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                         dataCriacao: response.data.user.dataCriacao,
                         curtidas: response.data.user.curtidas,
                         fotoPerfil: response.data.user.fotoPerfil,
+                        isGoogle: response.data.user.isGoogle,
+                        hasGooglePassword: response.data.user.hasGooglePassword,
                         posts: response.data.posts,
                     })
                 })
@@ -237,6 +243,8 @@ export function GlobalContextProvider({ children }: ProviderProps) {
                         dataCriacao: response.data.user.dataCriacao,
                         curtidas: response.data.user.curtidas,
                         fotoPerfil: response.data.user.fotoPerfil,
+                        isGoogle: response.data.user.isGoogle,
+                        hasGooglePassword: response.data.user.hasGooglePassword,
                         posts: response.data.posts,
                     })
                 })
