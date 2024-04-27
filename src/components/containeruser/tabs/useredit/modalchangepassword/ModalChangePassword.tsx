@@ -133,7 +133,7 @@ function ModalChangePassword(props: IModalChangePasswordProps) {
         axios
             .put(
                 import.meta.env.VITE_API_URL + '/users/' + user._id,
-                { senha: senhaAtual, novaSenha, isGoogle: user.isGoogle },
+                { senha: senhaAtual, novaSenha },
                 {
                     headers: {
                         Authorization: import.meta.env.VITE_API_KEY,
