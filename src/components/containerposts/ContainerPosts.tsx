@@ -17,7 +17,7 @@ function ContainerPosts() {
                 },
             })
             .then((response) => {
-                if (response.data.length === 0) {
+                if (response.data.posts.length === 0) {
                     setEmptyPosts(true)
                 } else {
                     setPosts(response.data.posts)

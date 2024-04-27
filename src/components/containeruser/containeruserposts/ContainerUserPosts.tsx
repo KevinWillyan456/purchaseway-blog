@@ -26,7 +26,7 @@ function ContainerUserPosts() {
                 },
             })
             .then((response) => {
-                if (response.data.length === 0) {
+                if (response.data.posts.length === 0) {
                     setEmptyUserPosts(true)
                 } else {
                     setUserPosts(response.data.posts)
