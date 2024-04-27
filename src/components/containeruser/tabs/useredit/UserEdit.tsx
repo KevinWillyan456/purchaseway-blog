@@ -7,6 +7,7 @@ import { GlobalContext } from '../../../../contexts/GlobalContext'
 import axios from 'axios'
 import ChangeProfilePhoto from '../../../changeprofilephoto/ChangeProfilePhoto'
 import ModalChangePassword from './modalchangepassword/ModalChangePassword'
+import ModalCreateGooglePassword from './modalcreategooglepassword/ModalCreateGooglePassword'
 
 const USER_NAME_MIN_LENGTH = 3
 const USER_NAME_MAX_LENGTH = 100
@@ -28,6 +29,7 @@ function UserEdit() {
         useState<boolean>(false)
 
     const [showChangePassword, setShowChangePassword] = useState<boolean>(false)
+    const [showCreatePassword, setShowCreatePassword] = useState<boolean>(false)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -142,13 +144,23 @@ function UserEdit() {
                         Mudar foto de perfil
                     </button>
 
-                    <button
-                        className="user-edit-button-change-password"
-                        type="button"
-                        onClick={() => setShowChangePassword(true)}
-                    >
-                        Mudar senha
-                    </button>
+                    {user.isGoogle && !user.hasGooglePassword ? (
+                        <button
+                            className="user-edit-button-change-password"
+                            type="button"
+                            onClick={() => setShowCreatePassword(true)}
+                        >
+                            Criar senha
+                        </button>
+                    ) : (
+                        <button
+                            className="user-edit-button-change-password"
+                            type="button"
+                            onClick={() => setShowChangePassword(true)}
+                        >
+                            Mudar senha
+                        </button>
+                    )}
 
                     <button
                         className={
@@ -171,6 +183,11 @@ function UserEdit() {
             <ModalChangePassword
                 show={showChangePassword}
                 onHide={() => setShowChangePassword(false)}
+            />
+
+            <ModalCreateGooglePassword
+                show={showCreatePassword}
+                onHide={() => setShowCreatePassword(false)}
             />
 
             <AlertComponent

@@ -149,18 +149,15 @@ function ModalChangePassword(props: IModalChangePasswordProps) {
                 setSenhaAtual('')
                 setNovaSenha('')
                 setConfirmarNovaSenha('')
+                setShowSenhaAtual(false)
+                setShowNovaSenha(false)
+                setShowConfirmarNovaSenha(false)
+
+                props.onHide()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)
                 }, 3000)
-                props.onHide()
-                setSenhaAtual('')
-                setNovaSenha('')
-                setConfirmarNovaSenha('')
-
-                setShowSenhaAtual(false)
-                setShowNovaSenha(false)
-                setShowConfirmarNovaSenha(false)
             })
             .catch(() => {
                 setShowAlertComponent(true)
