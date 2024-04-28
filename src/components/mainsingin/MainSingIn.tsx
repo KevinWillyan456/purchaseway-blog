@@ -4,6 +4,7 @@ import './MainSingIn.css'
 import AlertComponent from '../alertcomponent/AlertComponent'
 import { useState } from 'react'
 import ContinueWithGoogle from '../continuewithgoogle/ContinueWithGoogle'
+import { Form } from 'react-bootstrap'
 
 const USER_NAME_MIN_LENGTH = 3
 const USER_NAME_MAX_LENGTH = 100
@@ -11,7 +12,9 @@ const USER_PASSWORD_MIN_LENGTH = 6
 const USER_PASSWORD_MAX_LENGTH = 100
 
 function MainSingIn() {
-    const [showAlertComponent, setShowAlertComponent] = useState(false)
+    const [showSenha, setShowSenha] = useState<boolean>(false)
+
+    const [showAlertComponent, setShowAlertComponent] = useState<boolean>(false)
     const [messageAlertComponent, setMessageAlertComponent] =
         useState<string>('')
     const [typeAlertComponent, setTypeAlertComponent] = useState<
@@ -206,7 +209,7 @@ function MainSingIn() {
                     </div>
                     <div className="form-floating">
                         <input
-                            type="password"
+                            type={showSenha ? 'text' : 'password'}
                             className="form-control"
                             id="floatingPassword"
                             placeholder="Password"
@@ -214,6 +217,13 @@ function MainSingIn() {
                         />
                         <label htmlFor="floatingPassword">Senha</label>
                     </div>
+
+                    <Form.Switch
+                        id="custom-switch1"
+                        label="Mostrar senha"
+                        className="mt-3"
+                        onChange={() => setShowSenha((prev) => !prev)}
+                    />
 
                     <div className="form-check text-start my-3">
                         <input

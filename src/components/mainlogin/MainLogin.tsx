@@ -4,9 +4,12 @@ import './MainLogin.css'
 import { useState } from 'react'
 import AlertComponent from '../alertcomponent/AlertComponent'
 import ContinueWithGoogle from '../continuewithgoogle/ContinueWithGoogle'
+import { Form } from 'react-bootstrap'
 
 function MainLogin() {
-    const [showAlertComponent, setShowAlertComponent] = useState(false)
+    const [showSenha, setShowSenha] = useState<boolean>(false)
+
+    const [showAlertComponent, setShowAlertComponent] = useState<boolean>(false)
     const [messageAlertComponent, setMessageAlertComponent] =
         useState<string>('')
     const [typeAlertComponent, setTypeAlertComponent] = useState<
@@ -138,7 +141,7 @@ function MainLogin() {
                     </div>
                     <div className="form-floating">
                         <input
-                            type="password"
+                            type={showSenha ? 'text' : 'password'}
                             className="form-control"
                             id="floatingPassword"
                             placeholder="Password"
@@ -146,6 +149,13 @@ function MainLogin() {
                         />
                         <label htmlFor="floatingPassword">Senha</label>
                     </div>
+
+                    <Form.Switch
+                        id="custom-switch1"
+                        label="Mostrar senha"
+                        className="mt-3"
+                        onChange={() => setShowSenha((prev) => !prev)}
+                    />
 
                     <div className="form-check text-start my-3">
                         <input
