@@ -1,0 +1,18 @@
+.modal-search-btn-update {
+    transition: 200ms;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-blue);
+    color: var(--color-white);
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-search-btn-update:hover {
+    background-color: var(--color-dark-blue);
+}

@@ -3,6 +3,7 @@ import { GlobalContext, IPost } from '../../../contexts/GlobalContext'
 import axios from 'axios'
 import { Modal } from 'react-bootstrap'
 import PostComponent from '../../containerposts/postcomponent/PostComponent'
+import './ModalSearchPost.css'
 
 interface IModalEditProps {
     show: boolean
@@ -13,7 +14,11 @@ interface IModalEditProps {
 function ModalSearchPost(props: IModalEditProps) {
     const { user } = useContext(GlobalContext)
     const [post, setPost] = useState<IPost>({} as IPost)
+    const [onceSubmit, setOnceSubmit] = useState<boolean>(false)
+
     const handleModalUpdatePost = useCallback(() => {
+        if (onceSubmit) return
+
         axios
             .get(import.meta.env.VITE_API_URL + '/posts/' + post._id, {
                 headers: {
@@ -24,7 +29,10 @@ function ModalSearchPost(props: IModalEditProps) {
             .then((response) => {
                 setPost(response.data.post)
             })
-    }, [post._id])
+            .finally(() => {
+                setOnceSubmit(false)
+            })
+    }, [onceSubmit, post._id])
 
     useEffect(() => {
         setPost(props.selectedPost)
@@ -45,7 +53,14 @@ function ModalSearchPost(props: IModalEditProps) {
                             Visualizando uma postagem de um usuário
                         </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body onClick={handleModalUpdatePost}>
+                    <Modal.Body>
+                        <p>
+                            Caso você não seja o autor da postagem, você só
+                            poderá visualizar a postagem. Caso você faça alguma
+                            alteração na postagem, será necessário clicar no
+                            botão "Atualizar" para visualizar a postagem em seu
+                            estado original.
+                        </p>
                         {post._id && (
                             <section
                                 className="container-posts"
@@ -59,10 +74,15 @@ function ModalSearchPost(props: IModalEditProps) {
                     </Modal.Body>
                     <Modal.Footer>
                         <button
+                            className="modal-search-btn-update"
+                            onClick={handleModalUpdatePost}
+                            type="button"
+                        >
+                            Atualizar
+                        </button>
+                        <button
                             className="modal-edit-btn-close"
-                            onClick={() => {
-                                props.onHide()
-                            }}
+                            onClick={props.onHide}
                             type="button"
                         >
                             Fechar

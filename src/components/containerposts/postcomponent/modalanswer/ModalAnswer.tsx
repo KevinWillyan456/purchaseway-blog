@@ -37,6 +37,8 @@ function ModalAnswer(props: IModalAnswerProps) {
             )
             setTypeAlertComponent('error')
 
+            document.getElementById('exampleForm.ControlTextarea1')?.focus()
+
             setTimeout(() => {
                 setShowAlertComponent(false)
             }, 3000)
