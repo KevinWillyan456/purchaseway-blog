@@ -56,10 +56,12 @@
     margin-top: 60px;
 }
 .main .container .cards .card-characteristics {
+    transition: 200ms;
     position: relative;
     width: 300px;
     height: 260px;
     background: var(--color-white);
+    border-radius: 10px;
     margin-bottom: 20px;
 }
 .main .container .cards .card-characteristics .feature {
@@ -69,5 +71,37 @@
     bottom: 30px;
     margin: 0;
     width: 100%;
+    text-align: center;
+}
+.cards-numbers {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 60px;
+}
+.cards-numbers .card-numbers {
+    transition: 200ms;
+    width: 300px;
+    height: 260px;
+    background: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.main .container .cards .card-characteristics:hover,
+.cards-numbers .card-numbers:hover {
+    background-color: var(--color-dark-background);
+}
+.cards-numbers .card-numbers .number {
+    color: var(--color-dark);
+    font-size: 40px;
+    font-family: sans-serif;
+}
+.cards-numbers .card-numbers .feature {
+    color: var(--color-dark);
+    font-size: 30px;
+    margin-top: 10px;
     text-align: center;
 }
