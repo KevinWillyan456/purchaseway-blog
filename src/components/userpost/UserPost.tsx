@@ -113,10 +113,6 @@ function UserPost() {
                     setShowAlertComponent(true)
                     setMessageAlertComponent('Postagem criada com sucesso!')
                     setTypeAlertComponent('success')
-                    updatePosts()
-                    updateUserData()
-                    updateUserInfo()
-                    updateUserPosts()
 
                     setTimeout(() => {
                         setShowAlertComponent(false)
@@ -135,6 +131,10 @@ function UserPost() {
                 }, 3000)
             })
             .finally(() => {
+                updatePosts()
+                updateUserData()
+                updateUserInfo()
+                updateUserPosts()
                 setOnceSubmit(false)
             })
     }

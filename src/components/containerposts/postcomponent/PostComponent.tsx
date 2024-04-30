@@ -56,8 +56,6 @@ function PostComponent({ post }: { post: IPost }) {
                     })
                     .then((response) => {
                         setPostLikes(response.data.post.curtidas)
-                        updateUserData()
-                        updateUserInfo()
                     })
                     .catch(() => {
                         setShowAlertComponent(true)
@@ -70,6 +68,10 @@ function PostComponent({ post }: { post: IPost }) {
                             setShowAlertComponent(false)
                         }, 3000)
                     })
+                    .finally(() => {
+                        updateUserData()
+                        updateUserInfo()
+                    })
             })
             .catch(() => {
                 setShowAlertComponent(true)
@@ -77,6 +79,9 @@ function PostComponent({ post }: { post: IPost }) {
                     'Erro ao interagir com a postagem, tente novamente'
                 )
                 setTypeAlertComponent('error')
+
+                updateUserData()
+                updateUserInfo()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)

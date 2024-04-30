@@ -83,8 +83,6 @@ function ModalEdit(props: IModalEditProps) {
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Resposta editada com sucesso')
                 setTypeAlertComponent('success')
-                updatePosts()
-                updateUserPosts()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)
@@ -106,6 +104,8 @@ function ModalEdit(props: IModalEditProps) {
                 props.onHide()
             })
             .finally(() => {
+                updatePosts()
+                updateUserPosts()
                 setOnceSubmit(false)
             })
     }

@@ -85,10 +85,6 @@ function UserEdit() {
                     },
                 }
             )
-            .then(() => {
-                updateUserData()
-                updateUserInfo()
-            })
             .catch(() => {
                 setShowAlertComponent(true)
                 setMessageAlertComponent(
@@ -101,6 +97,8 @@ function UserEdit() {
                 }, 3000)
             })
             .finally(() => {
+                updateUserData()
+                updateUserInfo()
                 setOnceSubmit(false)
             })
     }

@@ -101,8 +101,7 @@ function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Foto de perfil alterada com sucesso')
                 setTypeAlertComponent('success')
-                updateUserData()
-                updateUserPosts()
+
                 props.onHide()
 
                 if (removePhoto) {
@@ -125,6 +124,8 @@ function ChangeProfilePhoto(props: IChangeProfilePhotoProps) {
                 }, 3000)
             })
             .finally(() => {
+                updateUserData()
+                updateUserPosts()
                 setOnceSubmit(false)
             })
     }

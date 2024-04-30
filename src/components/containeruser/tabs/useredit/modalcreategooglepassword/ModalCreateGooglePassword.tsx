@@ -90,7 +90,6 @@ function ModalCreateGooglePassword(props: IModalCreateGooglePasswordProps) {
 
                 setSenha('')
                 setShowSenha(false)
-                updateUserData()
                 props.onHide()
 
                 setTimeout(() => {
@@ -108,7 +107,10 @@ function ModalCreateGooglePassword(props: IModalCreateGooglePasswordProps) {
                     setShowAlertComponent(false)
                 }, 3000)
             })
-            .finally(() => setOnceSubmit(false))
+            .finally(() => {
+                updateUserData()
+                setOnceSubmit(false)
+            })
     }
 
     return (

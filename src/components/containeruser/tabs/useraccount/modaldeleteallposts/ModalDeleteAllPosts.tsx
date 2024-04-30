@@ -37,9 +37,6 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
                 }
             )
             .then(() => {
-                updateUserData()
-                updateUserInfo()
-                updateUserPosts()
                 props.onHide()
             })
             .catch(() => {
@@ -55,6 +52,9 @@ function ModalDeleteAllPosts(props: IModalDeleteAllPostsProps) {
                 }, 3000)
             })
             .finally(() => {
+                updateUserData()
+                updateUserInfo()
+                updateUserPosts()
                 setOnceSubmit(false)
             })
     }

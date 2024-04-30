@@ -46,10 +46,6 @@ function ModalDelete(props: IModalDeleteProps) {
                 }
             )
             .then(() => {
-                updatePosts()
-                updateUserPosts()
-                updateUserData()
-                updateUserInfo()
                 props.onHide()
             })
             .catch(() => {
@@ -66,6 +62,10 @@ function ModalDelete(props: IModalDeleteProps) {
                 props.onHide()
             })
             .finally(() => {
+                updatePosts()
+                updateUserPosts()
+                updateUserData()
+                updateUserInfo()
                 setOnceSubmit(false)
             })
     }

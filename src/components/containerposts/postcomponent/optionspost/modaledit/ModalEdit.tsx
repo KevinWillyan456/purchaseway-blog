@@ -219,9 +219,6 @@ function ModalEdit(props: IModalEditProps) {
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Postagem editada com sucesso')
                 setTypeAlertComponent('success')
-                updatePosts()
-                updateUserInfo()
-                updateUserPosts()
 
                 setTimeout(() => {
                     setShowAlertComponent(false)
@@ -243,6 +240,9 @@ function ModalEdit(props: IModalEditProps) {
                 props.onHide()
             })
             .finally(() => {
+                updatePosts()
+                updateUserInfo()
+                updateUserPosts()
                 setOnceSubmit(false)
             })
     }

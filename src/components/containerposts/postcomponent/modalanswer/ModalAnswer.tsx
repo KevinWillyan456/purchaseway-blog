@@ -86,9 +86,7 @@ function ModalAnswer(props: IModalAnswerProps) {
                 setShowAlertComponent(true)
                 setMessageAlertComponent('Resposta enviada com sucesso')
                 setTypeAlertComponent('success')
-                updatePosts()
-                updateUserPosts()
-                updateUserInfo()
+
                 props.setShowAnswers(true)
 
                 setTimeout(() => {
@@ -109,6 +107,9 @@ function ModalAnswer(props: IModalAnswerProps) {
                 props.onHide()
             })
             .finally(() => {
+                updatePosts()
+                updateUserPosts()
+                updateUserInfo()
                 setOnceSubmit(false)
             })
     }
