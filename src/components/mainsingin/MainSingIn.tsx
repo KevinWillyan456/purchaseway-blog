@@ -243,7 +243,10 @@ function MainSingIn() {
                         Criar
                     </button>
                 </form>
-                <ContinueWithGoogle />
+
+                <div className="container-google">
+                    <ContinueWithGoogle />
+                </div>
             </section>
 
             <AlertComponent

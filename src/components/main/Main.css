@@ -14,16 +14,32 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 1000px) {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 .main .container .content-banner .conversion {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    @media (max-width: 1000px) {
+        align-items: center;
+        gap: 60px;
+    }
 }
 .main .container .content-banner .conversion .title {
     width: 460px;
     color: var(--color-black);
     font-size: 40px;
+
+    @media (max-width: 1000px) {
+        width: 100%;
+        text-align: center;
+        font-size: 30px;
+    }
 }
 
 .main .container .content-banner .conversion .btn-register {
@@ -39,21 +55,40 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 1000px) {
+        width: calc(100% - 40px);
+        max-width: 460px;
+    }
 }
 .main .container .content-banner .conversion .btn-register:hover {
     background: var(--color-dark-blue);
+}
+.content-banner .world {
+    @media (max-width: 1000px) {
+        display: none;
+    }
 }
 .main .container .title-characteristics {
     color: var(--color-black);
     font-size: 40px;
     text-align: center;
     margin-top: 60px;
+
+    @media (max-width: 1000px) {
+        font-size: 30px;
+    }
 }
 .main .container .cards {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-top: 60px;
+
+    @media (max-width: 1000px) {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 .main .container .cards .card-characteristics {
     transition: 200ms;
@@ -63,6 +98,11 @@
     background: var(--color-white);
     border-radius: 10px;
     margin-bottom: 20px;
+
+    @media (max-width: 1000px) {
+        width: calc(100% - 40px);
+        max-width: 460px;
+    }
 }
 .main .container .cards .card-characteristics .feature {
     color: var(--color-dark);
@@ -72,12 +112,22 @@
     margin: 0;
     width: 100%;
     text-align: center;
+
+    @media (max-width: 1000px) {
+        font-size: 30px;
+    }
 }
 .cards-numbers {
     width: 100%;
     display: flex;
     justify-content: space-around;
     margin-top: 60px;
+
+    @media (max-width: 1000px) {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
 }
 .cards-numbers .card-numbers {
     transition: 200ms;
@@ -89,6 +139,11 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
+
+    @media (max-width: 1000px) {
+        width: calc(100% - 40px);
+        max-width: 460px;
+    }
 }
 .main .container .cards .card-characteristics:hover,
 .cards-numbers .card-numbers:hover {

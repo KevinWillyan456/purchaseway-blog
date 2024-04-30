@@ -175,8 +175,9 @@ function MainLogin() {
                         Entrar
                     </button>
                 </form>
-
-                <ContinueWithGoogle />
+                <div className="container-google">
+                    <ContinueWithGoogle />
+                </div>
             </section>
 
             <AlertComponent

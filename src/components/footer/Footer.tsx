@@ -8,7 +8,7 @@ function Footer() {
                 <img src="/purchaseway-blog-logo-medium.png" alt="logo" />
             </Link>
             <div className="copyright">
-                @ 2023 Purchaseway Blog - Todos os diretos reservados
+                @ 2024 Purchaseway Blog - Todos os diretos reservados
             </div>
         </footer>
     )

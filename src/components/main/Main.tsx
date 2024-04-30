@@ -44,7 +44,7 @@ function Main() {
                             Cadastrar-se
                         </Link>
                     </div>
-                    <div>
+                    <div className="world">
                         <World />
                     </div>
                 </div>

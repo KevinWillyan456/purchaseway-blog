@@ -52,3 +52,11 @@
 .main-singin-button:hover {
     background-color: var(--color-dark-blue);
 }
+.container-google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+}

@@ -8,10 +8,21 @@
     flex-direction: column;
     gap: 20px;
 }
+.footer .footer-logo {
+    @media (max-width: 1000px) {
+        width: 180px;
+    }
+}
 .footer .footer-logo img {
+    width: 100%;
     pointer-events: none;
 }
 .footer .copyright {
     color: var(--color-white);
     font-size: 16px;
+
+    @media (max-width: 1000px) {
+        font-size: 14px;
+        text-align: center;
+    }
 }
