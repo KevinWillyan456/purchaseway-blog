@@ -1,3 +1,8 @@
+.options-answer {
+    @media (max-width: 1000px) {
+        position: absolute;
+    }
+}
 .user-posted .options-answer .options-answer-icon {
     transition: 200ms;
     position: absolute;
@@ -13,6 +18,11 @@
     justify-content: center;
     border: none;
     padding: 8px;
+
+    @media (max-width: 1000px) {
+        top: 50px;
+        left: 0;
+    }
 }
 .user-posted .options-answer .options-answer-icon:hover {
     background: var(--color-dark-background);

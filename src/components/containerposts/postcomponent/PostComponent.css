@@ -26,17 +26,32 @@
     justify-content: center;
     overflow: hidden;
     pointer-events: none;
+
+    @media (max-width: 1000px) {
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+    }
 }
 .user-posted .user-picture-posts img {
     width: 100%;
 }
 .user-posted .wrapper {
     width: 100%;
+
+    @media (max-width: 1000px) {
+        width: calc(100% - 40px);
+    }
 }
 .user-posted .wrapper .name-wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
+    overflow: hidden;
+
+    @media (max-width: 1000px) {
+        gap: 5px;
+    }
 }
 .user-posted .wrapper .name-wrapper .name {
     color: var(--color-dark);
@@ -45,15 +60,35 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 380px;
+
+    @media (max-width: 1000px) {
+        font-size: 16px;
+        max-width: calc(100% - 110px);
+    }
 }
 .user-posted .wrapper .name-wrapper .posted-in {
     color: var(--color-light);
     font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media (max-width: 1000px) {
+        font-size: 12px;
+        max-width: calc(100% - 140px);
+        width: 100%;
+        margin-right: 10px;
+    }
 }
 .user-posted .wrapper .title-post {
     max-width: 700px;
     color: var(--color-black);
     font-size: 24px;
+
+    @media (max-width: 1000px) {
+        font-size: 20px;
+        max-width: calc(100% - 40px);
+    }
 }
 .user-posted .wrapper .content-post {
     color: var(--color-dark);
@@ -63,6 +98,11 @@
     padding-right: 20px;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 1000px) {
+        font-size: 14px;
+        max-width: calc(100% - 20px);
+    }
 }
 
 .user-posted .wrapper .actions-post {
@@ -141,6 +181,11 @@
     cursor: pointer;
     color: var(--color-black);
     font-size: 16px;
+
+    @media (max-width: 1000px) {
+        width: 80px;
+        font-size: 14px;
+    }
 }
 .user-posted .wrapper .actions-post .actions-wrapper .btn-respond:hover {
     background: var(--color-dark-background);
@@ -158,6 +203,11 @@
     padding: 0 10px;
     margin-top: 20px;
     cursor: pointer;
+
+    @media (max-width: 1000px) {
+        width: 100px;
+        font-size: 12px;
+    }
 }
 .user-posted .wrapper .actions-post .answers:hover {
     background: var(--color-dark-orange);
@@ -181,6 +231,10 @@
     text-align: center;
     margin-bottom: 0;
     margin-top: 30px;
+
+    @media (max-width: 1000px) {
+        font-size: 20px;
+    }
 }
 .video-post {
     margin: 30px auto 0 auto;

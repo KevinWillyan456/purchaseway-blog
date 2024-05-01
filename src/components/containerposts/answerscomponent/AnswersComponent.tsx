@@ -91,7 +91,10 @@ function AnswersComponent({
 
     return (
         <article className="user-posted-answering">
-            <div className="user-picture-posts">
+            <div
+                className="user-picture-posts"
+                style={!answer.fotoPerfil ? { padding: '5px' } : {}}
+            >
                 {answer.fotoPerfil ? (
                     <img src={answer.fotoPerfil} alt="Foto do usuário" />
                 ) : (

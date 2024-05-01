@@ -9,6 +9,11 @@
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 10px;
+
+    @media (max-width: 1000px) {
+        width: 100%;
+        max-width: 460px;
+    }
 }
 .user-post-container .user-message {
     transition: 200ms;
@@ -40,6 +45,10 @@
     width: 100%;
     gap: 20px;
     margin-top: 3px;
+
+    @media (max-width: 1000px) {
+        gap: 10px;
+    }
 }
 .user-post-footer .wrap .attach-image {
     position: relative;
@@ -69,6 +78,11 @@
     outline: none;
     color: var(--color-dark);
     font-size: 16px;
+
+    @media (max-width: 1000px) {
+        max-width: calc(100% - 60px);
+        font-size: 14px;
+    }
 }
 .user-post-footer .wrap .title-publish::placeholder {
     color: var(--color-dark);

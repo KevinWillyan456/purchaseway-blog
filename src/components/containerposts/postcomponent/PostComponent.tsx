@@ -94,7 +94,10 @@ function PostComponent({ post }: { post: IPost }) {
 
     return (
         <article className="user-posted">
-            <div className="user-picture-posts">
+            <div
+                className="user-picture-posts"
+                style={!post.fotoPerfil ? { padding: '5px' } : {}}
+            >
                 {post.fotoPerfil ? (
                     <img src={post.fotoPerfil} alt="Foto de perfil" />
                 ) : (

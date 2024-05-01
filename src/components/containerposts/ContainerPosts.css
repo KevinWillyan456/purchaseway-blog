@@ -9,6 +9,11 @@
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
+
+    @media (max-width: 1050px) {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
 @keyframes containerPostsExpand {
     from {
@@ -57,6 +62,11 @@
     color: var(--color-dark);
     font-size: 16px;
     margin-bottom: 20px;
+
+    @media (max-width: 1050px) {
+        font-size: 14px;
+        padding-left: 10px;
+    }
 }
 .container-posts .content-posts {
     max-width: 789px;
