@@ -17,10 +17,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 1000px) {
+        padding: 0 10px;
+    }
 }
 .header .container .header-logo {
     cursor: pointer;
     margin-right: 20px;
+
+    @media (max-width: 1000px) {
+        margin-right: 10px;
+    }
 }
 .header .container .header-logo img {
     pointer-events: none;
@@ -35,6 +43,11 @@
     margin-right: 20px;
     padding: 0 10px;
     overflow: hidden;
+
+    @media (max-width: 1000px) {
+        width: 100%;
+        margin-right: 10px;
+    }
 }
 .header .container .header-container-search .header-search-icon {
     margin-right: 5px;
@@ -79,7 +92,9 @@
 .header .container .header-btn-login {
     transition: 200ms;
     width: 80px;
+    min-width: 80px;
     height: 40px;
+    min-height: 40px;
     border-radius: 10px;
     background: var(--color-orange);
     color: var(--color-white);
@@ -96,7 +111,9 @@
 .header-btn-logout {
     transition: 200ms;
     width: 80px;
+    min-width: 80px;
     height: 40px;
+    min-height: 40px;
     border-radius: 10px;
     background: var(--color-blue);
     color: var(--color-white);
@@ -106,7 +123,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: auto;
 }
 .header-btn-logout:hover {
     background-color: var(--color-dark-blue);
@@ -171,6 +187,10 @@
     align-items: center;
     font-size: 20px;
     padding: 20px;
+
+    @media (max-width: 1000px) {
+        font-size: 18px;
+    }
 }
 @keyframes searchEmptyPost {
     from {
