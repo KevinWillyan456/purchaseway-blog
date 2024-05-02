@@ -107,7 +107,7 @@ function PostComponent({ post }: { post: IPost }) {
             <div className="wrapper">
                 <div className="name-wrapper">
                     <div className="name">
-                        {post.proprietario.match(/(\w{8}(-\w{4}){3}-\w{12}?)/g)
+                        {!post.proprietario
                             ? 'Carregando...'
                             : post.proprietario}
                     </div>
