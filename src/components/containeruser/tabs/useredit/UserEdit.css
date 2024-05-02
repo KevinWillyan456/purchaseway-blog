@@ -24,6 +24,11 @@
     align-items: center;
     justify-content: center;
     margin-top: 30px;
+
+    @media (max-width: 1000px) {
+        width: 180px;
+        font-size: 14px;
+    }
 }
 .user-edit-details .user-edit-button-change-picture:hover {
     background-color: var(--color-dark-orange);
@@ -42,6 +47,11 @@
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+
+    @media (max-width: 1000px) {
+        width: 140px;
+        font-size: 14px;
+    }
 }
 .user-edit-details .user-edit-button-change-password:hover {
     background-color: var(--color-dark-blue);

@@ -29,6 +29,13 @@
     justify-content: center;
     overflow: hidden;
     pointer-events: none;
+
+    @media (max-width: 1000px) {
+        width: 80px;
+        min-width: 80px;
+        height: 80px;
+        min-height: 80px;
+    }
 }
 .user-menu-container .user-menu-picture img {
     width: 100%;
@@ -39,6 +46,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    @media (max-width: 1000px) {
+        font-size: 24px;
+        width: 100%;
+    }
 }
 .user-information .user-information-details {
     margin-top: 40px;
@@ -49,6 +61,10 @@
 .user-information-details-item {
     color: var(--color-dark);
     font-size: 20px;
+
+    @media (max-width: 1000px) {
+        font-size: 16px;
+    }
 }
 .user-information-details-item span {
     font-weight: bold;

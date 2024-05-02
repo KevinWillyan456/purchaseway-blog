@@ -8,6 +8,12 @@
     margin-left: auto;
     margin-right: auto;
     display: flex;
+
+    @media (max-width: 1000px) {
+        flex-direction: column;
+        width: 100%;
+        max-width: 460px;
+    }
 }
 @keyframes containerUserExpand {
     from {
@@ -30,6 +36,13 @@
     border-radius: 10px;
     border: 1px solid #026e8133;
     background-color: var(--color-background);
+
+    @media (max-width: 1000px) {
+        flex-direction: row;
+        height: 60px;
+        max-width: 100%;
+        min-width: 100%;
+    }
 }
 .container-user .menu-user .menu-tab {
     transition: 200ms;
@@ -38,10 +51,25 @@
     font-size: 20px;
     border: none;
     cursor: pointer;
+
+    @media (max-width: 1000px) {
+        font-size: 16px;
+    }
 }
 .container-user .menu-user .menu-tab:first-child {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+
+    @media (max-width: 1000px) {
+        border-bottom-left-radius: 10px;
+        border-top-right-radius: 0;
+    }
+}
+.container-user .menu-user .menu-tab:last-child {
+    @media (max-width: 1000px) {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
 }
 .container-user .menu-user .menu-tab.unselected {
     background: var(--color-white);
@@ -60,4 +88,8 @@
 .container-user .content-user {
     width: 100%;
     max-width: calc(100% - 180px);
+
+    @media (max-width: 1000px) {
+        max-width: 100%;
+    }
 }

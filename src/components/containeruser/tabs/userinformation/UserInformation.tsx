@@ -11,7 +11,10 @@ function UserInformation() {
     return (
         <article className="user-information">
             <div className="user-menu-container">
-                <div className="user-menu-picture">
+                <div
+                    className="user-menu-picture"
+                    style={!user.fotoPerfil ? { padding: '12px' } : {}}
+                >
                     {user.fotoPerfil ? (
                         <img
                             src={user.fotoPerfil}
