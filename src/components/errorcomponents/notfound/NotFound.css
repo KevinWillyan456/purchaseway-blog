@@ -11,6 +11,17 @@
     align-items: center;
     gap: 20px;
     border-radius: 10px;
+
+    @media (max-width: 1000px) {
+        width: calc(100% - 40px);
+        max-width: 500px;
+        flex-direction: column;
+    }
+}
+.container-not-found .not-found-content .world-container {
+    @media (max-width: 1000px) {
+        display: none;
+    }
 }
 .container-not-found .not-found-content section {
     display: flex;

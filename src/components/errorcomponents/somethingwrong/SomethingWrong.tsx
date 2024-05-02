@@ -6,7 +6,9 @@ function SomethingWrong() {
     return (
         <div className="container-something-wrong">
             <section className="something-wrong-content">
-                <World />
+                <div className="world-container">
+                    <World />
+                </div>
                 <section>
                     <span className="something-wrong-code">500</span>
                     <h2>Algo deu errado</h2>

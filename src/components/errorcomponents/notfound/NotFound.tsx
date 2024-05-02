@@ -6,7 +6,10 @@ function NotFound() {
     return (
         <div className="container-not-found">
             <section className="not-found-content">
-                <World />
+                <div className="world-container">
+                    <World />
+                </div>
+
                 <section>
                     <span className="not-found-code">404</span>
                     <h2>Página não encontrada</h2>
