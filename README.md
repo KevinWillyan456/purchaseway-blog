@@ -71,3 +71,17 @@ Antes de começar, certifique-se de ter o Node.js e o MongoDB instalados em sua 
    ```
 
 8. Acesse o aplicativo em seu navegador em [http://localhost:5173](http://localhost:5173)
+
+## Capturas de Tela
+
+![tela-inicial](https://github.com/KevinWillyan456/purchaseway-blog/assets/115520107/ee3db6b8-8c92-4262-9231-b00ad2b0455d)
+_Tela inicial_
+
+![tela-singin](https://github.com/KevinWillyan456/purchaseway-blog/assets/115520107/b390a3b3-159d-48fe-a562-f0c27874cd0f)
+_Tela de Cadastro_
+
+![tela-login](https://github.com/KevinWillyan456/purchaseway-blog/assets/115520107/a3f7adca-e5ae-493b-8422-4aa219592709)
+_Tela de login_
+
+![tela-dashboard](https://github.com/KevinWillyan456/purchaseway-blog/assets/115520107/544e6b68-155c-46d1-b9d6-e1553ac45ed1)
+_Tela do dashboard_
