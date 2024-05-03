@@ -11,7 +11,6 @@ Este é um aplicativo web para uma rede social, criado com o objetivo de fornece
   - Date-fns
   - Js-cookie
   - React-oauth/google
-  - React Hook form
 
 - **Backend:**
   - Node.js com TypeScript
@@ -54,7 +53,7 @@ Antes de começar, certifique-se de ter o Node.js e o MongoDB instalados em sua 
    touch .env.local
    ```
 
-6. Defina as variáveis de ambiente dentro do arquivo `.env`, defina suas variáveis de ambiente no formato `NOME_DA_VARIAVEL=VALOR`.
+6. Defina as variáveis de ambiente dentro do arquivo `.env.local`, defina suas variáveis de ambiente no formato `NOME_DA_VARIAVEL=VALOR`.
 
    ```plaintext
    # API configuration
