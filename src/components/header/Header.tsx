@@ -7,6 +7,7 @@ import { GlobalContext, IPost } from '../../contexts/GlobalContext'
 import Cookies from 'js-cookie'
 import User from '../../icons/User'
 import ModalSearchPost from './modalsearchpost/ModalSearchPost'
+import axios from 'axios'
 
 function Header() {
     const [search, setSearch] = useState('')
@@ -34,6 +35,41 @@ function Header() {
     useEffect(() => {
         handleSearch()
     }, [handleSearch, search])
+
+    const logout = async () => {
+        setUser({
+            _id: '',
+            nome: '',
+            fotoPerfil: '',
+            hasGooglePassword: false,
+            isGoogle: false,
+            email: '',
+            dataCriacao: new Date(),
+            curtidas: 0,
+            posts: 0,
+        })
+
+        await axios
+            .post(
+                `${import.meta.env.VITE_API_URL}/logout`,
+                {},
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: import.meta.env.VITE_API_KEY,
+                        token: Cookies.get('token'),
+                    },
+                }
+            )
+            .catch((error) => {
+                console.error(error)
+            })
+            .finally(() => {
+                Cookies.remove('token')
+                Cookies.remove('user')
+                window.location.href = '/'
+            })
+    }
 
     return (
         <header className="header">
@@ -68,29 +104,9 @@ function Header() {
                         </Link>
                     </>
                 ) : (
-                    <Link
-                        to="/"
-                        className="header-btn-logout"
-                        onClick={() => {
-                            Cookies.remove('token')
-
-                            setUser({
-                                _id: '',
-                                nome: '',
-                                fotoPerfil: '',
-                                hasGooglePassword: false,
-                                isGoogle: false,
-                                email: '',
-                                dataCriacao: new Date(),
-                                curtidas: 0,
-                                posts: 0,
-                            })
-
-                            window.location.href = '/'
-                        }}
-                    >
+                    <button className="header-btn-logout" onClick={logout}>
                         Sair
-                    </Link>
+                    </button>
                 )}
             </div>
 
