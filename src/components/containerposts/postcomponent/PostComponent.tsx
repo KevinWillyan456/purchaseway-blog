@@ -92,6 +92,8 @@ function PostComponent({ post }: { post: IPost }) {
             })
     }
 
+    const [showVideo, setShowVideo] = useState<boolean>(false)
+
     return (
         <article className="user-posted">
             <div
@@ -145,15 +147,30 @@ function PostComponent({ post }: { post: IPost }) {
                                 Confira este vídeo
                             </h3>
                             <div className="video-post">
-                                <iframe
-                                    width="560"
-                                    height="315"
-                                    src={`https://www.youtube.com/embed/${post.conteudo.videoId}`}
-                                    title="YouTube video player"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerPolicy="strict-origin-when-cross-origin"
-                                    allowFullScreen
-                                ></iframe>
+                                {!showVideo && (
+                                    <div className="show-video-post">
+                                        <button
+                                            className="btn-show-video-post"
+                                            onClick={() =>
+                                                setShowVideo((prev) => !prev)
+                                            }
+                                        >
+                                            Mostrar vídeo
+                                        </button>
+                                    </div>
+                                )}
+
+                                {showVideo && (
+                                    <iframe
+                                        width="560"
+                                        height="315"
+                                        src={`https://www.youtube.com/embed/${post.conteudo.videoId}`}
+                                        title="YouTube video player"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerPolicy="strict-origin-when-cross-origin"
+                                        allowFullScreen
+                                    ></iframe>
+                                )}
                             </div>
                         </>
                     )}
